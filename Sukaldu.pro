@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += sql core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,3 +22,8 @@ FORMS    += mainwindow.ui
 
 OTHER_FILES += \
     data/database_definition.sql
+
+data.path    = $$OUT_PWD/data
+data.files   += \
+    data/database_definition.sql
+INSTALLS       += data

@@ -1,12 +1,10 @@
 -- Product measurement
-
-CREATE TABLE prod_meas {
+CREATE TABLE prod_meas (
 id INT PRIMARY KEY,
 name VARCHAR(100)
-}
+)
 
 -- Product categories
-
 CREATE TABLE prod_cat (
 id INT PRIMARY KEY,
 name VARCHAR(100)
@@ -20,7 +18,6 @@ name VARCHAR(100)
 
 
 -- Recipe categories
-
 CREATE TABLE recipe_cat (
 id INT PRIMARY KEY,
 name VARCHAR(100)
@@ -34,7 +31,6 @@ name VARCHAR(100)
 
 
 -- Menu categories
-
 CREATE TABLE menu_cat (
 id INT PRIMARY KEY,
 name VARCHAR(100)
@@ -48,7 +44,6 @@ name VARCHAR(100)
 
 
 -- Products
-
 CREATE TABLE product (
 id INT PRIMARY KEY,
 name VARCHAR(100),
@@ -57,3 +52,8 @@ subcat INT REFERENCES prod_subcat,
 notes TEXT,
 meas INT REFERENCES prod_meas
 )
+
+
+SELECT * FROM product;
+
+SELECT * FROM productless;
