@@ -49,6 +49,8 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
+static bool loadScript(const char *name, bool line_by_line = false);
+
 /*
     This file defines a helper function to open a connection to an
     in-memory SQLITE database and to create a test table.
@@ -72,26 +74,39 @@ static bool createConnection()
         return false;
     }
 
+    loadScript("data/database_definition.sql");
+    loadScript("data/database_sample.sql", true);
+
+    return true;
+}
+//! [0]
+
+static bool loadScript(const char * name, bool line_by_line)
+{
     QSqlQuery query;
-    std::ifstream inputFile("data/database_definition.sql");
+    std::ifstream inputFile(name);
     std::stringstream queryStr;
     std::string tmpStr;
     if(!inputFile)
         //Test file open
     {
-        std::cout << "Error opening output file" << std::endl;
-        system("pause");
-        return -1;
+        std::cerr << "Error opening input file: " << name << std::endl;
+//        std::exit(-1);
+        return -1; // Shouldn't arrive here
     }
 
     while (!inputFile.eof())
     {
 
-        if (std::getline(inputFile, tmpStr) && tmpStr.length() != 0) {
+        if (std::getline(inputFile, tmpStr) &&
+                tmpStr.length() != 0 &&
+                tmpStr.compare(0, 2, "--") != 0) {
             queryStr << tmpStr << std::endl;
         }
         if ((queryStr.str().length() != 0) &&
-                (tmpStr.length() == 0 || inputFile.eof()))
+                (tmpStr.length() == 0 ||
+                 inputFile.eof() ||
+                 line_by_line))
         {
             query.exec(queryStr.str().c_str());
 //            std::cout << "EXECUTE QUERY: " << std::endl;
@@ -99,60 +114,16 @@ static bool createConnection()
 //            std::cout << "--------" << std::endl;
             if (query.lastError().type() != QSqlError::NoError)
             {
-                std::cout << "ERROR: " << query.lastError().text().toUtf8().constData() << std::endl;
-                std::cout << "IN QUERY: " << std::endl;
-                std::cout << queryStr.str() << std::endl;
-                std::cout << "--------" << std::endl;
+                std::cerr << "ERROR: " << query.lastError().text().toUtf8().constData() << std::endl;
+                std::cerr << "IN QUERY: " << std::endl;
+                std::cerr << queryStr.str() << std::endl;
+                std::cerr << "--------" << std::endl;
             }
             queryStr.str(std::string());
         }
     }
 
-
-
-//    query.exec("create table person (id int primary key, "
-//               "firstname varchar(20), lastname varchar(20))");
-//    query.exec("insert into person values(101, 'Danny', 'Young')");
-//    query.exec("insert into person values(102, 'Christine', 'Holand')");
-//    query.exec("insert into person values(103, 'Lars', 'Gordon')");
-//    query.exec("insert into person values(104, 'Roberto', 'Robitaille')");
-//    query.exec("insert into person values(105, 'Maria', 'Papadopoulos')");
-
-//    query.exec("create table items (id int primary key,"
-//                                             "imagefile int,"
-//                                             "itemtype varchar(20),"
-//                                             "description varchar(100))");
-//    query.exec("insert into items "
-//               "values(0, 0, 'Qt',"
-//               "'Qt is a full development framework with tools designed to "
-//               "streamline the creation of stunning applications and  "
-//               "amazing user interfaces for desktop, embedded and mobile "
-//               "platforms.')");
-//    query.exec("insert into items "
-//               "values(1, 1, 'Qt Quick',"
-//               "'Qt Quick is a collection of techniques designed to help "
-//               "developers create intuitive, modern-looking, and fluid "
-//               "user interfaces using a CSS & JavaScript like language.')");
-//    query.exec("insert into items "
-//               "values(2, 2, 'Qt Creator',"
-//               "'Qt Creator is a powerful cross-platform integrated "
-//               "development environment (IDE), including UI design tools "
-//               "and on-device debugging.')");
-//    query.exec("insert into items "
-//               "values(3, 3, 'Qt Project',"
-//               "'The Qt Project governs the open source development of Qt, "
-//               "allowing anyone wanting to contribute to join the effort "
-//               "through a meritocratic structure of approvers and "
-//               "maintainers.')");
-
-//    query.exec("create table images (itemid int, file varchar(20))");
-//    query.exec("insert into images values(0, 'images/qt-logo.png')");
-//    query.exec("insert into images values(1, 'images/qt-quick.png')");
-//    query.exec("insert into images values(2, 'images/qt-creator.png')");
-//    query.exec("insert into images values(3, 'images/qt-project.png')");
-
     return true;
 }
-//! [0]
 
 #endif

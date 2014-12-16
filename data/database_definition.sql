@@ -4,14 +4,6 @@ id INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(100)
 )
 
--- Product prices
-CREATE TABLE prod_price (
-id INT AUTO_INCREMENT PRIMARY KEY,
-product INT REFERENCES product,
-price REAL,
-notes TEXT
-)
-
 -- Product categories
 CREATE TABLE prod_cat (
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,6 +51,14 @@ subcat INT REFERENCES prod_subcat,
 notes TEXT,
 meas INT REFERENCES prod_meas,
 current_price INT REFERENCES prod_price
+)
+
+-- Product prices
+CREATE TABLE prod_price (
+id INT AUTO_INCREMENT PRIMARY KEY,
+product INT REFERENCES product,
+price REAL,
+notes TEXT
 )
 
 -- Recipes

@@ -21,9 +21,11 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 OTHER_FILES += \
-    data/database_definition.sql
+    data/database_definition.sql \
+    data/database_sample.sql
 
 data.path    = $$OUT_PWD/data
 data.files   += \
-    data/database_definition.sql
+    data/database_definition.sql, \
+    data/database_sample.sql
 INSTALLS       += data
