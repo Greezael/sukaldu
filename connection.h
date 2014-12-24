@@ -91,8 +91,8 @@ static bool loadScript(const char * name, bool line_by_line)
         //Test file open
     {
         std::cerr << "Error opening input file: " << name << std::endl;
-//        std::exit(-1);
-        return -1; // Shouldn't arrive here
+        std::exit(-1);
+//        return -1; // Shouldn't arrive here
     }
 
     while (!inputFile.eof())
@@ -118,6 +118,7 @@ static bool loadScript(const char * name, bool line_by_line)
                 std::cerr << "IN QUERY: " << std::endl;
                 std::cerr << queryStr.str() << std::endl;
                 std::cerr << "--------" << std::endl;
+                std::exit(-1);
             }
             queryStr.str(std::string());
         }

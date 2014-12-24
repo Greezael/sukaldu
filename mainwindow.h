@@ -31,6 +31,7 @@ private:
     Ui::MainWindow *ui;
 
     void buildTree();
+    void fillProductCategoryLists(int catId, int subCatId);
 
 public slots:
     void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);

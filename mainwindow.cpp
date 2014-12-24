@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QSqlQueryModel *model = new QSqlQueryModel();
 
     QSqlQuery query;
-//    query.prepare("SELECT * FROM product");
     query.prepare("SELECT name, product.notes, price FROM product INNER JOIN prod_price ON product.id = prod_price.product");
 
     query.exec();
@@ -27,8 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->ui->tableView->setModel(model);
 
-
-//    this->ui->treeView->setModel(model);
     buildTree();
 
     QObject::connect(this->ui->treeView->selectionModel(),
@@ -115,12 +112,17 @@ void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex 
     {
         QSqlQuery query;
         std::stringstream query_str;
-        query_str << "SELECT name, product.notes, price FROM product INNER JOIN prod_price ON product.id = prod_price.product" << std::endl;
+        query_str << "SELECT name, product.notes, cat, subcat, price FROM product INNER JOIN prod_price ON product.id = prod_price.product" << std::endl;
         query_str << "WHERE product.id = " << id << std::endl;
         query.exec(query_str.str().c_str());
         if (query.next())
         {
             this->ui->p_name->setText(query.value("name").toString());
+            int cat = -1;
+            int subcat = -1;
+            cat = (query.value("cat").isNull()) ? -1 : query.value("cat").toInt();
+            subcat = (query.value("subcat").isNull()) ? -1 : query.value("subcat").toInt();
+            fillProductCategoryLists(cat, subcat);
         }
         editPane->setCurrentIndex(editPane->indexOf(this->ui->product_edit));
     }
@@ -131,5 +133,49 @@ void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex 
     else if (type == SK_Menu)
     {
         editPane->setCurrentIndex(editPane->indexOf(this->ui->menu_edit));
+    }
+}
+
+void MainWindow::fillProductCategoryLists(int catId, int subCatId)
+{
+    this->ui->p_cat->clear();
+    this->ui->p_subcat->clear();
+
+    QSqlQuery query;
+    std::stringstream query_str;
+    query_str << "SELECT id, name FROM prod_cat" << std::endl;
+    query.exec(query_str.str().c_str());
+    int selected = 0, index = 1;
+    this->ui->p_cat->addItem("None", QVariant::fromValue(-1));
+    while (query.next())
+    {
+        this->ui->p_cat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
+        if (query.value("id").toInt() == catId)
+            selected = index;
+        index++;
+    }
+    this->ui->p_cat->setCurrentIndex(selected);
+
+    if (catId != -1)
+    {
+        QSqlQuery query;
+        std::stringstream query_str;
+        query_str << "SELECT id, name FROM prod_subcat" << std::endl;
+        query_str << "WHERE cat = " << catId << std::endl;
+        query.exec(query_str.str().c_str());
+        int selected = 0, index = 1;
+        this->ui->p_subcat->addItem("None", QVariant::fromValue(-1));
+        while (query.next())
+        {
+            this->ui->p_subcat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
+            if (query.value("id").toInt() == subCatId)
+                selected = index;
+            index++;
+        }
+        this->ui->p_subcat->setCurrentIndex(selected);
+    }
+    else
+    {
+        this->ui->p_subcat->addItem("None", QVariant::fromValue(-1));
     }
 }
