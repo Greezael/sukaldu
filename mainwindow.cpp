@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <iostream>
+#include <sstream>
 
 #include <QtSql>
 #include <QStandardItemModel>
@@ -71,6 +72,7 @@ void MainWindow::buildTree()
 
         QStandardItem * wrapper = new QStandardItem(names.at(i).c_str());
         wrapper->setData(QVariant::fromValue((int) SK_Wrapper), SK_TypeRole);
+        wrapper->setData(QVariant::fromValue(types.at(i)), SK_IdRole);
         rootModel->appendRow(wrapper);
 
         while (query.next())
@@ -83,14 +85,51 @@ void MainWindow::buildTree()
     }
 
     this->ui->treeView->setModel(rootModel);
+    this->ui->treeView->expand(this->ui->treeView->model()->index(0, 0));
 }
 
-void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex &previous) {
-//    std::cout << "Row: " << current.row() << ", Col: " << current.column() << std::endl;
+void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex &previous)
+{
     int type = current.data(SK_TypeRole).toInt();
-    std::cout << "Type: " << type << std::endl;
     int id = current.data(SK_IdRole).toInt();
-    std::cout << "Id: " << id << std::endl;
+    QStackedWidget * editPane = this->ui->edit_pane;
+    QTreeView * tree = this->ui->treeView;
 
-
+    if (type == SK_Wrapper)
+    {
+//        QModelIndex parentIndex = current.parent();
+//        for (qint32 row = 0; row < tree->model()->rowCount(parentIndex); row++)
+//        {
+//            tree->collapse(tree->model()->index(row, 0, parentIndex));
+//        }
+//        if (this->ui->treeView->isExpanded(current))
+//        {
+//            this->ui->treeView->collapse(current);
+//        }
+//        else
+//        {
+//            this->ui->treeView->expand(current);
+//        }
+    }
+    else if (type == SK_Product)
+    {
+        QSqlQuery query;
+        std::stringstream query_str;
+        query_str << "SELECT name, product.notes, price FROM product INNER JOIN prod_price ON product.id = prod_price.product" << std::endl;
+        query_str << "WHERE product.id = " << id << std::endl;
+        query.exec(query_str.str().c_str());
+        if (query.next())
+        {
+            this->ui->p_name->setText(query.value("name").toString());
+        }
+        editPane->setCurrentIndex(editPane->indexOf(this->ui->product_edit));
+    }
+    else if (type == SK_Recipe)
+    {
+        editPane->setCurrentIndex(editPane->indexOf(this->ui->recipe_edit));
+    }
+    else if (type == SK_Menu)
+    {
+        editPane->setCurrentIndex(editPane->indexOf(this->ui->menu_edit));
+    }
 }

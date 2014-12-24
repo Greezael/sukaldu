@@ -13,7 +13,6 @@ enum SK_ObjectType {
     SK_Product,
     SK_Recipe,
     SK_Menu
-
 };
 
 namespace Ui {
