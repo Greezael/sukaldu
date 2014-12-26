@@ -96,3 +96,31 @@ menu INTEGER REFERENCES menu,
 recipe INTEGER REFERENCES recipe,
 PRIMARY KEY (menu, recipe)
 )
+
+-- COMPUTED
+-- Product prices
+CREATE VIEW C_prod_price AS
+SELECT product.id 'id', prod_price.price 'price'
+FROM product LEFT JOIN prod_price
+ON product.current_price = prod_price.id
+
+-- COMPUTED
+-- Recipe prices
+CREATE VIEW C_recipe_price AS
+SELECT recipe.id, (SUM(price * quantity)/servings) 'price'
+FROM recipe LEFT JOIN recipe_product
+ON recipe.id = recipe_product.recipe
+LEFT JOIN C_prod_price
+ON recipe_product.product = C_prod_price.id
+GROUP BY recipe.id
+
+-- COMPUTED
+-- Menu prices
+CREATE VIEW C_menu_price AS
+SELECT menu.id, SUM(price) 'price'
+FROM menu LEFT JOIN menu_recipe
+ON menu.id = menu_recipe.menu
+LEFT JOIN C_recipe_price
+ON menu_recipe.recipe = C_recipe_price.id
+GROUP BY menu.id
+

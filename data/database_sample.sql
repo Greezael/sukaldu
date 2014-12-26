@@ -35,7 +35,8 @@ PRAGMA foreign_keys = OFF;
 INSERT INTO product VALUES (1, 'product1', 1, 1, 'notes', 1, 1)
 INSERT INTO product VALUES (2, 'product2', 2, 2, 'notes', 1, 2)
 INSERT INTO product VALUES (3, 'product3', 2, 3, 'notes', 2, 3)
-INSERT INTO product VALUES (4, 'product4', 2, 3, 'notes', 3, 4)
+INSERT INTO product VALUES (4, 'product4', 2, 3, 'notes', 3, 5)
+INSERT INTO product VALUES (5, 'product4', 2, 3, 'notes', 3, NULL)
 
 -- Product prices
 INSERT INTO prod_price VALUES (1, 1, 1.5, NULL)
@@ -49,7 +50,7 @@ PRAGMA foreign_keys = ON;
 -- Recipes
 INSERT INTO recipe VALUES (1, 'recipe1', 1, 1, 'preparation', 1)
 INSERT INTO recipe VALUES (2, 'recipe2', 2, 2, 'preparation', 1)
-INSERT INTO recipe VALUES (3, 'recipe3', 2, 3, 'preparation', 1)
+INSERT INTO recipe VALUES (3, 'recipe3', 2, 3, 'preparation', 2)
 INSERT INTO recipe VALUES (4, 'recipe4', 3, NULL, 'preparation', 1)
 
 -- Menu
@@ -64,7 +65,7 @@ INSERT INTO recipe_product VALUES (1, 2, 1.5)
 INSERT INTO recipe_product VALUES (2, 1, 1.5)
 INSERT INTO recipe_product VALUES (2, 3, 1.5)
 INSERT INTO recipe_product VALUES (3, 3, 1.5)
-INSERT INTO recipe_product VALUES (4, 4, 1.5)
+INSERT INTO recipe_product VALUES (4, 4, 1.2)
 
 -- Menu is composed of recipes
 INSERT INTO menu_recipe VALUES (1, 1)

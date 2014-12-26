@@ -17,7 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QSqlQueryModel *model = new QSqlQueryModel();
 
     QSqlQuery query;
-    query.prepare("SELECT name, product.notes, price FROM product INNER JOIN prod_price ON product.id = prod_price.product");
+//    query.prepare("SELECT name, product.notes, price FROM product INNER JOIN prod_price ON product.id = prod_price.product");
+    query.prepare("SELECT 'recipe', * FROM C_recipe_price \
+                  UNION SELECT 'menu', * FROM C_menu_price \
+                  UNION SELECT 'product', * FROM C_prod_price");
 
     query.exec();
 
