@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     buildTree();
 
-    QObject::connect(this->ui->treeView->selectionModel(),
+    QObject::connect(this->ui->prod_tree->selectionModel(),
                      SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
                      this,
                      SLOT(treeItemSelected(const QModelIndex &, const QModelIndex &)));
@@ -84,16 +84,15 @@ void MainWindow::buildTree()
         }
     }
 
-    this->ui->treeView->setModel(rootModel);
-    this->ui->treeView->expand(this->ui->treeView->model()->index(0, 0));
+    this->ui->prod_tree->setModel(rootModel);
+    this->ui->prod_tree->expand(this->ui->prod_tree->model()->index(0, 0));
 }
 
 void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex &previous)
 {
     int type = current.data(SK_TypeRole).toInt();
     int id = current.data(SK_IdRole).toInt();
-    QStackedWidget * editPane = this->ui->edit_pane;
-    QTreeView * tree = this->ui->treeView;
+    QTreeView * tree = this->ui->prod_tree;
 
     if (type == SK_Wrapper)
     {
@@ -120,44 +119,41 @@ void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex 
         query.exec(query_str.str().c_str());
         if (query.next())
         {
-            this->ui->p_name->setText(query.value("name").toString());
+            this->ui->prod_name->setText(query.value("name").toString());
             int cat = -1;
             int subcat = -1;
             cat = (query.value("cat").isNull()) ? -1 : query.value("cat").toInt();
             subcat = (query.value("subcat").isNull()) ? -1 : query.value("subcat").toInt();
             fillProductCategoryLists(cat, subcat);
         }
-        editPane->setCurrentIndex(editPane->indexOf(this->ui->product_edit));
     }
     else if (type == SK_Recipe)
     {
-        editPane->setCurrentIndex(editPane->indexOf(this->ui->recipe_edit));
     }
     else if (type == SK_Menu)
     {
-        editPane->setCurrentIndex(editPane->indexOf(this->ui->menu_edit));
     }
 }
 
 void MainWindow::fillProductCategoryLists(int catId, int subCatId)
 {
-    this->ui->p_cat->clear();
-    this->ui->p_subcat->clear();
+    this->ui->prod_cat->clear();
+    this->ui->prod_subcat->clear();
 
     QSqlQuery query;
     std::stringstream query_str;
     query_str << "SELECT id, name FROM prod_cat" << std::endl;
     query.exec(query_str.str().c_str());
     int selected = 0, index = 1;
-    this->ui->p_cat->addItem("None", QVariant::fromValue(-1));
+    this->ui->prod_cat->addItem("None", QVariant::fromValue(-1));
     while (query.next())
     {
-        this->ui->p_cat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
+        this->ui->prod_cat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
         if (query.value("id").toInt() == catId)
             selected = index;
         index++;
     }
-    this->ui->p_cat->setCurrentIndex(selected);
+    this->ui->prod_cat->setCurrentIndex(selected);
 
     if (catId != -1)
     {
@@ -167,18 +163,18 @@ void MainWindow::fillProductCategoryLists(int catId, int subCatId)
         query_str << "WHERE cat = " << catId << std::endl;
         query.exec(query_str.str().c_str());
         int selected = 0, index = 1;
-        this->ui->p_subcat->addItem("None", QVariant::fromValue(-1));
+        this->ui->prod_subcat->addItem("None", QVariant::fromValue(-1));
         while (query.next())
         {
-            this->ui->p_subcat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
+            this->ui->prod_subcat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
             if (query.value("id").toInt() == subCatId)
                 selected = index;
             index++;
         }
-        this->ui->p_subcat->setCurrentIndex(selected);
+        this->ui->prod_subcat->setCurrentIndex(selected);
     }
     else
     {
-        this->ui->p_subcat->addItem("None", QVariant::fromValue(-1));
+        this->ui->prod_subcat->addItem("None", QVariant::fromValue(-1));
     }
 }
