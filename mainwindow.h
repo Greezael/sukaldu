@@ -12,7 +12,9 @@ enum SK_ObjectType {
     SK_Wrapper,
     SK_Product,
     SK_Recipe,
-    SK_Menu
+    SK_Menu,
+    SK_Category,
+    SK_Subcategory
 };
 
 namespace Ui {
@@ -30,11 +32,13 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    void buildTree();
+// Product related
+private:
+    void buildProductTree();
     void fillProductCategoryLists(int catId, int subCatId);
 
 public slots:
-    void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);
+    void productSelected(const QModelIndex &current, const QModelIndex &previous);
 };
 
 #endif // MAINWINDOW_H

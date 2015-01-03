@@ -36,7 +36,7 @@ INSERT INTO product VALUES (1, 'product1', 1, 1, 'notes', 1, 1)
 INSERT INTO product VALUES (2, 'product2', 2, 2, 'notes', 1, 2)
 INSERT INTO product VALUES (3, 'product3', 2, 3, 'notes', 2, 3)
 INSERT INTO product VALUES (4, 'product4', 2, 3, 'notes', 3, 5)
-INSERT INTO product VALUES (5, 'product4', 2, 3, 'notes', 3, NULL)
+INSERT INTO product VALUES (5, 'product5', 3, 4, 'notes', 3, NULL)
 
 -- Product prices
 INSERT INTO prod_price VALUES (1, 1, 1.5, NULL)
