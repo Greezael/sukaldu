@@ -7,6 +7,16 @@
 #include <QtSql>
 #include <QStandardItemModel>
 
+#include "pricedialog.h"
+
+void MainWindow::makeProductConnections()
+{
+    QObject::connect(this->ui->prod_newprice,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(showNewPricePopup()));
+}
+
 void MainWindow::buildProductTree()
 {
     QStandardItemModel * rootModel = new QStandardItemModel(this);
@@ -163,12 +173,6 @@ void MainWindow::productSelected(const QModelIndex &current, const QModelIndex &
             fillProductCategoryLists(cat, subcat);
         }
     }
-    else if (type == SK_Recipe)
-    {
-    }
-    else if (type == SK_Menu)
-    {
-    }
 }
 
 void MainWindow::fillProductCategoryLists(int catId, int subCatId)
@@ -213,4 +217,11 @@ void MainWindow::fillProductCategoryLists(int catId, int subCatId)
     {
         this->ui->prod_subcat->addItem("None", QVariant::fromValue(-1));
     }
+}
+
+void MainWindow::showNewPricePopup()
+{
+    QDialog* popUp= new PriceDialog();
+    popUp->setModal(true);
+    popUp->show();
 }

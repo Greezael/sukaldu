@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
                      this,
                      SLOT(productSelected(const QModelIndex &, const QModelIndex &)));
+    makeProductConnections();
 
 }
 

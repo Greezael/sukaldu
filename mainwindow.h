@@ -34,11 +34,13 @@ private:
 
 // Product related
 private:
+    void makeProductConnections();
     void buildProductTree();
     void fillProductCategoryLists(int catId, int subCatId);
 
 public slots:
     void productSelected(const QModelIndex &current, const QModelIndex &previous);
+    void showNewPricePopup();
 };
 
 #endif // MAINWINDOW_H

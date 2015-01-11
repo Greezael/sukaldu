@@ -14,12 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        ProductSection.cpp
+        pricedialog.cpp \
+    productsection.cpp
 
 HEADERS  += mainwindow.h \
-    connection.h
+    connection.h \
+    pricedialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    pricedialog.ui
 
 OTHER_FILES += \
     data/database_definition.sql \
@@ -29,4 +32,5 @@ data.path    = $$OUT_PWD/data
 data.files   += \
     data/database_definition.sql \
     data/database_sample.sql
+
 INSTALLS       += data
