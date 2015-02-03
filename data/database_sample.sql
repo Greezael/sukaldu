@@ -39,11 +39,11 @@ INSERT INTO product VALUES (4, 'product4', 2, 3, 'notes', 3, 5)
 INSERT INTO product VALUES (5, 'product5', 3, 4, 'notes', 3, NULL)
 
 -- Product prices
-INSERT INTO prod_price VALUES (1, 1, 1.5, NULL)
-INSERT INTO prod_price VALUES (2, 2, 2.5, NULL)
-INSERT INTO prod_price VALUES (3, 3, 3.5, NULL)
-INSERT INTO prod_price VALUES (4, 4, 4.5, NULL)
-INSERT INTO prod_price VALUES (5, 4, 5.5, "Another provider")
+INSERT INTO prod_price VALUES (1, 1, 1.5, 1.0, NULL)
+INSERT INTO prod_price VALUES (2, 2, 2.5, 1.0, NULL)
+INSERT INTO prod_price VALUES (3, 3, 3.5, 1.0, NULL)
+INSERT INTO prod_price VALUES (4, 4, 4.5, 1.0, NULL)
+INSERT INTO prod_price VALUES (5, 4, 5.5, 1.0, "Another provider")
 
 PRAGMA foreign_keys = ON;
 

@@ -40,7 +40,15 @@ private:
 
 public slots:
     void productSelected(const QModelIndex &current, const QModelIndex &previous);
+    void updatePriceList();
     void showNewPricePopup();
+
+
+// State
+private:
+    int currentProduct;
+    int currentRecipe;
+    int currentMenu;
 };
 
 #endif // MAINWINDOW_H

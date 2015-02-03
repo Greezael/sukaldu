@@ -60,6 +60,7 @@ CREATE TABLE prod_price (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 product INTEGER REFERENCES product,
 price REAL,
+quantity REAL,
 notes TEXT
 )
 

@@ -15,8 +15,16 @@ public:
     explicit PriceDialog(QWidget *parent = 0);
     ~PriceDialog();
 
+    inline PriceDialog& product(int prodId)
+    { this->prodId = prodId; return *this; }
+
 private:
     Ui::PriceDialog *ui;
+    int prodId;
+
+
+public slots:
+    void addPrice();
 };
 
 #endif // PRICEDIALOG_H

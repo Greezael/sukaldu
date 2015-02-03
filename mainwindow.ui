@@ -66,6 +66,9 @@
         </item>
         <item row="0" column="2" colspan="2">
          <widget class="QScrollArea" name="prod_scroll">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
@@ -132,14 +135,11 @@
                <widget class="QComboBox" name="prod_meas"/>
               </item>
               <item row="5" column="0">
-               <widget class="QLabel" name="label">
+               <widget class="QLabel" name="prod_pricetable_tag">
                 <property name="text">
                  <string>TextLabel</string>
                 </property>
                </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QTableWidget" name="tableWidget"/>
               </item>
               <item row="7" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -182,6 +182,9 @@
               <item row="8" column="1">
                <widget class="QPlainTextEdit" name="prod_notes"/>
               </item>
+              <item row="5" column="1">
+               <widget class="QTableView" name="prod_pricetable"/>
+              </item>
              </layout>
             </item>
            </layout>
@@ -218,8 +221,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>390</width>
-             <height>399</height>
+             <width>111</width>
+             <height>78</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
