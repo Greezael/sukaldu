@@ -93,7 +93,6 @@ void MainWindow::productSelected(const QModelIndex &current, const QModelIndex &
 {
     int type = current.data(SK_TypeRole).toInt();
     int id = current.data(SK_IdRole).toInt();
-    QTreeView * tree = this->ui->prod_tree;
 
     if (type == SK_Product)
     {
@@ -101,13 +100,15 @@ void MainWindow::productSelected(const QModelIndex &current, const QModelIndex &
         this->ui->prod_scroll->setEnabled(true);
 
         QSqlQuery query;
-        std::stringstream query_str;
-        query_str << "SELECT name, notes, cat, subcat FROM product" << std::endl;
-        query_str << "WHERE product.id = " << id << std::endl;
-        query.exec(query_str.str().c_str());
+        query.prepare("SELECT name, notes, cat, subcat, meas "
+                      "FROM product "
+                      "WHERE id = :id" );
+        query.bindValue(":id", id);
+        query.exec();
         if (query.next())
         {
             this->ui->prod_name->setText(query.value("name").toString());
+            this->ui->prod_notes->setPlainText(query.value("notes").toString());
             int cat = -1;
             int subcat = -1;
             cat = (query.value("cat").isNull()) ? -1 : query.value("cat").toInt();
