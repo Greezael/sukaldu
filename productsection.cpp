@@ -15,6 +15,10 @@ void MainWindow::makeProductConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(showNewPricePopup()));
+    QObject::connect(this->ui->prod_curprod_buttons,
+                     SIGNAL(clicked(QAbstractButton*)),
+                     this,
+                     SLOT(generalProdButtonClicked(QAbstractButton*)));
 }
 
 void MainWindow::buildProductTree()
@@ -89,33 +93,41 @@ void MainWindow::buildProductTree()
 }
 
 
-void MainWindow::productSelected(const QModelIndex &current, const QModelIndex &previous)
+void MainWindow::prodTreeItemSelected(const QModelIndex &current, const QModelIndex &previous)
 {
     int type = current.data(SK_TypeRole).toInt();
     int id = current.data(SK_IdRole).toInt();
 
     if (type == SK_Product)
     {
-        this->currentProduct = id;
-        this->ui->prod_scroll->setEnabled(true);
+        productSelected(id);
+    }
+}
 
-        QSqlQuery query;
-        query.prepare("SELECT name, notes, cat, subcat, meas "
-                      "FROM product "
-                      "WHERE id = :id" );
-        query.bindValue(":id", id);
-        query.exec();
-        if (query.next())
-        {
-            this->ui->prod_name->setText(query.value("name").toString());
-            this->ui->prod_notes->setPlainText(query.value("notes").toString());
-            int cat = -1;
-            int subcat = -1;
-            cat = (query.value("cat").isNull()) ? -1 : query.value("cat").toInt();
-            subcat = (query.value("subcat").isNull()) ? -1 : query.value("subcat").toInt();
-            fillProductCategoryLists(cat, subcat);
-            updatePriceList();
-        }
+void MainWindow::productSelected(int id)
+{
+    this->currentProduct = id;
+    this->ui->prod_scroll->setEnabled(true);
+
+    QSqlQuery query;
+    query.prepare("SELECT name, notes, cat, subcat, meas "
+                  "FROM product "
+                  "WHERE id = :id" );
+    query.bindValue(":id", id);
+    query.exec();
+    if (query.next())
+    {
+        this->ui->prod_name->setText(query.value("name").toString());
+        this->ui->prod_notes->setPlainText(query.value("notes").toString());
+        int cat = -1;
+        int subcat = -1;
+        int meas = -1;
+        cat = (query.value("cat").isNull()) ? -1 : query.value("cat").toInt();
+        subcat = (query.value("subcat").isNull()) ? -1 : query.value("subcat").toInt();
+        meas = (query.value("meas").isNull()) ? -1 : query.value("meas").toInt();
+        fillProductCategoryLists(cat, subcat);
+        fillProductMeasurementList(meas);
+        updatePriceList();
     }
 }
 
@@ -175,6 +187,26 @@ void MainWindow::fillProductCategoryLists(int catId, int subCatId)
     }
 }
 
+void MainWindow::fillProductMeasurementList(int measId)
+{
+    this->ui->prod_meas->clear();
+
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM prod_meas");
+    query.exec();
+    int selected = 0, index = 1;
+    this->ui->prod_meas->addItem("None", QVariant::fromValue(-1));
+    while (query.next())
+    {
+        this->ui->prod_meas->addItem(query.value("name").toString(),
+                                     QVariant::fromValue(query.value("id").toInt()));
+        if (query.value("id").toInt() == measId)
+            selected = index;
+        index++;
+    }
+    this->ui->prod_meas->setCurrentIndex(selected);
+}
+
 void MainWindow::showNewPricePopup()
 {
     PriceDialog* popUp = new PriceDialog(this);
@@ -182,3 +214,19 @@ void MainWindow::showNewPricePopup()
     popUp->setModal(true);
     popUp->show();
 }
+
+void MainWindow::generalProdButtonClicked(QAbstractButton *button)
+{
+    switch (this->ui->prod_curprod_buttons->standardButton(button))
+    {
+    case QDialogButtonBox::Reset:
+        resetProductData();
+        break;
+    }
+}
+
+void MainWindow::resetProductData()
+{
+    productSelected(currentProduct);
+}
+

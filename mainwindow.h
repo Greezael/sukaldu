@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QAbstractButton>
 
 enum SK_CustomRole {
     SK_IdRole = Qt::UserRole + 1,
@@ -37,11 +38,15 @@ private:
     void makeProductConnections();
     void buildProductTree();
     void fillProductCategoryLists(int catId, int subCatId);
+    void fillProductMeasurementList(int measId);
+    void updatePriceList();
+    void productSelected(int id);
+    void resetProductData();
 
 public slots:
-    void productSelected(const QModelIndex &current, const QModelIndex &previous);
-    void updatePriceList();
+    void prodTreeItemSelected(const QModelIndex &current, const QModelIndex &previous);
     void showNewPricePopup();
+    void generalProdButtonClicked(QAbstractButton * button);
 
 
 // State

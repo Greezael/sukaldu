@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(this->ui->prod_tree->selectionModel(),
                      SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
                      this,
-                     SLOT(productSelected(const QModelIndex &, const QModelIndex &)));
+                     SLOT(prodTreeItemSelected(const QModelIndex &, const QModelIndex &)));
     makeProductConnections();
 
 }
