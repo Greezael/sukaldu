@@ -14,20 +14,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    QSqlQueryModel *model = new QSqlQueryModel();
+//    QSqlQueryModel *model = new QSqlQueryModel();
 
-    QSqlQuery query;
+//    QSqlQuery query;
 //    query.prepare("SELECT name, product.notes, price FROM product INNER JOIN prod_price ON product.id = prod_price.product");
-    query.prepare("SELECT 'recipe', * FROM C_recipe_price \
-                  UNION SELECT 'menu', * FROM C_menu_price \
-                  UNION SELECT 'product', * FROM C_prod_price");
+//    query.prepare("SELECT 'recipe', * FROM C_recipe_price \
+//                  UNION SELECT 'menu', * FROM C_menu_price \
+//                  UNION SELECT 'product', * FROM C_prod_price");
 
-    query.exec();
+//    query.exec();
 
-    model->setQuery(query);
+//    model->setQuery(query);
 //    model->setHeaderData(0, Qt::Horizontal, "Col1");
 
-    this->ui->tableView->setModel(model);
+//    this->ui->tableView->setModel(model);
 
     buildProductTree();
 

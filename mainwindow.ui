@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>694</width>
-    <height>540</height>
+    <width>901</width>
+    <height>643</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,47 +22,18 @@
       </property>
       <widget class="QWidget" name="products">
        <attribute name="title">
-        <string>Tab 1</string>
+        <string>Products</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1" rowspan="2">
-         <widget class="QTreeView" name="prod_tree">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="prod_delprod">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete</string>
           </property>
          </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QDialogButtonBox" name="buttonBox">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="standardButtons">
-           <set>QDialogButtonBox::Reset|QDialogButtonBox::Save</set>
-          </property>
-          <property name="centerButtons">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="0" column="2" colspan="2">
          <widget class="QScrollArea" name="prod_scroll">
@@ -77,8 +48,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>377</width>
-             <height>392</height>
+             <width>597</width>
+             <height>459</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -97,7 +68,7 @@
               <item row="1" column="0">
                <widget class="QLabel" name="prod_name_tag">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>Name</string>
                 </property>
                </widget>
               </item>
@@ -107,7 +78,7 @@
               <item row="2" column="0">
                <widget class="QLabel" name="prod_cat_tag">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>Category</string>
                 </property>
                </widget>
               </item>
@@ -117,7 +88,7 @@
               <item row="3" column="0">
                <widget class="QLabel" name="prod_subcat_tag">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>Subcategory</string>
                 </property>
                </widget>
               </item>
@@ -127,7 +98,7 @@
               <item row="4" column="0">
                <widget class="QLabel" name="prod_meas_tag">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>Measurement</string>
                 </property>
                </widget>
               </item>
@@ -137,7 +108,7 @@
               <item row="5" column="0">
                <widget class="QLabel" name="prod_pricetable_tag">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>Prices</string>
                 </property>
                </widget>
               </item>
@@ -157,16 +128,26 @@
                  </spacer>
                 </item>
                 <item>
+                 <widget class="QPushButton" name="prod_editprice">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string>Edit</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="prod_removeprice">
                   <property name="text">
-                   <string>Remove Price</string>
+                   <string>Delete</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="prod_newprice">
                   <property name="text">
-                   <string>New price</string>
+                   <string>New</string>
                   </property>
                  </widget>
                 </item>
@@ -175,7 +156,7 @@
               <item row="8" column="0">
                <widget class="QLabel" name="prod_notes_tag">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>Notes</string>
                 </property>
                </widget>
               </item>
@@ -191,11 +172,60 @@
           </widget>
          </widget>
         </item>
+        <item row="0" column="0" rowspan="2" colspan="2">
+         <widget class="QTreeView" name="prod_tree">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="3">
+         <widget class="QDialogButtonBox" name="prod_curprod_buttons">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="standardButtons">
+           <set>QDialogButtonBox::Reset|QDialogButtonBox::Save</set>
+          </property>
+          <property name="centerButtons">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="prod_newprod">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="recipes">
        <attribute name="title">
-        <string>Page</string>
+        <string>Recipes</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
@@ -221,8 +251,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>111</width>
-             <height>78</height>
+             <width>597</width>
+             <height>502</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -249,13 +279,53 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="menus">
+       <attribute name="title">
+        <string>Menus</string>
+       </attribute>
+      </widget>
       <widget class="QWidget" name="config">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>Settings</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QTableView" name="tableView"/>
+         <widget class="QToolBox" name="toolBox">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="page">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>861</width>
+             <height>434</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>Page 1</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QListView" name="listView"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="page_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>861</width>
+             <height>434</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>Page 2</string>
+           </attribute>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -268,7 +338,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>694</width>
+     <width>901</width>
      <height>27</height>
     </rect>
    </property>
