@@ -29,6 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    this->ui->tableView->setModel(model);
 
+    currentProduct = -1;
+    currentRecipe = -1;
+    currentMenu = -1;
+
     buildProductTree();
 
     QObject::connect(this->ui->prod_tree->selectionModel(),

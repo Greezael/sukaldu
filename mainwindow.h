@@ -42,9 +42,12 @@ private:
     void updatePriceList();
     void productSelected(int id);
     void resetProductData();
+    void saveProductData();
+    int currentCatId, currentSubCatId;
 
 public slots:
     void prodTreeItemSelected(const QModelIndex &current, const QModelIndex &previous);
+    void prodCatSelected(int index);
     void showNewPricePopup();
     void generalProdButtonClicked(QAbstractButton * button);
 
