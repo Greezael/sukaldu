@@ -174,14 +174,62 @@ void MainWindow::productSelected(int id)
 
 void MainWindow::updatePriceList()
 {
-    QSqlQueryModel *pricemodel = new QSqlQueryModel();
-    QSqlQuery pricequery;
-    std::stringstream query_str;
-    query_str << "SELECT price, notes FROM prod_price" << std::endl;
-    query_str << "WHERE product = " << this->currentProduct << std::endl;
-    pricequery.exec(query_str.str().c_str());
-    pricemodel->setQuery(pricequery);
-    this->ui->prod_pricetable->setModel(pricemodel);
+//    QSqlQueryModel *pricemodel = new QSqlQueryModel();
+//    QSqlQuery pricequery;
+//    std::stringstream query_str;
+//    query_str << "SELECT price, notes FROM prod_price" << std::endl;
+//    query_str << "WHERE product = " << this->currentProduct << std::endl;
+//    pricequery.exec(query_str.str().c_str());
+//    pricemodel->setQuery(pricequery);
+//    this->ui->prod_pricetable->setModel(pricemodel);
+
+
+    QStandardItemModel * rootModel;
+    if (this->ui->prod_pricetable->model() != NULL)
+    {
+        rootModel = (QStandardItemModel *) this->ui->prod_pricetable->model();
+        rootModel->clear();
+    }
+    else
+    {
+        rootModel = new QStandardItemModel(this);
+    }
+
+    int currentPrice = -1;
+
+    QSqlQuery query;
+    query.prepare("SELECT current_price FROM product WHERE id = :prodid");
+    query.bindValue(":prodid", QVariant::fromValue(this->currentProduct));
+    query.exec();
+    if (query.next())
+    {
+        currentPrice = query.value("current_price").toInt();
+    }
+
+    query.prepare("SELECT id, price / quantity 'cprice', notes FROM prod_price WHERE product = :prodid");
+    query.bindValue(":prodid", QVariant::fromValue(this->currentProduct));
+    query.exec();
+    rootModel->setColumnCount(3);
+    while (query.next())
+    {
+        QList<QStandardItem*> row;
+        QStandardItem* price = new QStandardItem(query.value("cprice").toString());
+        QStandardItem* notes = new QStandardItem(query.value("notes").toString());
+        QStandardItem* current = new QStandardItem("");
+
+        if (query.value("id").toInt() == currentPrice)
+        {
+            current->setText("✓");
+        }
+        row << price << notes << current;
+
+        price->setData(query.value("id"), SK_IdRole);
+
+        rootModel->appendRow(row);
+
+    }
+
+    this->ui->prod_pricetable->setModel(rootModel);
 }
 
 void MainWindow::fillProductCategoryLists(int catId, int subCatId)

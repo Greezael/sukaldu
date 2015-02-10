@@ -164,7 +164,14 @@
                <widget class="QPlainTextEdit" name="prod_notes"/>
               </item>
               <item row="5" column="1">
-               <widget class="QTableView" name="prod_pricetable"/>
+               <widget class="QTableView" name="prod_pricetable">
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
@@ -179,6 +186,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
           </property>
          </widget>
         </item>
@@ -317,8 +327,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>434</height>
+             <width>100</width>
+             <height>30</height>
             </rect>
            </property>
            <attribute name="label">
