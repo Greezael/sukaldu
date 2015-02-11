@@ -15,6 +15,10 @@ void MainWindow::makeProductConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(showNewPricePopup()));
+    QObject::connect(this->ui->prod_setcurrentprice,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(setCurrentPrice()));
     QObject::connect(this->ui->prod_curprod_buttons,
                      SIGNAL(clicked(QAbstractButton*)),
                      this,
@@ -366,4 +370,21 @@ void MainWindow::saveProductData()
 
     productSelected(currentProduct);
     buildProductTree();
+}
+
+void MainWindow::setCurrentPrice()
+{
+    QModelIndexList indexes = this->ui->prod_pricetable->selectionModel()->selectedIndexes();
+    if (indexes.size())
+    {
+        QModelIndex tableIndex = indexes.first();
+        QVariant priceid = this->ui->prod_pricetable->model()->itemData(tableIndex)[SK_IdRole];
+        QSqlQuery query;
+        query.prepare("UPDATE product SET current_price = :priceid WHERE id = :id");
+        query.bindValue(":id", currentProduct);
+        query.bindValue(":priceid", priceid);
+        query.exec();
+
+        updatePriceList();
+    }
 }

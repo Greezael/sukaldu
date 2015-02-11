@@ -49,6 +49,7 @@ public slots:
     void prodTreeItemSelected(const QModelIndex &current, const QModelIndex &previous);
     void prodCatSelected(int index);
     void showNewPricePopup();
+    void setCurrentPrice();
     void generalProdButtonClicked(QAbstractButton * button);
 
 

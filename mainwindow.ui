@@ -128,6 +128,13 @@
                  </spacer>
                 </item>
                 <item>
+                 <widget class="QPushButton" name="prod_setcurrentprice">
+                  <property name="text">
+                   <string>Set Current</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="prod_editprice">
                   <property name="enabled">
                    <bool>false</bool>
@@ -261,8 +268,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>597</width>
-             <height>502</height>
+             <width>111</width>
+             <height>78</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -309,8 +316,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>434</height>
+             <width>93</width>
+             <height>93</height>
             </rect>
            </property>
            <attribute name="label">
