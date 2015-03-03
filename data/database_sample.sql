@@ -1,7 +1,7 @@
 -- Product measurement
-INSERT INTO prod_meas VALUES (NULL, 'g')
-INSERT INTO prod_meas VALUES (NULL, 'uds')
-INSERT INTO prod_meas VALUES (NULL, 'l')
+INSERT INTO prod_meas VALUES (1, 'g')
+INSERT INTO prod_meas VALUES (2, 'uds')
+INSERT INTO prod_meas VALUES (3, 'l')
 
 -- Product categories
 INSERT INTO prod_cat VALUES (1, 'prod_cat1')

@@ -351,20 +351,25 @@ void MainWindow::saveProductData()
     QString notes = this->ui->prod_notes->toPlainText();
     int catId = this->ui->prod_cat->currentData().toInt();
     int subCatId = this->ui->prod_subcat->currentData().toInt();
+    int measId = this->ui->prod_meas->currentData().toInt();
     QVariant catV = (catId != -1) ? QVariant::fromValue(catId) : QVariant();
     QVariant subCatV = (subCatId != -1) ? QVariant::fromValue(subCatId) : QVariant();
+    QVariant measV = (measId != -1) ? QVariant::fromValue(measId) : QVariant();
+    std::cout << measId << std::endl;
 
     QSqlQuery query;
     query.prepare("UPDATE product SET "
                   "name = :name, "
                   "notes = :notes, "
                   "cat = :cat, "
-                  "subcat = :subcat "
+                  "subcat = :subcat, "
+                  "meas = :meas "
                   "WHERE id = :id");
     query.bindValue(":name", name);
     query.bindValue(":notes", notes);
     query.bindValue(":cat", catV);
     query.bindValue(":subcat", subCatV);
+    query.bindValue(":meas", measV);
     query.bindValue(":id", currentProduct);
     query.exec();
 
