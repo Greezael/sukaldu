@@ -182,16 +182,6 @@ void MainWindow::productSelected(int id)
 
 void MainWindow::updatePriceList()
 {
-//    QSqlQueryModel *pricemodel = new QSqlQueryModel();
-//    QSqlQuery pricequery;
-//    std::stringstream query_str;
-//    query_str << "SELECT price, notes FROM prod_price" << std::endl;
-//    query_str << "WHERE product = " << this->currentProduct << std::endl;
-//    pricequery.exec(query_str.str().c_str());
-//    pricemodel->setQuery(pricequery);
-//    this->ui->prod_pricetable->setModel(pricemodel);
-
-
     QStandardItemModel * rootModel;
     if (this->ui->prod_pricetable->model() != NULL)
     {
@@ -261,9 +251,9 @@ void MainWindow::fillProductCategoryLists(int catId, int subCatId)
             selected = index;
         index++;
     }
-    this->ui->prod_cat->blockSignals(false);
     this->ui->prod_cat->setCurrentIndex(selected);
-
+    this->ui->prod_cat->blockSignals(false);
+    prodCatSelected(selected);
 }
 
 void MainWindow::prodCatSelected(int index)
