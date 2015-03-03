@@ -27,6 +27,10 @@ void MainWindow::makeProductConnections()
                      SIGNAL(currentIndexChanged(int)),
                      this,
                      SLOT(prodCatSelected(int)));
+    QObject::connect(this->ui->prod_newprod,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(insertNewProduct()));
 }
 
 void MainWindow::buildProductTree()
@@ -392,4 +396,27 @@ void MainWindow::setCurrentPrice()
 
         updatePriceList();
     }
+}
+
+void MainWindow::insertNewProduct()
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO product VALUES ( "
+                  "NULL, "  // Id
+                  "\"New Product\", "  // Name
+                  "NULL, "  // Cat
+                  "NULL, "  // Subcat
+                  "NULL, "  // Notes
+                  "NULL, "  // Price
+                  "NULL "  // Measurement
+                  ")");
+    query.exec();
+
+    query.prepare("SELECT last_insert_rowid()");
+    query.exec();
+    if (query.next())
+    {
+        productSelected(query.value(0).toInt());
+    }
+    buildProductTree();
 }
