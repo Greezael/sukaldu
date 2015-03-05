@@ -15,7 +15,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
         pricedialog.cpp \
-    productsection.cpp
+    productsection.cpp \
+    genericcode.cpp \
+    recipesection.cpp \
+    menusection.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \

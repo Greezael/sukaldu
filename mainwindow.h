@@ -18,6 +18,12 @@ enum SK_ObjectType {
     SK_Subcategory
 };
 
+enum SK_Section {
+    SK_S_PROD,
+    SK_S_REC,
+    SK_S_MENU
+};
+
 namespace Ui {
 class MainWindow;
 }
@@ -39,7 +45,6 @@ private:
     void buildProductTree();
     void fillProductCategoryLists(int catId, int subCatId);
     void fillProductMeasurementList(int measId);
-    void updatePriceList();
     void productSelected(int id);
     void resetProductData();
     void saveProductData();
@@ -53,7 +58,20 @@ public slots:
     void generalProdButtonClicked(QAbstractButton * button);
     void insertNewProduct();
     void deleteProduct();
+    void updatePriceList();
 
+// Recipe related
+private:
+    void buildRecipeTree();
+
+// Menu related
+private:
+    void buildMenuTree();
+
+
+// Generic code
+private:
+    void buildTree(SK_Section section);
 
 // State
 private:
