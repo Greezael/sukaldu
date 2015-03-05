@@ -58,10 +58,11 @@ current_price INTEGER REFERENCES prod_price
 -- Product prices
 CREATE TABLE prod_price (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-product INTEGER REFERENCES product,
+product INTEGER,
 price REAL,
 quantity REAL,
-notes TEXT
+notes TEXT,
+FOREIGN KEY (product) references product ON DELETE CASCADE
 )
 
 -- Recipes
@@ -88,7 +89,8 @@ CREATE TABLE recipe_product (
 recipe INTEGER REFERENCES recipe,
 product INTEGER REFERENCES product,
 quantity REAL,
-PRIMARY KEY (recipe, product)
+PRIMARY KEY (recipe, product),
+FOREIGN KEY (product) references product ON DELETE CASCADE
 )
 
 -- Menu is composed of recipes

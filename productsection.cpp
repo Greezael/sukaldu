@@ -31,6 +31,10 @@ void MainWindow::makeProductConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(insertNewProduct()));
+    QObject::connect(this->ui->prod_delprod,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(deleteProduct()));
 }
 
 void MainWindow::buildProductTree()
@@ -156,6 +160,24 @@ void MainWindow::prodTreeItemSelected(const QModelIndex &current, const QModelIn
 void MainWindow::productSelected(int id)
 {
     this->currentProduct = id;
+    if (id == -1)
+    {
+        this->ui->prod_scroll->setEnabled(false);
+        this->ui->prod_name->clear();
+        this->ui->prod_cat->clear();
+        this->ui->prod_subcat->clear();
+        QStandardItemModel * rootModel;
+        if (this->ui->prod_pricetable->model() != NULL)
+        {
+            rootModel = (QStandardItemModel *) this->ui->prod_pricetable->model();
+            rootModel->clear();
+        }
+        this->ui->prod_meas->clear();
+        this->ui->prod_notes->clear();
+
+        return;
+    }
+
     this->ui->prod_scroll->setEnabled(true);
 
     QSqlQuery query;
@@ -410,3 +432,38 @@ void MainWindow::insertNewProduct()
     }
     buildProductTree();
 }
+
+void MainWindow::deleteProduct()
+{
+    QModelIndexList indexes = this->ui->prod_tree->selectionModel()->selectedIndexes();
+    bool deleted = false;
+
+    for (int i = 0; i < indexes.size(); i++)
+    {
+        QModelIndex tableIndex = indexes.at(i);
+        QVariant typeSel = this->ui->prod_tree->model()->itemData(tableIndex)[SK_TypeRole];
+        if (typeSel.toInt() == SK_Product)
+        {
+            QVariant prodid = this->ui->prod_tree->model()->itemData(tableIndex)[SK_IdRole];
+            std::cout << "Id: " << prodid.toInt() << std::endl;
+            QSqlQuery query;
+            query.prepare("DELETE FROM product WHERE id = :id");
+            query.bindValue(":id", prodid);
+            query.exec();
+            if (query.lastError().type() != QSqlError::NoError)
+            {
+            }
+            else
+            {
+                deleted = true;
+            }
+        }
+    }
+
+    if (deleted)
+    {
+        productSelected(-1);
+        buildProductTree();
+    }
+}
+

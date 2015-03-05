@@ -65,7 +65,7 @@ INSERT INTO recipe_product VALUES (1, 2, 1.5)
 INSERT INTO recipe_product VALUES (2, 1, 1.5)
 INSERT INTO recipe_product VALUES (2, 3, 1.5)
 INSERT INTO recipe_product VALUES (3, 3, 1.5)
-INSERT INTO recipe_product VALUES (4, 4, 1.2)
+INSERT INTO recipe_product VALUES (4, 3, 1.2)
 
 -- Menu is composed of recipes
 INSERT INTO menu_recipe VALUES (1, 1)

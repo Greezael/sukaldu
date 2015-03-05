@@ -52,6 +52,7 @@ public slots:
     void setCurrentPrice();
     void generalProdButtonClicked(QAbstractButton * button);
     void insertNewProduct();
+    void deleteProduct();
 
 
 // State

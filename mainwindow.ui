@@ -28,7 +28,7 @@
         <item row="2" column="0">
          <widget class="QPushButton" name="prod_delprod">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Delete</string>
@@ -248,6 +248,9 @@
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ExtendedSelection</enum>
           </property>
          </widget>
         </item>
@@ -617,8 +620,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>93</width>
-             <height>93</height>
+             <width>861</width>
+             <height>434</height>
             </rect>
            </property>
            <attribute name="label">
