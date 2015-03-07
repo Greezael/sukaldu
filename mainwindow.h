@@ -64,9 +64,12 @@ private:
     void buildRecipeTree();
     void fillRecipeCategoryLists(int catId, int subCatId);
     void recipeSelected(int id);
+    void resetRecipeData();
+    void saveRecipeData();
 
 public slots:
     void recCatSelected(int index);
+    void generalRecButtonClicked(QAbstractButton * button);
 
 // Menu related
 private:

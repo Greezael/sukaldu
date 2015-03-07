@@ -175,7 +175,6 @@ void MainWindow::saveProductData()
     QVariant catV = (catId != -1) ? QVariant::fromValue(catId) : QVariant();
     QVariant subCatV = (subCatId != -1) ? QVariant::fromValue(subCatId) : QVariant();
     QVariant measV = (measId != -1) ? QVariant::fromValue(measId) : QVariant();
-    std::cout << measId << std::endl;
 
     QSqlQuery query;
     query.prepare("UPDATE product SET "

@@ -59,8 +59,59 @@ void MainWindow::fillRecipeCategoryLists(int catId, int subCatId)
     fillCategoryLists(catId, subCatId, SK_S_REC);
 }
 
-
 void MainWindow::recCatSelected(int index)
 {
     catSelected(index, SK_S_REC);
 }
+
+void MainWindow::generalRecButtonClicked(QAbstractButton *button)
+{
+    switch (this->ui->rec_currec_buttons->standardButton(button))
+    {
+    case QDialogButtonBox::Reset:
+        resetRecipeData();
+        break;
+    case QDialogButtonBox::Save:
+        saveRecipeData();
+        break;
+    default:
+        break;
+    }
+}
+
+
+void MainWindow::resetRecipeData()
+{
+    recipeSelected(currentRecipe);
+}
+
+void MainWindow::saveRecipeData()
+{
+    QString name = this->ui->rec_name->text();
+    QString elab = this->ui->rec_elab->toPlainText();
+    int catId = this->ui->rec_cat->currentData().toInt();
+    int subCatId = this->ui->rec_subcat->currentData().toInt();
+    QVariant catV = (catId != -1) ? QVariant::fromValue(catId) : QVariant();
+    QVariant subCatV = (subCatId != -1) ? QVariant::fromValue(subCatId) : QVariant();
+    QVariant servs = this->ui->rec_servs->value();
+
+    QSqlQuery query;
+    query.prepare("UPDATE recipe SET "
+                  "name = :name, "
+                  "preparation = :elab, "
+                  "cat = :cat, "
+                  "subcat = :subcat, "
+                  "servings = :servs "
+                  "WHERE id = :id");
+    query.bindValue(":name", name);
+    query.bindValue(":elab", elab);
+    query.bindValue(":cat", catV);
+    query.bindValue(":subcat", subCatV);
+    query.bindValue(":servs", servs);
+    query.bindValue(":id", currentRecipe);
+    query.exec();
+
+    recipeSelected(currentRecipe);
+    buildRecipeTree();
+}
+

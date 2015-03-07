@@ -12,6 +12,7 @@ void MainWindow::buildTree(SK_Section section)
     QTreeView* tree;
     QString prefix, itemTable;
     SK_ObjectType role;
+    int index;
     switch (section)
     {
     case SK_S_PROD:
@@ -19,18 +20,21 @@ void MainWindow::buildTree(SK_Section section)
         prefix = "prod";
         itemTable = "product";
         role = SK_Product;
+        index = currentProduct;
         break;
     case SK_S_REC:
         tree = this->ui->rec_tree;
         prefix = "recipe";
         itemTable = "recipe";
         role = SK_Recipe;
+        index = currentRecipe;
         break;
     case SK_S_MENU:
         tree = this->ui->menu_tree;
         prefix = "menu";
         itemTable = "menu";
         role = SK_Menu;
+        index = currentMenu;
         break;
     }
 
@@ -88,7 +92,7 @@ void MainWindow::buildTree(SK_Section section)
                 item->setData(QVariant::fromValue((int) role), SK_TypeRole);
                 item->setData(QVariant::fromValue(queryItem.value("id").toInt()), SK_IdRole);
                 subcategory->appendRow(item);
-                if (queryItem.value("id").toInt() == currentProduct)
+                if (queryItem.value("id").toInt() == index)
                 {
                     tree->setExpanded(rootModel->indexFromItem(category), true);
                     tree->setExpanded(rootModel->indexFromItem(subcategory), true);
@@ -109,7 +113,7 @@ void MainWindow::buildTree(SK_Section section)
             item->setData(QVariant::fromValue((int) role), SK_TypeRole);
             item->setData(QVariant::fromValue(queryItem.value("id").toInt()), SK_IdRole);
             category->appendRow(item);
-            if (queryItem.value("id").toInt() == currentProduct)
+            if (queryItem.value("id").toInt() == index)
             {
                 tree->setExpanded(rootModel->indexFromItem(category), true);
                 tree->selectionModel()->setCurrentIndex(rootModel->indexFromItem(item),
@@ -128,7 +132,7 @@ void MainWindow::buildTree(SK_Section section)
         item->setData(QVariant::fromValue((int) role), SK_TypeRole);
         item->setData(QVariant::fromValue(queryItem.value("id").toInt()), SK_IdRole);
         rootModel->appendRow(item);
-        if (queryItem.value("id").toInt() == currentProduct)
+        if (queryItem.value("id").toInt() == index)
         {
             tree->selectionModel()->setCurrentIndex(rootModel->indexFromItem(item),
                                                                    QItemSelectionModel::SelectCurrent);
