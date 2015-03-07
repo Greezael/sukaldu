@@ -49,8 +49,18 @@ void MainWindow::recipeSelected(int id)
         subcat = (query.value("subcat").isNull()) ? -1 : query.value("subcat").toInt();
         servs = (query.value("servings").isNull()) ? 0 : query.value("servings").toInt();
         this->ui->rec_servs->setValue(servs);
-//        fillProductCategoryLists(cat, subcat);
-//        fillProductMeasurementList(meas);
+        fillRecipeCategoryLists(cat, subcat);
 //        updatePriceList();
     }
+}
+
+void MainWindow::fillRecipeCategoryLists(int catId, int subCatId)
+{
+    fillCategoryLists(catId, subCatId, SK_S_REC);
+}
+
+
+void MainWindow::recCatSelected(int index)
+{
+    catSelected(index, SK_S_REC);
 }

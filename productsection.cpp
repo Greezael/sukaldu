@@ -109,63 +109,12 @@ void MainWindow::updatePriceList()
 
 void MainWindow::fillProductCategoryLists(int catId, int subCatId)
 {
-    this->currentCatId = catId;
-    this->currentSubCatId = subCatId;
-
-    this->ui->prod_cat->blockSignals(true);
-    this->ui->prod_cat->clear();
-
-    QSqlQuery query;
-    std::stringstream query_str;
-    query_str << "SELECT id, name FROM prod_cat" << std::endl;
-    query.exec(query_str.str().c_str());
-    int selected = 0, index = 1;
-    this->ui->prod_cat->addItem("None", QVariant::fromValue(-1));
-    while (query.next())
-    {
-        this->ui->prod_cat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
-        if (query.value("id").toInt() == catId)
-            selected = index;
-        index++;
-    }
-    this->ui->prod_cat->setCurrentIndex(selected);
-    this->ui->prod_cat->blockSignals(false);
-    prodCatSelected(selected);
+    fillCategoryLists(catId, subCatId, SK_S_PROD);
 }
 
 void MainWindow::prodCatSelected(int index)
 {
-    this->ui->prod_subcat->clear();
-    int catId = this->ui->prod_cat->itemData(index).toInt();
-    if (catId != this->currentCatId)
-    {
-        this->currentCatId = catId;
-        this->currentSubCatId = -1;
-    }
-    int subCatId = this->currentSubCatId;
-
-    if (catId != -1)
-    {
-        QSqlQuery query;
-        std::stringstream query_str;
-        query_str << "SELECT id, name FROM prod_subcat" << std::endl;
-        query_str << "WHERE cat = " << catId << std::endl;
-        query.exec(query_str.str().c_str());
-        int selected = 0, index = 1;
-        this->ui->prod_subcat->addItem("None", QVariant::fromValue(-1));
-        while (query.next())
-        {
-            this->ui->prod_subcat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
-            if (query.value("id").toInt() == subCatId)
-                selected = index;
-            index++;
-        }
-        this->ui->prod_subcat->setCurrentIndex(selected);
-    }
-    else
-    {
-        this->ui->prod_subcat->addItem("None", QVariant::fromValue(-1));
-    }
+    catSelected(index, SK_S_PROD);
 }
 
 void MainWindow::fillProductMeasurementList(int measId)

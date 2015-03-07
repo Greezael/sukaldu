@@ -46,6 +46,16 @@ void MainWindow::makeConnections()
                      this,
                      SLOT(treeItemSelected(const QModelIndex &, const QModelIndex &)));
 
+    QObject::connect(this->ui->prod_cat,
+                     SIGNAL(currentIndexChanged(int)),
+                     this,
+                     SLOT(prodCatSelected(int)));
+
+    QObject::connect(this->ui->rec_cat,
+                     SIGNAL(currentIndexChanged(int)),
+                     this,
+                     SLOT(recCatSelected(int)));
+
     // Product
     QObject::connect(this->ui->prod_newprice,
                      SIGNAL(clicked()),
@@ -59,10 +69,6 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked(QAbstractButton*)),
                      this,
                      SLOT(generalProdButtonClicked(QAbstractButton*)));
-    QObject::connect(this->ui->prod_cat,
-                     SIGNAL(currentIndexChanged(int)),
-                     this,
-                     SLOT(prodCatSelected(int)));
     QObject::connect(this->ui->prod_newprod,
                      SIGNAL(clicked()),
                      this,

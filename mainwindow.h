@@ -39,6 +39,7 @@ public:
 private:
     Ui::MainWindow *ui;
     void makeConnections();
+    int currentCatId, currentSubCatId;
 
 // Product related
 private:
@@ -48,7 +49,6 @@ private:
     void productSelected(int id);
     void resetProductData();
     void saveProductData();
-    int currentCatId, currentSubCatId;
 
 public slots:
     void prodCatSelected(int index);
@@ -62,7 +62,11 @@ public slots:
 // Recipe related
 private:
     void buildRecipeTree();
+    void fillRecipeCategoryLists(int catId, int subCatId);
     void recipeSelected(int id);
+
+public slots:
+    void recCatSelected(int index);
 
 // Menu related
 private:
@@ -72,9 +76,11 @@ private:
 // Generic code
 private:
     void buildTree(SK_Section section);
+    void fillCategoryLists(int catId, int subCatId, SK_Section section);
 
 public slots:
     void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);
+    void catSelected(int index, SK_Section section);
 
 // State
 private:

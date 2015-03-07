@@ -158,3 +158,104 @@ void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex 
 //        menuSelected(id);
     }
 }
+
+void MainWindow::fillCategoryLists(int catId, int subCatId, SK_Section section)
+{
+    QComboBox *cat, *subcat;
+    QString prefix;
+    switch (section)
+    {
+    case SK_S_PROD:
+        cat = this->ui->prod_cat;
+        subcat = this->ui->prod_subcat;
+        prefix = "prod";
+        break;
+    case SK_S_REC:
+        cat = this->ui->rec_cat;
+        subcat = this->ui->rec_subcat;
+        prefix = "recipe";
+        break;
+    case SK_S_MENU:
+        cat = this->ui->menu_cat;
+        subcat = this->ui->menu_subcat;
+        prefix = "menu";
+        break;
+    }
+
+    this->currentCatId = catId;
+    this->currentSubCatId = subCatId;
+
+    cat->blockSignals(true);
+    cat->clear();
+
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM " + prefix + "_cat");
+    query.exec();
+    int selected = 0, index = 1;
+    cat->addItem("None", QVariant::fromValue(-1));
+    while (query.next())
+    {
+        cat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
+        if (query.value("id").toInt() == catId)
+            selected = index;
+        index++;
+    }
+    cat->setCurrentIndex(selected);
+    cat->blockSignals(false);
+    catSelected(selected, section);
+}
+
+void MainWindow::catSelected(int index, SK_Section section)
+{
+    QComboBox *cat, *subcat;
+    QString prefix;
+    switch (section)
+    {
+    case SK_S_PROD:
+        cat = this->ui->prod_cat;
+        subcat = this->ui->prod_subcat;
+        prefix = "prod";
+        break;
+    case SK_S_REC:
+        cat = this->ui->rec_cat;
+        subcat = this->ui->rec_subcat;
+        prefix = "recipe";
+        break;
+    case SK_S_MENU:
+        cat = this->ui->menu_cat;
+        subcat = this->ui->menu_subcat;
+        prefix = "menu";
+        break;
+    }
+
+    subcat->clear();
+    int catId = cat->itemData(index).toInt();
+    if (catId != this->currentCatId)
+    {
+        this->currentCatId = catId;
+        this->currentSubCatId = -1;
+    }
+    int subCatId = this->currentSubCatId;
+
+    if (catId != -1)
+    {
+        QSqlQuery query;
+        query.prepare("SELECT id, name FROM " + prefix + "_subcat WHERE cat = :catId");
+        query.bindValue(":catId", QVariant::fromValue(catId));
+        query.exec();
+        int selected = 0, index = 1;
+        subcat->addItem("None", QVariant::fromValue(-1));
+        while (query.next())
+        {
+            subcat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
+            if (query.value("id").toInt() == subCatId)
+                selected = index;
+            index++;
+        }
+        subcat->setCurrentIndex(selected);
+    }
+    else
+    {
+        subcat->addItem("None", QVariant::fromValue(-1));
+    }
+}
