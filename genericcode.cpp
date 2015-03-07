@@ -10,23 +10,26 @@
 void MainWindow::buildTree(SK_Section section)
 {
     QTreeView* tree;
-    QString prefix;
+    QString prefix, itemTable;
     SK_ObjectType role;
     switch (section)
     {
     case SK_S_PROD:
         tree = this->ui->prod_tree;
         prefix = "prod";
+        itemTable = "product";
         role = SK_Product;
         break;
     case SK_S_REC:
         tree = this->ui->rec_tree;
         prefix = "recipe";
+        itemTable = "recipe";
         role = SK_Recipe;
         break;
     case SK_S_MENU:
         tree = this->ui->menu_tree;
         prefix = "menu";
+        itemTable = "menu";
         role = SK_Menu;
         break;
     }
@@ -73,7 +76,7 @@ void MainWindow::buildTree(SK_Section section)
             subcategory->setData(subCatId, SK_IdRole);
             category->appendRow(subcategory);
 
-            queryItem.prepare("SELECT id, name FROM " + prefix + " "
+            queryItem.prepare("SELECT id, name FROM " + itemTable + " "
                                  "WHERE cat = :catId AND subcat = :subCatId");
             queryItem.bindValue(":catId", catId);
             queryItem.bindValue(":subCatId", subCatId);
@@ -95,7 +98,7 @@ void MainWindow::buildTree(SK_Section section)
             }
         }
 
-        queryItem.prepare("SELECT id, name FROM " + prefix + " "
+        queryItem.prepare("SELECT id, name FROM " + itemTable + " "
                              "WHERE cat = :catId AND subcat IS NULL");
         queryItem.bindValue(":catId", catId);
         queryItem.exec();
@@ -115,7 +118,7 @@ void MainWindow::buildTree(SK_Section section)
         }
     }
 
-    queryItem.prepare("SELECT id, name FROM " + prefix + " "
+    queryItem.prepare("SELECT id, name FROM " + itemTable + " "
                          "WHERE cat IS NULL AND subcat IS NULL");
     queryItem.exec();
 
@@ -135,4 +138,23 @@ void MainWindow::buildTree(SK_Section section)
     tree->setModel(rootModel);
     tree->blockSignals(false);
 
+}
+
+void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex &previous)
+{
+    int type = current.data(SK_TypeRole).toInt();
+    int id = current.data(SK_IdRole).toInt();
+
+    if (type == SK_Product)
+    {
+        productSelected(id);
+    }
+    else if (type == SK_Recipe)
+    {
+        recipeSelected(id);
+    }
+    else if (type == SK_Menu)
+    {
+//        menuSelected(id);
+    }
 }

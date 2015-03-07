@@ -38,10 +38,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void makeConnections();
 
 // Product related
 private:
-    void makeProductConnections();
     void buildProductTree();
     void fillProductCategoryLists(int catId, int subCatId);
     void fillProductMeasurementList(int measId);
@@ -51,7 +51,6 @@ private:
     int currentCatId, currentSubCatId;
 
 public slots:
-    void prodTreeItemSelected(const QModelIndex &current, const QModelIndex &previous);
     void prodCatSelected(int index);
     void showNewPricePopup();
     void setCurrentPrice();
@@ -63,6 +62,7 @@ public slots:
 // Recipe related
 private:
     void buildRecipeTree();
+    void recipeSelected(int id);
 
 // Menu related
 private:
@@ -72,6 +72,9 @@ private:
 // Generic code
 private:
     void buildTree(SK_Section section);
+
+public slots:
+    void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);
 
 // State
 private:

@@ -9,49 +9,9 @@
 
 #include "pricedialog.h"
 
-void MainWindow::makeProductConnections()
-{
-    QObject::connect(this->ui->prod_newprice,
-                     SIGNAL(clicked()),
-                     this,
-                     SLOT(showNewPricePopup()));
-    QObject::connect(this->ui->prod_setcurrentprice,
-                     SIGNAL(clicked()),
-                     this,
-                     SLOT(setCurrentPrice()));
-    QObject::connect(this->ui->prod_curprod_buttons,
-                     SIGNAL(clicked(QAbstractButton*)),
-                     this,
-                     SLOT(generalProdButtonClicked(QAbstractButton*)));
-    QObject::connect(this->ui->prod_cat,
-                     SIGNAL(currentIndexChanged(int)),
-                     this,
-                     SLOT(prodCatSelected(int)));
-    QObject::connect(this->ui->prod_newprod,
-                     SIGNAL(clicked()),
-                     this,
-                     SLOT(insertNewProduct()));
-    QObject::connect(this->ui->prod_delprod,
-                     SIGNAL(clicked()),
-                     this,
-                     SLOT(deleteProduct()));
-}
-
 void MainWindow::buildProductTree()
 {
     buildTree(SK_S_PROD);
-}
-
-
-void MainWindow::prodTreeItemSelected(const QModelIndex &current, const QModelIndex &previous)
-{
-    int type = current.data(SK_TypeRole).toInt();
-    int id = current.data(SK_IdRole).toInt();
-
-    if (type == SK_Product)
-    {
-        productSelected(id);
-    }
 }
 
 void MainWindow::productSelected(int id)
@@ -63,11 +23,9 @@ void MainWindow::productSelected(int id)
         this->ui->prod_name->clear();
         this->ui->prod_cat->clear();
         this->ui->prod_subcat->clear();
-        QStandardItemModel * rootModel;
         if (this->ui->prod_pricetable->model() != NULL)
         {
-            rootModel = (QStandardItemModel *) this->ui->prod_pricetable->model();
-            rootModel->clear();
+            ((QStandardItemModel *) this->ui->prod_pricetable->model())->clear();
         }
         this->ui->prod_meas->clear();
         this->ui->prod_notes->clear();
