@@ -115,3 +115,8 @@ void MainWindow::saveRecipeData()
     buildRecipeTree();
 }
 
+
+void MainWindow::deleteRecipe()
+{
+    deleteItems(SK_S_REC);
+}

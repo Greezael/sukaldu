@@ -263,3 +263,69 @@ void MainWindow::catSelected(int index, SK_Section section)
         subcat->addItem("None", QVariant::fromValue(-1));
     }
 }
+
+void MainWindow::deleteItems(SK_Section section)
+{
+    QTreeView* tree;
+    QString itemTable;
+    SK_ObjectType role;
+    switch (section)
+    {
+    case SK_S_PROD:
+        tree = this->ui->prod_tree;
+        itemTable = "product";
+        role = SK_Product;
+        break;
+    case SK_S_REC:
+        tree = this->ui->rec_tree;
+        itemTable = "recipe";
+        role = SK_Recipe;
+        break;
+    case SK_S_MENU:
+        tree = this->ui->menu_tree;
+        itemTable = "menu";
+        role = SK_Menu;
+        break;
+    }
+
+
+    QModelIndexList indexes = tree->selectionModel()->selectedIndexes();
+    bool deleted = false;
+
+    for (int i = 0; i < indexes.size(); i++)
+    {
+        QModelIndex tableIndex = indexes.at(i);
+        QVariant typeSel = tree->model()->itemData(tableIndex)[SK_TypeRole];
+        if (typeSel.toInt() == role)
+        {
+            QVariant id = tree->model()->itemData(tableIndex)[SK_IdRole];
+            QSqlQuery query;
+            query.prepare("DELETE FROM " + itemTable + " WHERE id = :id");
+            query.bindValue(":id", id);
+            query.exec();
+            if (query.lastError().type() == QSqlError::NoError)
+            {
+                deleted = true;
+            }
+        }
+    }
+
+    if (deleted)
+    {
+        switch (section)
+        {
+        case SK_S_PROD:
+            productSelected(-1);
+            buildProductTree();
+            break;
+        case SK_S_REC:
+            recipeSelected(-1);
+            buildRecipeTree();
+            break;
+        case SK_S_MENU:
+//            menuSelected(-1);
+            buildMenuTree();
+            break;
+        }
+    }
+}

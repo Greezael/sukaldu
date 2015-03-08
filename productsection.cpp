@@ -238,35 +238,6 @@ void MainWindow::insertNewProduct()
 
 void MainWindow::deleteProduct()
 {
-    QModelIndexList indexes = this->ui->prod_tree->selectionModel()->selectedIndexes();
-    bool deleted = false;
-
-    for (int i = 0; i < indexes.size(); i++)
-    {
-        QModelIndex tableIndex = indexes.at(i);
-        QVariant typeSel = this->ui->prod_tree->model()->itemData(tableIndex)[SK_TypeRole];
-        if (typeSel.toInt() == SK_Product)
-        {
-            QVariant prodid = this->ui->prod_tree->model()->itemData(tableIndex)[SK_IdRole];
-            std::cout << "Id: " << prodid.toInt() << std::endl;
-            QSqlQuery query;
-            query.prepare("DELETE FROM product WHERE id = :id");
-            query.bindValue(":id", prodid);
-            query.exec();
-            if (query.lastError().type() != QSqlError::NoError)
-            {
-            }
-            else
-            {
-                deleted = true;
-            }
-        }
-    }
-
-    if (deleted)
-    {
-        productSelected(-1);
-        buildProductTree();
-    }
+    deleteItems(SK_S_PROD);
 }
 

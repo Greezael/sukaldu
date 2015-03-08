@@ -86,18 +86,21 @@ notes TEXT
 
 -- Recipe is composed of products
 CREATE TABLE recipe_product (
-recipe INTEGER REFERENCES recipe,
-product INTEGER REFERENCES product,
+recipe INTEGER,
+product INTEGER,
 quantity REAL,
 PRIMARY KEY (recipe, product),
-FOREIGN KEY (product) references product ON DELETE CASCADE
+FOREIGN KEY (product) references product ON DELETE CASCADE,
+FOREIGN KEY (recipe) references recipe ON DELETE CASCADE
 )
 
 -- Menu is composed of recipes
 CREATE TABLE menu_recipe (
-menu INTEGER REFERENCES menu,
-recipe INTEGER REFERENCES recipe,
-PRIMARY KEY (menu, recipe)
+menu INTEGER,
+recipe INTEGER,
+PRIMARY KEY (menu, recipe),
+FOREIGN KEY (menu) references menu ON DELETE CASCADE,
+FOREIGN KEY (recipe) references recipe ON DELETE CASCADE
 )
 
 -- COMPUTED

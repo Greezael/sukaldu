@@ -70,6 +70,7 @@ private:
 public slots:
     void recCatSelected(int index);
     void generalRecButtonClicked(QAbstractButton * button);
+    void deleteRecipe();
 
 // Menu related
 private:
@@ -80,6 +81,7 @@ private:
 private:
     void buildTree(SK_Section section);
     void fillCategoryLists(int catId, int subCatId, SK_Section section);
+    void deleteItems(SK_Section section);
 
 public slots:
     void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);
