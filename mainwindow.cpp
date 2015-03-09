@@ -76,6 +76,16 @@ void MainWindow::makeConnections()
                      this,
                      SLOT(deleteRecipe()));
 
+    // Insert item Buttons
+    QObject::connect(this->ui->prod_newprod,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(insertNewProduct()));
+    QObject::connect(this->ui->rec_newrec,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(insertNewRecipe()));
+
     // Product
     QObject::connect(this->ui->prod_newprice,
                      SIGNAL(clicked()),
@@ -85,10 +95,7 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(setCurrentPrice()));
-    QObject::connect(this->ui->prod_newprod,
-                     SIGNAL(clicked()),
-                     this,
-                     SLOT(insertNewProduct()));
+
 
 }
 

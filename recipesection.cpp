@@ -115,6 +115,28 @@ void MainWindow::saveRecipeData()
     buildRecipeTree();
 }
 
+void MainWindow::insertNewRecipe()
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO recipe VALUES ( "
+                  "NULL, "  // Id
+                  "\"New Recipe\", "  // Name
+                  "NULL, "  // Cat
+                  "NULL, "  // Subcat
+                  "NULL, "  // preparation
+                  "NULL "   // servings
+                  ")");
+    query.exec();
+
+    query.prepare("SELECT last_insert_rowid()");
+    query.exec();
+    if (query.next())
+    {
+        recipeSelected(query.value(0).toInt());
+    }
+    buildRecipeTree();
+}
+
 
 void MainWindow::deleteRecipe()
 {

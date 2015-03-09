@@ -70,6 +70,7 @@ private:
 public slots:
     void recCatSelected(int index);
     void generalRecButtonClicked(QAbstractButton * button);
+    void insertNewRecipe();
     void deleteRecipe();
 
 // Menu related

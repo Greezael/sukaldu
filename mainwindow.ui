@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="products">
        <attribute name="title">
@@ -48,8 +48,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>494</width>
-             <height>392</height>
+             <width>597</width>
+             <height>465</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -349,7 +349,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QPushButton" name="re_addrec">
+         <widget class="QPushButton" name="rec_newrec">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -514,7 +514,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="1" column="1">
-         <widget class="QPushButton" name="menu_addmenu">
+         <widget class="QPushButton" name="menu_newmenu">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -565,8 +565,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>307</width>
-             <height>148</height>
+             <width>597</width>
+             <height>502</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout_2">
@@ -667,8 +667,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>93</height>
+             <width>861</width>
+             <height>434</height>
             </rect>
            </property>
            <attribute name="label">
