@@ -50,7 +50,7 @@ void MainWindow::recipeSelected(int id)
         servs = (query.value("servings").isNull()) ? 0 : query.value("servings").toInt();
         this->ui->rec_servs->setValue(servs);
         fillRecipeCategoryLists(cat, subcat);
-//        updatePriceList();
+        updateIngredientsList();
     }
 }
 
@@ -141,4 +141,44 @@ void MainWindow::insertNewRecipe()
 void MainWindow::deleteRecipe()
 {
     deleteItems(SK_S_REC);
+}
+
+void MainWindow::updateIngredientsList()
+{
+    QStandardItemModel * rootModel;
+    if (this->ui->rec_ing->model() != NULL)
+    {
+        rootModel = (QStandardItemModel *) this->ui->rec_ing->model();
+        rootModel->clear();
+    }
+    else
+    {
+        rootModel = new QStandardItemModel(this);
+    }
+
+    QSqlQuery query;
+
+    query.prepare("SELECT RP.product, M.name 'meas', P.name, RP.quantity "
+                  "FROM recipe_product RP "
+                  "JOIN product P "
+                  "JOIN prod_meas M "
+                  "WHERE RP.recipe = :recid "
+                  "AND P.id = RP.product "
+                  "AND P.meas = M.id");
+    query.bindValue(":recid", QVariant::fromValue(this->currentRecipe));
+    query.exec();
+    rootModel->setColumnCount(3);
+    while (query.next())
+    {
+        QList<QStandardItem*> row;
+        QStandardItem* quantity = new QStandardItem(query.value("quantity").toString());
+        QStandardItem* meas = new QStandardItem(query.value("meas").toString());
+        QStandardItem* product = new QStandardItem(query.value("name").toString());
+        row << quantity << meas << product;
+        quantity->setData(query.value("product"), SK_IdRole);
+
+        rootModel->appendRow(row);
+    }
+
+    this->ui->rec_ing->setModel(rootModel);
 }

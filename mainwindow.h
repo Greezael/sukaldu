@@ -50,6 +50,9 @@ private:
     void resetProductData();
     void saveProductData();
 
+public:
+    void updatePriceList();
+
 public slots:
     void prodCatSelected(int index);
     void showNewPricePopup();
@@ -57,7 +60,6 @@ public slots:
     void generalProdButtonClicked(QAbstractButton * button);
     void insertNewProduct();
     void deleteProduct();
-    void updatePriceList();
 
 // Recipe related
 private:
@@ -66,6 +68,9 @@ private:
     void recipeSelected(int id);
     void resetRecipeData();
     void saveRecipeData();
+
+public:
+    void updateIngredientsList();
 
 public slots:
     void recCatSelected(int index);

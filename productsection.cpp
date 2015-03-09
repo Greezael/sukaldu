@@ -96,9 +96,9 @@ void MainWindow::updatePriceList()
         {
             current->setText("✓");
         }
-        row << price << notes << current;
+        row << current << price << notes;
 
-        price->setData(query.value("id"), SK_IdRole);
+        current->setData(query.value("id"), SK_IdRole);
 
         rootModel->appendRow(row);
 
