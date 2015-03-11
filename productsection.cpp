@@ -214,6 +214,30 @@ void MainWindow::setCurrentPrice()
     }
 }
 
+void MainWindow::deletePrice()
+{
+    QModelIndexList indexes = this->ui->prod_pricetable->selectionModel()->selectedIndexes();
+    bool deleted = false;
+
+    for (int i = 0; i < indexes.size(); i++)
+    {
+        QModelIndex tableIndex = indexes.first();
+        QVariant id = this->ui->prod_pricetable->model()->itemData(tableIndex)[SK_IdRole];
+        QSqlQuery query;
+        query.prepare("DELETE FROM prod_price WHERE id = :id");
+        query.bindValue(":id", id);
+        query.exec();
+        if (query.lastError().type() == QSqlError::NoError)
+        {
+            deleted = true;
+        }
+    }
+    if (deleted)
+    {
+        updatePriceList();
+    }
+}
+
 void MainWindow::insertNewProduct()
 {
     QSqlQuery query;

@@ -57,6 +57,7 @@ public slots:
     void prodCatSelected(int index);
     void showNewPricePopup();
     void setCurrentPrice();
+    void deletePrice();
     void generalProdButtonClicked(QAbstractButton * button);
     void insertNewProduct();
     void deleteProduct();

@@ -52,7 +52,8 @@ cat INTEGER REFERENCES prod_cat,
 subcat INTEGER REFERENCES prod_subcat,
 notes TEXT,
 meas INTEGER REFERENCES prod_meas,
-current_price INTEGER REFERENCES prod_price
+current_price INTEGER,
+FOREIGN KEY (current_price) references prod_price ON DELETE SET NULL
 )
 
 -- Product prices

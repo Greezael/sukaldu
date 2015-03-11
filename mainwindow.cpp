@@ -97,6 +97,10 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(showNewPricePopup()));
+    QObject::connect(this->ui->prod_delprice,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(deletePrice()));
     QObject::connect(this->ui->prod_setcurrentprice,
                      SIGNAL(clicked()),
                      this,
