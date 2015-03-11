@@ -27,6 +27,7 @@ void MainWindow::recipeSelected(int id)
         }
         this->ui->rec_elab->clear();
         this->ui->rec_servs->clear();
+        this->ui->rec_price->setText("--");
         return;
     }
 
@@ -51,6 +52,29 @@ void MainWindow::recipeSelected(int id)
         this->ui->rec_servs->setValue(servs);
         fillRecipeCategoryLists(cat, subcat);
         updateIngredientsList();
+        updateRecipePrice();
+    }
+}
+
+void MainWindow::updateRecipePrice()
+{
+    if (this->currentRecipe < 0)
+    {
+        return;
+    }
+    QSqlQuery query;
+    query.prepare("SELECT price "
+                  "FROM C_recipe_price "
+                  "WHERE id = :id" );
+    query.bindValue(":id", this->currentRecipe);
+    query.exec();
+    if (query.next())
+    {
+        this->ui->rec_price->setText(query.value("price").toString());
+    }
+    else
+    {
+        this->ui->rec_price->setText("--");
     }
 }
 

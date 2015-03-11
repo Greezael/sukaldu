@@ -105,6 +105,7 @@ void MainWindow::updatePriceList()
     }
 
     this->ui->prod_pricetable->setModel(rootModel);
+    updateRecipePrice();
 }
 
 void MainWindow::fillProductCategoryLists(int catId, int subCatId)

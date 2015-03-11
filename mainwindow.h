@@ -68,6 +68,7 @@ private:
     void recipeSelected(int id);
     void resetRecipeData();
     void saveRecipeData();
+    void updateRecipePrice();
 
 public:
     void updateIngredientsList();
