@@ -32,6 +32,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::makeConnections()
 {
+    // Tabs
+    QObject::connect(this->ui->tabWidget,
+                     SIGNAL(currentChanged(int)),
+                     this,
+                     SLOT(tabChanged(int)));
+
     // Trees
     QObject::connect(this->ui->prod_tree->selectionModel(),
                      SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),

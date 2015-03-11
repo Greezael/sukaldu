@@ -93,6 +93,7 @@ private:
 public slots:
     void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);
     void catSelected(int index, SK_Section section);
+    void tabChanged(int index);
 
 // State
 private:

@@ -329,3 +329,19 @@ void MainWindow::deleteItems(SK_Section section)
         }
     }
 }
+
+void MainWindow::tabChanged(int index)
+{
+    switch (index)
+    {
+    case 0:
+        productSelected(currentProduct);
+        break;
+    case 1:
+        recipeSelected(currentRecipe);
+        break;
+    case 2:
+//        menuSelected(currentMenu);
+        break;
+    }
+}

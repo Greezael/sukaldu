@@ -70,12 +70,13 @@ void MainWindow::updateRecipePrice()
     query.exec();
     if (query.next())
     {
-        this->ui->rec_price->setText(query.value("price").toString());
+        if (!query.value("price").isNull())
+        {
+            this->ui->rec_price->setText(query.value("price").toString());
+            return;
+        }
     }
-    else
-    {
-        this->ui->rec_price->setText("--");
-    }
+    this->ui->rec_price->setText("--");
 }
 
 void MainWindow::fillRecipeCategoryLists(int catId, int subCatId)
@@ -205,4 +206,5 @@ void MainWindow::updateIngredientsList()
     }
 
     this->ui->rec_ing->setModel(rootModel);
+    updateRecipePrice();
 }
