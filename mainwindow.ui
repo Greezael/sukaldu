@@ -172,9 +172,6 @@
                 </item>
                 <item>
                  <widget class="QPushButton" name="prod_editprice">
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
                   <property name="text">
                    <string>Edit</string>
                   </property>
@@ -715,8 +712,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>100</width>
+             <height>30</height>
             </rect>
            </property>
            <attribute name="label">

@@ -140,11 +140,25 @@ void MainWindow::fillProductMeasurementList(int measId)
 
 void MainWindow::showNewPricePopup()
 {
-    PriceDialog* popUp = new PriceDialog(this);
-    popUp->product(currentProduct);
+    PriceDialog* popUp = new PriceDialog(currentProduct, -1, this);
     popUp->setModal(true);
     popUp->show();
 }
+
+void MainWindow::showEditPricePopup()
+{
+    QModelIndexList indexes = this->ui->prod_pricetable->selectionModel()->selectedIndexes();
+    if (indexes.size())
+    {
+        QModelIndex tableIndex = indexes.first();
+        QVariant priceid = this->ui->prod_pricetable->model()->itemData(tableIndex)[SK_IdRole];
+        PriceDialog* popUp = new PriceDialog(currentProduct, priceid.toInt(), this);
+        popUp->product(currentProduct);
+        popUp->setModal(true);
+        popUp->show();
+    }
+}
+
 
 void MainWindow::generalProdButtonClicked(QAbstractButton *button)
 {
