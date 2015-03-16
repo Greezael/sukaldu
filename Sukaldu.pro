@@ -20,14 +20,17 @@ SOURCES += main.cpp\
     productsection.cpp \
     genericcode.cpp \
     recipesection.cpp \
-    menusection.cpp
+    menusection.cpp \
+    recipedialog.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
-    pricedialog.h
+    pricedialog.h \
+    recipedialog.h
 
 FORMS    += mainwindow.ui \
-    pricedialog.ui
+    pricedialog.ui \
+    recipedialog.ui
 
 OTHER_FILES += \
     data/database_definition.sql \

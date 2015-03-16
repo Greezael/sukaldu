@@ -80,6 +80,9 @@ public slots:
     void generalRecButtonClicked(QAbstractButton * button);
     void insertNewRecipe();
     void deleteRecipe();
+    void showAddProductPopup();
+    void showEditProductPopup();
+    void removeProduct();
 
 // Menu related
 private:

@@ -7,6 +7,8 @@
 #include <QtSql>
 #include <QStandardItemModel>
 
+#include "recipedialog.h"
+
 void MainWindow::buildRecipeTree()
 {
     buildTree(SK_S_REC);
@@ -207,4 +209,49 @@ void MainWindow::updateIngredientsList()
 
     this->ui->rec_ing->setModel(rootModel);
     updateRecipePrice();
+}
+
+void MainWindow::showAddProductPopup()
+{
+    RecipeDialog* popUp = new RecipeDialog(currentRecipe, -1, this);
+    popUp->setModal(true);
+    popUp->show();
+}
+
+void MainWindow::showEditProductPopup()
+{
+    QModelIndexList indexes = this->ui->rec_ing->selectionModel()->selectedIndexes();
+    if (indexes.size())
+    {
+        QModelIndex tableIndex = indexes.first();
+        QVariant prodid = this->ui->rec_ing->model()->itemData(tableIndex)[SK_IdRole];
+        RecipeDialog* popUp = new RecipeDialog(currentRecipe, prodid.toInt(), this);
+        popUp->setModal(true);
+        popUp->show();
+    }
+}
+
+
+void MainWindow::removeProduct()
+{
+//    QModelIndexList indexes = this->ui->prod_pricetable->selectionModel()->selectedIndexes();
+//    bool deleted = false;
+
+//    for (int i = 0; i < indexes.size(); i++)
+//    {
+//        QModelIndex tableIndex = indexes.first();
+//        QVariant id = this->ui->prod_pricetable->model()->itemData(tableIndex)[SK_IdRole];
+//        QSqlQuery query;
+//        query.prepare("DELETE FROM prod_price WHERE id = :id");
+//        query.bindValue(":id", id);
+//        query.exec();
+//        if (query.lastError().type() == QSqlError::NoError)
+//        {
+//            deleted = true;
+//        }
+//    }
+//    if (deleted)
+//    {
+//        updatePriceList();
+//    }
 }

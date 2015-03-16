@@ -110,6 +110,19 @@ void MainWindow::makeConnections()
                      this,
                      SLOT(setCurrentPrice()));
 
+    // Recipe
+    QObject::connect(this->ui->rec_addprod,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(showAddProductPopup()));
+    QObject::connect(this->ui->rec_editprod,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(showEditProductPopup()));
+    QObject::connect(this->ui->rec_delrec,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(removeProduct()));
 
 }
 
