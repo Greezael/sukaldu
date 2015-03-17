@@ -2,9 +2,10 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "recipedialog.h"
 #include "ui_recipedialog.h"
+
+#include "mainwindow.h"
 
 #include <QtSql>
 
@@ -70,7 +71,6 @@ RecipeDialog::RecipeDialog(int recIdentifier, int prodIdentifier, QWidget *paren
 
     if (this->prodId < 0)
     {
-        QObject::connect(this, SIGNAL(accepted()), this, SLOT(addRecipe()));
         fillCategoryList();
         QObject::connect(this->ui->recprod_cat,
                          SIGNAL(currentIndexChanged(int)),
@@ -81,6 +81,8 @@ RecipeDialog::RecipeDialog(int recIdentifier, int prodIdentifier, QWidget *paren
                          this,
                          SLOT(subcatSelected(int)));
     }
+
+    QObject::connect(this, SIGNAL(accepted()), this, SLOT(addRecipe()));
 }
 
 void RecipeDialog::fillCategoryList()
@@ -180,5 +182,34 @@ RecipeDialog::~RecipeDialog()
 
 void RecipeDialog::addRecipe()
 {
+    if (this->prodId >= 0)
+    {
+        float quantity = this->ui->recprod_quantity->value();
+        QSqlQuery query;
+        query.prepare("UPDATE recipe_product SET "
+                      "quantity = :quantity "
+                      "WHERE product = :product "
+                      "AND recipe = :recipe");
+        query.bindValue(":quantity", quantity);
+        query.bindValue(":recipe", this->recId);
+        query.bindValue(":product", this->prodId);
+        query.exec();
+    }
+    else
+    {
+        if (!this->ui->recprod_prod->currentData().isNull())
+        {
+            int prodId = this->ui->recprod_prod->currentData().toInt();
+            float quantity = this->ui->recprod_quantity->value();
+            QSqlQuery query;
+            query.prepare("INSERT INTO recipe_product VALUES (:recipe, :product, :quantity)");
+            query.bindValue(":recipe", this->recId);
+            query.bindValue(":product", prodId);
+            query.bindValue(":quantity", quantity);
+            query.exec();
+        }
+    }
 
+    MainWindow * mainwindow = (MainWindow *) this->parent();
+    mainwindow->updateIngredientsList();
 }
