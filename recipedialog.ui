@@ -107,6 +107,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="decimals">
+        <number>3</number>
+       </property>
+       <property name="maximum">
+        <double>999.999000000000024</double>
+       </property>
       </widget>
      </item>
     </layout>

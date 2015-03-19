@@ -234,24 +234,25 @@ void MainWindow::showEditProductPopup()
 
 void MainWindow::removeProduct()
 {
-//    QModelIndexList indexes = this->ui->prod_pricetable->selectionModel()->selectedIndexes();
-//    bool deleted = false;
+    QModelIndexList indexes = this->ui->rec_ing->selectionModel()->selectedIndexes();
+    bool deleted = false;
 
-//    for (int i = 0; i < indexes.size(); i++)
-//    {
-//        QModelIndex tableIndex = indexes.first();
-//        QVariant id = this->ui->prod_pricetable->model()->itemData(tableIndex)[SK_IdRole];
-//        QSqlQuery query;
-//        query.prepare("DELETE FROM prod_price WHERE id = :id");
-//        query.bindValue(":id", id);
-//        query.exec();
-//        if (query.lastError().type() == QSqlError::NoError)
-//        {
-//            deleted = true;
-//        }
-//    }
-//    if (deleted)
-//    {
-//        updatePriceList();
-//    }
+    for (int i = 0; i < indexes.size(); i++)
+    {
+        QModelIndex tableIndex = indexes.first();
+        QVariant prodId = this->ui->rec_ing->model()->itemData(tableIndex)[SK_IdRole];
+        QSqlQuery query;
+        query.prepare("DELETE FROM recipe_product WHERE recipe = :recId AND product = :prodId");
+        query.bindValue(":prodId", prodId);
+        query.bindValue(":recId", this->currentRecipe);
+        query.exec();
+        if (query.lastError().type() == QSqlError::NoError)
+        {
+            deleted = true;
+        }
+    }
+    if (deleted)
+    {
+        updateIngredientsList();
+    }
 }

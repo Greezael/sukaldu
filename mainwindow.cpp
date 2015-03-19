@@ -119,7 +119,7 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(showEditProductPopup()));
-    QObject::connect(this->ui->rec_delrec,
+    QObject::connect(this->ui->rec_remprod,
                      SIGNAL(clicked()),
                      this,
                      SLOT(removeProduct()));
