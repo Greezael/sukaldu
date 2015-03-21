@@ -159,7 +159,7 @@ void MainWindow::treeItemSelected(const QModelIndex &current, const QModelIndex 
     }
     else if (type == SK_Menu)
     {
-//        menuSelected(id);
+        menuSelected(id);
     }
 }
 
@@ -323,7 +323,7 @@ void MainWindow::deleteItems(SK_Section section)
             buildRecipeTree();
             break;
         case SK_S_MENU:
-//            menuSelected(-1);
+            menuSelected(-1);
             buildMenuTree();
             break;
         }

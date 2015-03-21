@@ -87,7 +87,12 @@ public slots:
 // Menu related
 private:
     void buildMenuTree();
+    void fillMenuCategoryLists(int catId, int subCatId);
+    void menuSelected(int id);
+    void updateMenuPrice();
 
+public slots:
+    void menuCatSelected(int index);
 
 // Generic code
 private:

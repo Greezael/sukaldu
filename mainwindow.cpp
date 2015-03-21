@@ -61,6 +61,10 @@ void MainWindow::makeConnections()
                      SIGNAL(currentIndexChanged(int)),
                      this,
                      SLOT(recCatSelected(int)));
+    QObject::connect(this->ui->menu_cat,
+                     SIGNAL(currentIndexChanged(int)),
+                     this,
+                     SLOT(menuCatSelected(int)));
 
     // Reset and Save Buttons
     QObject::connect(this->ui->prod_curprod_buttons,
