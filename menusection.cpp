@@ -77,3 +77,48 @@ void MainWindow::menuCatSelected(int index)
 {
     catSelected(index, SK_S_MENU);
 }
+
+void MainWindow::saveMenuData()
+{
+    QString name = this->ui->menu_name->text();
+    int catId = this->ui->menu_cat->currentData().toInt();
+    int subCatId = this->ui->menu_subcat->currentData().toInt();
+    QVariant catV = (catId != -1) ? QVariant::fromValue(catId) : QVariant();
+    QVariant subCatV = (subCatId != -1) ? QVariant::fromValue(subCatId) : QVariant();
+
+    QSqlQuery query;
+    query.prepare("UPDATE menu SET "
+                  "name = :name, "
+                  "cat = :cat, "
+                  "subcat = :subcat "
+                  "WHERE id = :id");
+    query.bindValue(":name", name);
+    query.bindValue(":cat", catV);
+    query.bindValue(":subcat", subCatV);
+    query.bindValue(":id", currentMenu);
+    query.exec();
+
+    menuSelected(currentMenu);
+    buildMenuTree();
+}
+
+void MainWindow::generalMenuButtonClicked(QAbstractButton *button)
+{
+    switch (this->ui->menu_curmenu_buttons->standardButton(button))
+    {
+    case QDialogButtonBox::Reset:
+        resetMenuData();
+        break;
+    case QDialogButtonBox::Save:
+        saveMenuData();
+        break;
+    default:
+        break;
+    }
+}
+
+void MainWindow::resetMenuData()
+{
+    menuSelected(currentMenu);
+}
+

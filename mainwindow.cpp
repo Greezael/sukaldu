@@ -75,6 +75,11 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked(QAbstractButton*)),
                      this,
                      SLOT(generalRecButtonClicked(QAbstractButton*)));
+    QObject::connect(this->ui->menu_curmenu_buttons,
+                     SIGNAL(clicked(QAbstractButton*)),
+                     this,
+                     SLOT(generalMenuButtonClicked(QAbstractButton*)));
+
 
     // Delete item Buttons
     QObject::connect(this->ui->prod_delprod,

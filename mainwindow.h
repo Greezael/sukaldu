@@ -89,10 +89,13 @@ private:
     void buildMenuTree();
     void fillMenuCategoryLists(int catId, int subCatId);
     void menuSelected(int id);
+    void resetMenuData();
+    void saveMenuData();
     void updateMenuPrice();
 
 public slots:
     void menuCatSelected(int index);
+    void generalMenuButtonClicked(QAbstractButton * button);
 
 // Generic code
 private:
