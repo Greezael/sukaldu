@@ -132,7 +132,6 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(removeProduct()));
-
 }
 
 
