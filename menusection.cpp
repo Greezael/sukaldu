@@ -7,6 +7,8 @@
 #include <QtSql>
 #include <QStandardItemModel>
 
+#include "menudialog.h"
+
 void MainWindow::buildMenuTree()
 {
     buildTree(SK_S_MENU);
@@ -14,6 +16,7 @@ void MainWindow::buildMenuTree()
 
 void MainWindow::menuSelected(int id)
 {
+    cleanMenuOptions();
     this->currentMenu = id;
     if (id == -1)
     {
@@ -42,6 +45,7 @@ void MainWindow::menuSelected(int id)
         subcat = (query.value("subcat").isNull()) ? -1 : query.value("subcat").toInt();
         fillMenuCategoryLists(cat, subcat);
         updateMenuPrice();
+        fillMenuOptions();
     }
 }
 
@@ -122,3 +126,149 @@ void MainWindow::resetMenuData()
     menuSelected(currentMenu);
 }
 
+void MainWindow::fillMenuOptions()
+{
+    cleanMenuOptions();
+
+    menuOptions.clear();
+
+    QSqlQuery query;
+    query.prepare("SELECT id "
+                  "FROM menu_role "
+                  "WHERE menu = :id" );
+    query.bindValue(":id", currentMenu);
+    query.exec();
+    firstMenuOptionRow = -1;
+    while (query.next())
+    {
+        QVariant optionId = query.value("id");
+        menuOptions.push_back(optionId);
+        showMenuOption(optionId);
+    }
+}
+
+void MainWindow::reloadMenuOptions()
+{
+    cleanMenuOptions();
+    fillMenuOptions();
+}
+
+void MainWindow::showMenuOption(QVariant roleid)
+{
+    QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
+
+    QLabel *optionLabel = new QLabel("Option");
+    QTableView *tableView = new QTableView();
+    QHBoxLayout *buttonBox = new QHBoxLayout();
+    QSpacerItem *spacer = new QSpacerItem(1, 1, QSizePolicy::Expanding);
+    QPushButton *remButton = new QPushButton("Remove");
+    QPushButton *addButton = new QPushButton("Add");
+
+    layout->addRow(optionLabel, tableView);
+
+    buttonBox->addSpacerItem(spacer);
+    buttonBox->addWidget(remButton);
+    buttonBox->addWidget(addButton);
+
+    layout->addRow(buttonBox);
+
+    int row;
+    QFormLayout::ItemRole role;
+
+    layout->getWidgetPosition(optionLabel, &row, &role);
+    if (firstMenuOptionRow <= 0)
+    {
+        firstMenuOptionRow = row;
+    }
+
+    QObject::connect(addButton, &QPushButton::clicked, [=]() {this->showAddRecipePopup(row);});
+
+    QStandardItemModel * rootModel = new QStandardItemModel(this);
+
+    QSqlQuery query;
+
+    query.prepare("SELECT MR.recipe, R.name "
+                  "FROM menu_recipe MR "
+                  "JOIN recipe R "
+                  "WHERE MR.menu = :menuid "
+                  "AND R.id = MR.recipe "
+                  "AND MR.role = :role");
+    query.bindValue(":menuid", currentMenu);
+    query.bindValue(":role", roleid);
+    query.exec();
+    rootModel->setColumnCount(1);
+    while (query.next())
+    {
+        QList<QStandardItem*> row;
+        QStandardItem* recipeName = new QStandardItem(query.value("name").toString());
+        row << recipeName;
+        recipeName->setData(query.value("recipe"), SK_IdRole);
+        rootModel->appendRow(row);
+    }
+
+    tableView->setModel(rootModel);
+
+    query.prepare("SELECT name "
+                  "FROM menu_role "
+                  "WHERE id = :role");
+    query.bindValue(":role", roleid);
+    query.exec();
+    if (query.next())
+    {
+        optionLabel->setText(query.value("name").toString());
+    }
+}
+
+void MainWindow::cleanMenuOptions()
+{
+    if (firstMenuOptionRow <= 0) return;
+
+    QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
+
+    for (int i = 0; i < (int) menuOptions.size() * 2; i++)
+    {
+        int row = firstMenuOptionRow + i;
+        QLayoutItem * field = layout->itemAt(row, QFormLayout::FieldRole);
+        if (field != nullptr)
+        {
+            if (QLayout * boxLayout = dynamic_cast<QLayout *>(field->layout()))
+            {
+                for (int j = 0; j < boxLayout->count(); j++)
+                {
+                    if (QWidget * widget = (boxLayout->itemAt(j)->widget()))
+                    {
+                        widget->deleteLater();
+                    }
+                }
+                boxLayout->deleteLater();
+            }
+            else
+            {
+                field->widget()->hide();
+                field->widget()->deleteLater();
+            }
+            layout->removeItem(field);
+        }
+        QLayoutItem * label = layout->itemAt(row, QFormLayout::LabelRole);
+        if (label != nullptr)
+        {
+            label->widget()->hide();
+            label->widget()->deleteLater();
+            layout->removeItem(label);
+        }
+    }
+
+    menuOptions.clear();
+    this->ui->menu_scroll_contents->setLayout(layout);
+    this->ui->menu_scroll_contents->update();
+}
+
+
+void MainWindow::showAddRecipePopup(int row)
+{
+    int index = (row - firstMenuOptionRow) / 2;
+    QVariant roleId = menuOptions.at(index);
+    MenuDialog* popUp = new MenuDialog(currentMenu, roleId.toInt(), this);
+    popUp->setModal(true);
+    popUp->show();
+}
