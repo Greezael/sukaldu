@@ -43,7 +43,7 @@ INSERT INTO prod_price VALUES (1, 1, 1.5, 1.0, NULL)
 INSERT INTO prod_price VALUES (2, 2, 2.5, 1.0, NULL)
 INSERT INTO prod_price VALUES (3, 3, 3.5, 1.0, NULL)
 INSERT INTO prod_price VALUES (4, 4, 4.5, 1.0, NULL)
-INSERT INTO prod_price VALUES (5, 4, 5.5, 1.0, "Another provider")
+INSERT INTO prod_price VALUES (5, 4, 5.5, 1.0, 'Another provider')
 
 PRAGMA foreign_keys = ON;
 
@@ -67,12 +67,18 @@ INSERT INTO recipe_product VALUES (2, 3, 1.5)
 INSERT INTO recipe_product VALUES (3, 3, 1.5)
 INSERT INTO recipe_product VALUES (4, 3, 1.2)
 
+-- Menu role
+INSERT INTO menu_role VALUES (1, 1, 'All')
+INSERT INTO menu_role VALUES (2, 2, 'All')
+INSERT INTO menu_role VALUES (3, 3, 'First')
+INSERT INTO menu_role VALUES (4, 3, 'Second')
+
 -- Menu is composed of recipes
-INSERT INTO menu_recipe VALUES (1, 1)
-INSERT INTO menu_recipe VALUES (1, 2)
-INSERT INTO menu_recipe VALUES (1, 3)
-INSERT INTO menu_recipe VALUES (2, 1)
-INSERT INTO menu_recipe VALUES (2, 2)
-INSERT INTO menu_recipe VALUES (2, 4)
-INSERT INTO menu_recipe VALUES (3, 1)
-INSERT INTO menu_recipe VALUES (3, 3)
+INSERT INTO menu_recipe VALUES (1, 1, 1)
+INSERT INTO menu_recipe VALUES (1, 2, 1)
+INSERT INTO menu_recipe VALUES (1, 3, 1)
+INSERT INTO menu_recipe VALUES (2, 1, 2)
+INSERT INTO menu_recipe VALUES (2, 2, 2)
+INSERT INTO menu_recipe VALUES (2, 4, 2)
+INSERT INTO menu_recipe VALUES (3, 1, 3)
+INSERT INTO menu_recipe VALUES (3, 3, 4)

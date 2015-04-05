@@ -95,13 +95,23 @@ FOREIGN KEY (product) references product ON DELETE CASCADE,
 FOREIGN KEY (recipe) references recipe ON DELETE CASCADE
 )
 
+-- Menu / recipe composition can have different roles
+CREATE TABLE menu_role (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+menu INTEGER,
+name VARCHAR(100),
+FOREIGN KEY (menu) references menu ON DELETE CASCADE
+)
+
 -- Menu is composed of recipes
 CREATE TABLE menu_recipe (
 menu INTEGER,
 recipe INTEGER,
-PRIMARY KEY (menu, recipe),
+role INTEGER,
+PRIMARY KEY (menu, recipe, role),
 FOREIGN KEY (menu) references menu ON DELETE CASCADE,
-FOREIGN KEY (recipe) references recipe ON DELETE CASCADE
+FOREIGN KEY (recipe) references recipe ON DELETE CASCADE,
+FOREIGN KEY (role) references menu_role ON DELETE CASCADE
 )
 
 -- COMPUTED
