@@ -239,7 +239,7 @@ void MainWindow::removeProduct()
 
     for (int i = 0; i < indexes.size(); i++)
     {
-        QModelIndex tableIndex = indexes.first();
+        QModelIndex tableIndex = indexes.at(i);
         QVariant prodId = this->ui->rec_ing->model()->itemData(tableIndex)[SK_IdRole];
         QSqlQuery query;
         query.prepare("DELETE FROM recipe_product WHERE recipe = :recId AND product = :prodId");

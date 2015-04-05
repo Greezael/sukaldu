@@ -106,6 +106,7 @@ public slots:
     void menuCatSelected(int index);
     void generalMenuButtonClicked(QAbstractButton * button);
     void showAddRecipePopup(int row);
+    void removeRecipes(int row);
 
 // Generic code
 private:

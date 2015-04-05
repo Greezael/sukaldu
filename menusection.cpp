@@ -182,6 +182,7 @@ void MainWindow::showMenuOption(QVariant roleid)
     }
 
     QObject::connect(addButton, &QPushButton::clicked, [=]() {this->showAddRecipePopup(row);});
+    QObject::connect(remButton, &QPushButton::clicked, [=]() {this->removeRecipes(row);});
 
     QStandardItemModel * rootModel = new QStandardItemModel(this);
 
@@ -271,4 +272,43 @@ void MainWindow::showAddRecipePopup(int row)
     MenuDialog* popUp = new MenuDialog(currentMenu, roleId.toInt(), this);
     popUp->setModal(true);
     popUp->show();
+}
+
+void MainWindow::removeRecipes(int row)
+{
+    int index = (row - firstMenuOptionRow) / 2;
+    QVariant roleId = menuOptions.at(index);
+
+    QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
+
+    QLayoutItem * field = layout->itemAt(row, QFormLayout::FieldRole);
+    QTableView * productTable = nullptr;
+    if ((field != nullptr) && (productTable = dynamic_cast<QTableView *>(field->widget())))
+    {
+        QModelIndexList indexes = productTable->selectionModel()->selectedIndexes();
+        bool deleted = false;
+
+        for (int i = 0; i < indexes.size(); i++)
+        {
+            QModelIndex tableIndex = indexes.at(i);
+            QVariant recipeId = productTable->model()->itemData(tableIndex)[SK_IdRole];
+            QSqlQuery query;
+            query.prepare("DELETE FROM menu_recipe "
+                          "WHERE menu = :menuId "
+                          "AND recipe = :recId "
+                          "AND role = :roleId");
+            query.bindValue(":menuId", this->currentMenu);
+            query.bindValue(":recId", recipeId);
+            query.bindValue(":roleId", roleId);
+            query.exec();
+            if (query.lastError().type() == QSqlError::NoError)
+            {
+                deleted = true;
+            }
+        }
+        if (deleted)
+        {
+            reloadMenuOptions();
+        }
+    }
 }

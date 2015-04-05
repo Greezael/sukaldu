@@ -110,9 +110,17 @@ void MenuDialog::subcatSelected(int index)
     QSqlQuery query;
     query.prepare("SELECT id, name FROM recipe " +
                   catCond +
-                  subcatCond);
+                  subcatCond +
+                  "EXCEPT "
+                  "SELECT R.id, R.name "
+                  "FROM recipe R JOIN menu_recipe MR "
+                  "WHERE MR.recipe = R.id "
+                  "AND MR.menu = :menuId "
+                  "AND MR.role = :roleId ");
     query.bindValue(":catId", catId);
     query.bindValue(":subcatId", subcatId);
+    query.bindValue(":menuId", this->menuId);
+    query.bindValue(":roleId", this->roleId);
     query.exec();
     while (query.next())
     {
