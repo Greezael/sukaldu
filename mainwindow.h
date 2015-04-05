@@ -93,9 +93,19 @@ private:
     void saveMenuData();
     void updateMenuPrice();
 
+    void fillMenuOptions();
+    void cleanMenuOptions();
+    std::vector<QVariant> menuOptions;
+    int firstMenuOptionRow;
+    void showMenuOption(QVariant roleid);
+
+public:
+    void reloadMenuOptions();
+
 public slots:
     void menuCatSelected(int index);
     void generalMenuButtonClicked(QAbstractButton * button);
+    void showAddRecipePopup(int row);
 
 // Generic code
 private:
