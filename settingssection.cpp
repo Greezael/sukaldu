@@ -28,6 +28,7 @@ void MainWindow::initSettingsPanel()
     sections->blockSignals(false);
 
     currentSection = SK_S_NONE;
+    currentCategory = -1;
     set_sectionSelected(0);
 }
 
@@ -38,6 +39,22 @@ void MainWindow::rebuildTrees()
     buildMenuTree();
 }
 
+void MainWindow::resetCategoriesInfo()
+{
+    currentSection = SK_S_NONE;
+    set_sectionSelected(currentSectionIndex);
+    rebuildTrees();
+}
+
+void MainWindow::resetSubCategoriesInfo()
+{
+    rebuildTrees();
+    if (currentCategory != -1)
+    {
+        set_catSelectedById(currentCategory);
+    }
+}
+
 
 void MainWindow::set_sectionSelected(int index)
 {
@@ -46,6 +63,7 @@ void MainWindow::set_sectionSelected(int index)
         return;
     currentSection = static_cast<SK_Section>(section);
     currentSectionIndex = index;
+    currentCategory = -1;
 
     QListView *cat = this->ui->set_cat;
     QListView *subCat = this->ui->set_subcat;
@@ -82,10 +100,16 @@ void MainWindow::set_sectionSelected(int index)
 
 void MainWindow::set_catSelected(const QModelIndex &current, const QModelIndex &previous)
 {
+    set_catSelectedById(current.data(SK_IdRole).toInt());
+}
+
+void MainWindow::set_catSelectedById(int id)
+{
     QListView *cat = this->ui->set_cat;
     QListView *subCat = this->ui->set_subcat;
 
-    int catId = current.data(SK_IdRole).toInt();
+    int catId = id;
+    currentCategory = catId;
 
     QString prefix;
     switch (currentSection)
@@ -130,11 +154,24 @@ void MainWindow::set_catSelected(const QModelIndex &current, const QModelIndex &
 
 void MainWindow::set_addCat()
 {
+    QSqlQuery query;
+    query.prepare("INSERT INTO " + getPrefix(currentSection) + "_cat "
+                  "VALUES (NULL, 'New category')");
+    query.exec();
+
+    resetCategoriesInfo();
 }
 
 void MainWindow::set_addSubCat()
 {
+    if (currentCategory == -1) return;
+    QSqlQuery query;
+    query.prepare("INSERT INTO " + getPrefix(currentSection) + "_subcat "
+                  "VALUES (NULL, :cat, 'New subcategory')");
+    query.bindValue(":cat", currentCategory);
+    query.exec();
 
+    resetSubCategoriesInfo();
 }
 
 void MainWindow::set_deleteCat()
@@ -151,9 +188,7 @@ void MainWindow::set_deleteCat()
     query.bindValue(":id", id);
     query.exec();
 
-    currentSection = SK_S_NONE;
-    set_sectionSelected(currentSectionIndex);
-    rebuildTrees();
+    resetCategoriesInfo();
 }
 
 void MainWindow::set_deleteSubCat()
@@ -170,9 +205,7 @@ void MainWindow::set_deleteSubCat()
     query.bindValue(":id", id);
     query.exec();
 
-    currentSection = SK_S_NONE;
-    set_sectionSelected(currentSectionIndex);
-    rebuildTrees();
+    resetSubCategoriesInfo();
 }
 
 void MainWindow::set_renameCat()

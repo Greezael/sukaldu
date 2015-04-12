@@ -130,12 +130,16 @@ public slots:
 private:
     SK_Section currentSection;
     int currentSectionIndex;
+    int currentCategory;
     void initSettingsPanel();
     void rebuildTrees();
+    void resetCategoriesInfo();
+    void resetSubCategoriesInfo();
 
 public slots:
     void set_sectionSelected(int index);
     void set_catSelected(const QModelIndex & current, const QModelIndex & previous);
+    void set_catSelectedById(int id);
     void set_deleteCat();
     void set_deleteSubCat();
     void set_addCat();
