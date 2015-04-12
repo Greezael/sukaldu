@@ -110,6 +110,8 @@ public slots:
     void addOption();
     void removeOption(int row);
     void renameOption(int row);
+    void insertNewMenu();
+    void deleteMenu();
 
 // Generic code
 private:

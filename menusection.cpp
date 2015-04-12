@@ -389,3 +389,30 @@ void MainWindow::renameOption(int row)
         label->setText(text);
     }
 }
+
+void MainWindow::insertNewMenu()
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO menu VALUES ( "
+                  "NULL, "  // Id
+                  "'New Menu', "  // Name
+                  "NULL, "  // Cat
+                  "NULL, "  // Subcat
+                  "NULL "  // notes
+                  ")");
+    query.exec();
+
+    query.prepare("SELECT last_insert_rowid()");
+    query.exec();
+    if (query.next())
+    {
+        menuSelected(query.value(0).toInt());
+    }
+    buildMenuTree();
+}
+
+
+void MainWindow::deleteMenu()
+{
+    deleteItems(SK_S_MENU);
+}

@@ -90,6 +90,10 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(deleteRecipe()));
+    QObject::connect(this->ui->menu_delmenu,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(deleteMenu()));
 
     // Insert item Buttons
     QObject::connect(this->ui->prod_newprod,
@@ -100,6 +104,10 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(insertNewRecipe()));
+    QObject::connect(this->ui->menu_newmenu,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(insertNewMenu()));
 
     // Product
     QObject::connect(this->ui->prod_newprice,

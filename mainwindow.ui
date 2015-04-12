@@ -48,8 +48,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>597</width>
-             <height>465</height>
+             <width>494</width>
+             <height>392</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -387,8 +387,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>597</width>
-             <height>465</height>
+             <width>382</width>
+             <height>425</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -626,7 +626,7 @@
         <item row="1" column="1">
          <widget class="QPushButton" name="menu_newmenu">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Add</string>
@@ -636,7 +636,7 @@
         <item row="1" column="0">
          <widget class="QPushButton" name="menu_delmenu">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Delete</string>
@@ -775,8 +775,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>434</height>
+             <width>93</width>
+             <height>93</height>
             </rect>
            </property>
            <attribute name="label">
