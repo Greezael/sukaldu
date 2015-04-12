@@ -145,6 +145,23 @@ void MainWindow::fillMenuOptions()
         menuOptions.push_back(optionId);
         showMenuOption(optionId);
     }
+
+    // Add option button
+    QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
+    QHBoxLayout *buttonBox = new QHBoxLayout();
+    QSpacerItem *spacer = new QSpacerItem(1, 1, QSizePolicy::Expanding);
+    QPushButton *addButton = new QPushButton("Add Option");
+    QObject::connect(addButton, &QPushButton::clicked, [=]() {this->addOption();});
+
+    buttonBox->addSpacerItem(spacer);
+    buttonBox->addWidget(addButton);
+
+    layout->addRow(buttonBox);
+
+    int row;
+    QFormLayout::ItemRole role;
+    layout->getLayoutPosition(buttonBox, &row, &role);
+    if (firstMenuOptionRow <= 0) firstMenuOptionRow = row;
 }
 
 void MainWindow::reloadMenuOptions()
@@ -226,7 +243,8 @@ void MainWindow::cleanMenuOptions()
 
     QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
 
-    for (int i = 0; i < (int) menuOptions.size() * 2; i++)
+    // The +1 is for the add option button at the end
+    for (int i = 0; i < (int) menuOptions.size() * 2 + 1; i++)
     {
         int row = firstMenuOptionRow + i;
         QLayoutItem * field = layout->itemAt(row, QFormLayout::FieldRole);
@@ -311,4 +329,17 @@ void MainWindow::removeRecipes(int row)
             reloadMenuOptions();
         }
     }
+}
+
+void MainWindow::addOption()
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO menu_role VALUES (NULL, :menuId, 'Unnamed') ");
+    query.bindValue(":menuId", this->currentMenu);
+    query.exec();
+    if (query.lastError().type() != QSqlError::NoError)
+    {
+        std::cout << query.lastError().text().toStdString() << std::endl;
+    }
+    this->reloadMenuOptions();
 }
