@@ -21,8 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     buildRecipeTree();
     buildMenuTree();
 
-    makeConnections();
+    initSettingsPanel();
 
+    makeConnections();
 }
 
 MainWindow::~MainWindow()
@@ -140,6 +141,16 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(removeProduct()));
+
+    // Settings Panel
+    QObject::connect(this->ui->set_section,
+                     SIGNAL(currentIndexChanged(int)),
+                     this,
+                     SLOT(setSectionSelected(int)));
+    QObject::connect(this->ui->set_cat->selectionModel(),
+                     SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
+                     this,
+                     SLOT(setCatSelected(const QModelIndex &, const QModelIndex &)));
 }
 
 

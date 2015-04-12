@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="products">
        <attribute name="title">
@@ -48,8 +48,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>494</width>
-             <height>392</height>
+             <width>597</width>
+             <height>465</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -387,8 +387,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>382</width>
-             <height>425</height>
+             <width>597</width>
+             <height>465</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -770,21 +770,96 @@
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="page">
+          <widget class="QWidget" name="set_categories">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>93</width>
-             <height>93</height>
+             <width>861</width>
+             <height>434</height>
             </rect>
            </property>
            <attribute name="label">
-            <string>Page 1</string>
+            <string>Categories</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
+            <item row="4" column="1">
+             <widget class="QPushButton" name="set_cat_ren">
+              <property name="text">
+               <string>Rename</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QPushButton" name="set_cat_add">
+              <property name="text">
+               <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QPushButton" name="set_subcat_add">
+              <property name="text">
+               <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QPushButton" name="set_subcat_rem">
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1">
+             <widget class="QPushButton" name="set_subcat_ren">
+              <property name="text">
+               <string>Rename</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="set_cat_tag">
+              <property name="text">
+               <string>Category</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" rowspan="9">
+             <widget class="QListView" name="set_cat"/>
+            </item>
+            <item row="1" column="2" rowspan="9">
+             <widget class="QListView" name="set_subcat"/>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="set_cat_rem">
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLabel" name="set_subcat_tag">
+              <property name="text">
+               <string>Subcategory</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="0">
-             <widget class="QListView" name="listView"/>
+             <widget class="QComboBox" name="set_section"/>
             </item>
            </layout>
           </widget>

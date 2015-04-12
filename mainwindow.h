@@ -19,6 +19,7 @@ enum SK_ObjectType {
 };
 
 enum SK_Section {
+    SK_S_NONE,
     SK_S_PROD,
     SK_S_REC,
     SK_S_MENU
@@ -123,6 +124,16 @@ public slots:
     void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);
     void catSelected(int index, SK_Section section);
     void tabChanged(int index);
+
+
+// Settings related
+private:
+    SK_Section currentSection;
+    void initSettingsPanel();
+
+public slots:
+    void setSectionSelected(int index);
+    void setCatSelected(const QModelIndex & current, const QModelIndex & previous);
 
 // State
 private:

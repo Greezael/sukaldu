@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     recipesection.cpp \
     menusection.cpp \
     recipedialog.cpp \
-    menudialog.cpp
+    menudialog.cpp \
+    settingssection.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
