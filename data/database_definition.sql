@@ -14,8 +14,9 @@ name VARCHAR(100)
 
 CREATE TABLE prod_subcat (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-cat INTEGER NOT NULL REFERENCES prod_cat(id),
-name VARCHAR(100)
+cat INTEGER NOT NULL,
+name VARCHAR(100),
+FOREIGN KEY (cat) references prod_cat ON DELETE CASCADE
 )
 
 
@@ -27,8 +28,9 @@ name VARCHAR(100)
 
 CREATE TABLE recipe_subcat (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-cat INTEGER REFERENCES recipe_cat,
-name VARCHAR(100)
+cat INTEGER NOT NULL,
+name VARCHAR(100),
+FOREIGN KEY (cat) references recipe_cat ON DELETE CASCADE
 )
 
 
@@ -40,20 +42,23 @@ name VARCHAR(100)
 
 CREATE TABLE menu_subcat (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-cat INTEGER REFERENCES menu_cat,
-name VARCHAR(100)
+cat INTEGER NOT NULL,
+name VARCHAR(100),
+FOREIGN KEY (cat) references menu_cat ON DELETE CASCADE
 )
 
 -- Products
 CREATE TABLE product (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 name VARCHAR(100),
-cat INTEGER REFERENCES prod_cat,
-subcat INTEGER REFERENCES prod_subcat,
+cat INTEGER,
+subcat INTEGER,
 notes TEXT,
 meas INTEGER REFERENCES prod_meas,
 current_price INTEGER,
-FOREIGN KEY (current_price) references prod_price ON DELETE SET NULL
+FOREIGN KEY (current_price) references prod_price ON DELETE SET NULL,
+FOREIGN KEY (cat) references prod_cat ON DELETE SET NULL,
+FOREIGN KEY (subcat) references prod_subcat ON DELETE SET NULL
 )
 
 -- Product prices
@@ -70,19 +75,23 @@ FOREIGN KEY (product) references product ON DELETE CASCADE
 CREATE TABLE recipe (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 name VARCHAR(100),
-cat INTEGER REFERENCES recipe_cat,
-subcat INTEGER REFERENCES recipe_subcat,
+cat INTEGER,
+subcat INTEGER,
 preparation TEXT,
-servings INTEGER
+servings INTEGER,
+FOREIGN KEY (cat) references recipe_cat ON DELETE SET NULL,
+FOREIGN KEY (subcat) references recipe_subcat ON DELETE SET NULL
 )
 
 -- Menu
 CREATE TABLE menu (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 name VARCHAR(100),
-cat INTEGER REFERENCES menu_cat,
-subcat INTEGER REFERENCES menu_subcat,
-notes TEXT
+cat INTEGER,
+subcat INTEGER,
+notes TEXT,
+FOREIGN KEY (cat) references menu_cat ON DELETE SET NULL,
+FOREIGN KEY (subcat) references menu_subcat ON DELETE SET NULL
 )
 
 -- Recipe is composed of products

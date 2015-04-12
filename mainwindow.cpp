@@ -146,11 +146,35 @@ void MainWindow::makeConnections()
     QObject::connect(this->ui->set_section,
                      SIGNAL(currentIndexChanged(int)),
                      this,
-                     SLOT(setSectionSelected(int)));
+                     SLOT(set_sectionSelected(int)));
     QObject::connect(this->ui->set_cat->selectionModel(),
                      SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
                      this,
-                     SLOT(setCatSelected(const QModelIndex &, const QModelIndex &)));
+                     SLOT(set_catSelected(const QModelIndex &, const QModelIndex &)));
+    QObject::connect(this->ui->set_cat_add,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_addCat()));
+    QObject::connect(this->ui->set_cat_rem,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_deleteCat()));
+    QObject::connect(this->ui->set_cat_ren,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_renameCat()));
+    QObject::connect(this->ui->set_subcat_add,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_addSubCat()));
+    QObject::connect(this->ui->set_subcat_rem,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_deleteSubCat()));
+    QObject::connect(this->ui->set_subcat_ren,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_renameSubCat()));
 }
 
 

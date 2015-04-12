@@ -8,6 +8,9 @@
 #include <QtSql>
 #include <QStandardItemModel>
 
+// Helpers
+QString getPrefix(SK_Section section);
+
 void MainWindow::initSettingsPanel()
 {
     QComboBox *sections;
@@ -25,32 +28,29 @@ void MainWindow::initSettingsPanel()
     sections->blockSignals(false);
 
     currentSection = SK_S_NONE;
-    setSectionSelected(0);
+    set_sectionSelected(0);
 }
 
-void MainWindow::setSectionSelected(int index)
+void MainWindow::rebuildTrees()
+{
+    buildProductTree();
+    buildRecipeTree();
+    buildMenuTree();
+}
+
+
+void MainWindow::set_sectionSelected(int index)
 {
     int section = this->ui->set_section->itemData(index).toInt();
     if (currentSection == static_cast<SK_Section>(section))
         return;
     currentSection = static_cast<SK_Section>(section);
+    currentSectionIndex = index;
 
     QListView *cat = this->ui->set_cat;
     QListView *subCat = this->ui->set_subcat;
 
-    QString prefix;
-    switch (currentSection)
-    {
-    case SK_S_PROD:
-        prefix = "prod";
-        break;
-    case SK_S_REC:
-        prefix = "recipe";
-        break;
-    case SK_S_MENU:
-        prefix = "menu";
-        break;
-    }
+    QString prefix = getPrefix(currentSection);
 
     QStandardItemModel * model;
     if (cat->model() != nullptr)
@@ -80,7 +80,7 @@ void MainWindow::setSectionSelected(int index)
     cat->setModel(model);
 }
 
-void MainWindow::setCatSelected(const QModelIndex &current, const QModelIndex &previous)
+void MainWindow::set_catSelected(const QModelIndex &current, const QModelIndex &previous)
 {
     QListView *cat = this->ui->set_cat;
     QListView *subCat = this->ui->set_subcat;
@@ -126,4 +126,78 @@ void MainWindow::setCatSelected(const QModelIndex &current, const QModelIndex &p
     }
 
     subCat->setModel(model);
+}
+
+void MainWindow::set_addCat()
+{
+}
+
+void MainWindow::set_addSubCat()
+{
+
+}
+
+void MainWindow::set_deleteCat()
+{
+    QListView * list = this->ui->set_cat;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+
+    QString prefix = getPrefix(currentSection);
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM " + prefix + "_cat "
+                  "WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    currentSection = SK_S_NONE;
+    set_sectionSelected(currentSectionIndex);
+    rebuildTrees();
+}
+
+void MainWindow::set_deleteSubCat()
+{
+    QListView * list = this->ui->set_subcat;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+
+    QString prefix = getPrefix(currentSection);
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM " + prefix + "_subcat "
+                  "WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    currentSection = SK_S_NONE;
+    set_sectionSelected(currentSectionIndex);
+    rebuildTrees();
+}
+
+void MainWindow::set_renameCat()
+{
+}
+
+void MainWindow::set_renameSubCat()
+{
+
+}
+
+QString getPrefix(SK_Section section)
+{
+    QString prefix;
+    switch (section)
+    {
+    case SK_S_PROD:
+        prefix = "prod";
+        break;
+    case SK_S_REC:
+        prefix = "recipe";
+        break;
+    case SK_S_MENU:
+        prefix = "menu";
+        break;
+    }
+    return prefix;
 }
