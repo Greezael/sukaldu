@@ -108,6 +108,8 @@ public slots:
     void showAddRecipePopup(int row);
     void removeRecipes(int row);
     void addOption();
+    void removeOption(int row);
+    void renameOption(int row);
 
 // Generic code
 private:

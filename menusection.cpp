@@ -180,9 +180,13 @@ void MainWindow::showMenuOption(QVariant roleid)
     QSpacerItem *spacer = new QSpacerItem(1, 1, QSizePolicy::Expanding);
     QPushButton *remButton = new QPushButton("Remove");
     QPushButton *addButton = new QPushButton("Add");
+    QPushButton *remOptButton = new QPushButton("Remove Option");
+    QPushButton *renOptButton = new QPushButton("Rename Option");
 
     layout->addRow(optionLabel, tableView);
 
+    buttonBox->addWidget(remOptButton);
+    buttonBox->addWidget(renOptButton);
     buttonBox->addSpacerItem(spacer);
     buttonBox->addWidget(remButton);
     buttonBox->addWidget(addButton);
@@ -200,6 +204,9 @@ void MainWindow::showMenuOption(QVariant roleid)
 
     QObject::connect(addButton, &QPushButton::clicked, [=]() {this->showAddRecipePopup(row);});
     QObject::connect(remButton, &QPushButton::clicked, [=]() {this->removeRecipes(row);});
+
+    QObject::connect(remOptButton, &QPushButton::clicked, [=]() {this->removeOption(row);});
+    QObject::connect(renOptButton, &QPushButton::clicked, [=]() {this->renameOption(row);});
 
     QStandardItemModel * rootModel = new QStandardItemModel(this);
 
@@ -342,4 +349,22 @@ void MainWindow::addOption()
         std::cout << query.lastError().text().toStdString() << std::endl;
     }
     this->reloadMenuOptions();
+}
+
+void MainWindow::removeOption(int row)
+{
+    int index = (row - firstMenuOptionRow) / 2;
+    QVariant roleId = menuOptions.at(index);
+    QSqlQuery query;
+    query.prepare("DELETE FROM menu_role "
+                  "WHERE id = :roleId");
+    query.bindValue(":roleId", roleId);
+    query.exec();
+
+    this->reloadMenuOptions();
+}
+
+
+void MainWindow::renameOption(int row)
+{
 }
