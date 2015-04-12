@@ -6,6 +6,7 @@
 
 #include <QtSql>
 #include <QStandardItemModel>
+#include <QInputDialog>
 
 #include "menudialog.h"
 
@@ -367,4 +368,24 @@ void MainWindow::removeOption(int row)
 
 void MainWindow::renameOption(int row)
 {
+    int index = (row - firstMenuOptionRow) / 2;
+    QVariant roleId = menuOptions.at(index);
+    QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
+    QLayoutItem * labelItem = layout->itemAt(row, QFormLayout::LabelRole);
+    QLabel * label = dynamic_cast<QLabel *>(labelItem->widget());
+
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Rename Option"),
+                                         tr("Option name:"), QLineEdit::Normal,
+                                         label->text(), &ok);
+    if (ok && !text.isEmpty())
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE menu_role SET name = :name WHERE id = :id");
+        query.bindValue(":id", roleId);
+        query.bindValue(":name", text);
+        query.exec();
+
+        label->setText(text);
+    }
 }
