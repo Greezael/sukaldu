@@ -7,6 +7,7 @@
 
 #include <QtSql>
 #include <QStandardItemModel>
+#include <QInputDialog>
 
 // Helpers
 QString getPrefix(SK_Section section);
@@ -210,11 +211,52 @@ void MainWindow::set_deleteSubCat()
 
 void MainWindow::set_renameCat()
 {
+    QListView * list = this->ui->set_cat;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+    QString currentName = list->selectionModel()->selectedIndexes().first().data(Qt::DisplayRole).toString();
+
+    bool ok;
+    QString newName = QInputDialog::getText(this, tr("Rename Category"),
+                                         tr("Category name:"), QLineEdit::Normal,
+                                         currentName, &ok);
+    if (ok && !newName.isEmpty())
+    {
+        QString prefix = getPrefix(currentSection);
+
+        QSqlQuery query;
+        query.prepare("UPDATE " + prefix + "_cat SET name = :name WHERE id = :id");
+        query.bindValue(":id", id);
+        query.bindValue(":name", newName);
+        query.exec();
+
+        resetCategoriesInfo();
+    }
 }
 
 void MainWindow::set_renameSubCat()
 {
+    QListView * list = this->ui->set_subcat;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+    QString currentName = list->selectionModel()->selectedIndexes().first().data(Qt::DisplayRole).toString();
 
+    bool ok;
+    QString newName = QInputDialog::getText(this, tr("Rename Subcategory"),
+                                         tr("Subcategory name:"), QLineEdit::Normal,
+                                         currentName, &ok);
+    if (ok && !newName.isEmpty())
+    {
+        QString prefix = getPrefix(currentSection);
+
+        QSqlQuery query;
+        query.prepare("UPDATE " + prefix + "_subcat SET name = :name WHERE id = :id");
+        query.bindValue(":id", id);
+        query.bindValue(":name", newName);
+        query.exec();
+
+        resetSubCategoriesInfo();
+    }
 }
 
 QString getPrefix(SK_Section section)
