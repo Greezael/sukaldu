@@ -1,5 +1,12 @@
 PRAGMA foreign_keys = ON;
 
+-- Database info
+CREATE TABLE sukaldu_db (
+infokey VARCHAR(100) PRIMARY KEY,
+infovalue VARCHAR(100)
+)
+
+
 -- Product measurement
 CREATE TABLE prod_meas (
 id INTEGER PRIMARY KEY AUTOINCREMENT,

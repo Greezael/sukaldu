@@ -1,3 +1,5 @@
+INSERT INTO sukaldu_db VALUES ('dbversion', 'v1.0')
+
 -- Product measurement
 INSERT INTO prod_meas VALUES (1, 'g')
 INSERT INTO prod_meas VALUES (2, 'uds')

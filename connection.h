@@ -63,7 +63,8 @@ static bool loadScript(const char *name, bool line_by_line = false);
 static bool createConnection()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(":memory:");
+//    db.setDatabaseName(":memory:");
+    db.setDatabaseName("sukaldudb.db");
     if (!db.open()) {
         QMessageBox::critical(0, qApp->tr("Cannot open database"),
             qApp->tr("Unable to establish a database connection.\n"
@@ -74,8 +75,33 @@ static bool createConnection()
         return false;
     }
 
-    loadScript("data/database_definition.sql");
-    loadScript("data/database_sample.sql", true);
+    QSqlQuery query;
+    query.prepare("SELECT infovalue FROM sukaldu_db WHERE infokey='dbversion'");
+    query.exec();
+
+    if (query.next())
+    {
+        if (query.value("infovalue").toString().compare("v1.0") == 0)
+        {
+            return true;
+        }
+        else
+        {
+            QMessageBox::critical(0, qApp->tr("Cannot open database"),
+                qApp->tr("The database doesn't correspond to this version of the program.\n"
+                         "The db reports version [%1]\n"
+                         "Click Cancel to exit.").arg(query.value("value").toString()), QMessageBox::Cancel);
+            return false;
+        }
+    }
+    else
+    {
+        QMessageBox::information(0, "Initializing DB",
+                                 "This is your first time. I will create a sample database for you.\n"
+                                                      "Click Ok to continue.");
+        loadScript("data/database_definition.sql");
+        loadScript("data/database_sample.sql", true);
+    }
 
     return true;
 }
