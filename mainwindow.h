@@ -92,7 +92,6 @@ private:
     void menuSelected(int id);
     void resetMenuData();
     void saveMenuData();
-    void updateMenuPrice();
 
     void fillMenuOptions();
     void cleanMenuOptions();
@@ -101,6 +100,7 @@ private:
     void showMenuOption(QVariant roleid);
 
 public:
+    void updateMenuPrice();
     void reloadMenuOptions();
 
 public slots:

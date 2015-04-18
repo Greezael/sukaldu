@@ -25,7 +25,9 @@ void MainWindow::menuSelected(int id)
         this->ui->menu_name->clear();
         this->ui->menu_cat->clear();
         this->ui->menu_subcat->clear();
-        this->ui->menu_price->setText("--");
+        this->ui->menu_price_avg->setText("--");
+        this->ui->menu_price_max->setText("--");
+        this->ui->menu_price_min->setText("--");
         return;
     }
 
@@ -57,20 +59,24 @@ void MainWindow::updateMenuPrice()
         return;
     }
     QSqlQuery query;
-    query.prepare("SELECT price "
+    query.prepare("SELECT avg_price, max_price, min_price "
                   "FROM C_menu_price "
                   "WHERE id = :id" );
     query.bindValue(":id", this->currentMenu);
     query.exec();
     if (query.next())
     {
-        if (!query.value("price").isNull())
+        if (!query.value("avg_price").isNull())
         {
-            this->ui->menu_price->setText(query.value("price").toString());
+            this->ui->menu_price_avg->setText(query.value("avg_price").toString());
+            this->ui->menu_price_max->setText(query.value("max_price").toString());
+            this->ui->menu_price_min->setText(query.value("min_price").toString());
             return;
         }
     }
-    this->ui->menu_price->setText("--");
+    this->ui->menu_price_avg->setText("--");
+    this->ui->menu_price_max->setText("--");
+    this->ui->menu_price_min->setText("--");
 }
 
 void MainWindow::fillMenuCategoryLists(int catId, int subCatId)
@@ -335,6 +341,7 @@ void MainWindow::removeRecipes(int row)
         if (deleted)
         {
             reloadMenuOptions();
+            this->updateMenuPrice();
         }
     }
 }
@@ -364,6 +371,7 @@ void MainWindow::removeOption(int row)
     query.exec();
 
     this->reloadMenuOptions();
+    this->updateMenuPrice();
 }
 
 

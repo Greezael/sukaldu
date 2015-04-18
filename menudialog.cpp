@@ -144,6 +144,7 @@ void MenuDialog::addRecipe()
 
     MainWindow * mainwindow = (MainWindow *) this->parent();
     mainwindow->reloadMenuOptions();
+    mainwindow->updateMenuPrice();
 }
 
 MenuDialog::~MenuDialog()

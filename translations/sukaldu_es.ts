@@ -26,19 +26,19 @@
     <message>
         <location line="-583"/>
         <location line="+351"/>
-        <location line="+269"/>
+        <location line="+332"/>
         <source>Category</source>
         <translation>Categoría</translation>
     </message>
     <message>
-        <location line="-597"/>
+        <location line="-660"/>
         <location line="+351"/>
-        <location line="+269"/>
+        <location line="+332"/>
         <source>Subcategory</source>
         <translation>Subcategoría</translation>
     </message>
     <message>
-        <location line="-590"/>
+        <location line="-653"/>
         <source>Prices</source>
         <translation>Precios</translation>
     </message>
@@ -69,15 +69,15 @@
         <location line="+81"/>
         <location line="+173"/>
         <location line="+99"/>
-        <location line="+164"/>
+        <location line="+234"/>
         <location line="+7"/>
         <location line="+86"/>
-        <location filename="../menusection.cpp" line="+183"/>
+        <location filename="../menusection.cpp" line="+189"/>
         <source>Add</source>
         <translation>Añadir</translation>
     </message>
     <message>
-        <location line="-580"/>
+        <location line="-650"/>
         <location filename="../settingssection.cpp" line="-292"/>
         <source>Recipes</source>
         <translation>Recetas</translation>
@@ -89,18 +89,20 @@
     </message>
     <message>
         <location line="+30"/>
-        <location line="+269"/>
+        <location line="+392"/>
         <source>Price</source>
         <translation>Precio</translation>
     </message>
     <message>
-        <location line="-262"/>
-        <location line="+269"/>
+        <location line="-385"/>
+        <location line="+277"/>
+        <location line="+20"/>
+        <location line="+20"/>
         <source>--</source>
         <translation>--</translation>
     </message>
     <message>
-        <location line="-682"/>
+        <location line="-730"/>
         <location line="+466"/>
         <location filename="../settingssection.cpp" line="-1"/>
         <source>Ingredients</source>
@@ -113,7 +115,7 @@
     </message>
     <message>
         <location line="+476"/>
-        <location line="+270"/>
+        <location line="+340"/>
         <location line="+40"/>
         <location line="+75"/>
         <location filename="../menusection.cpp" line="-1"/>
@@ -121,7 +123,7 @@
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location line="-376"/>
+        <location line="-446"/>
         <source>Servings</source>
         <translation>Raciones</translation>
     </message>
@@ -142,7 +144,22 @@
         <translation>Menú</translation>
     </message>
     <message>
-        <location line="+95"/>
+        <location line="+38"/>
+        <source>Average:</source>
+        <translation>Medio:</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Most expensive:</source>
+        <translation>Más caro:</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Cheapest:</source>
+        <translation>M&apos;as barato:</translation>
+    </message>
+    <message>
+        <location line="+87"/>
         <source>Settings</source>
         <translation>Opciones</translation>
     </message>
@@ -169,8 +186,8 @@
         <translation>Subcategoría &gt;</translation>
     </message>
     <message>
-        <location line="-733"/>
-        <location line="+752"/>
+        <location line="-803"/>
+        <location line="+822"/>
         <location line="+42"/>
         <source>Units</source>
         <translation>Unidades</translation>
@@ -199,17 +216,17 @@
     </message>
     <message>
         <location line="+1"/>
-        <location line="+194"/>
+        <location line="+196"/>
         <source>Rename Option</source>
         <translation>Renombrar Opción</translation>
     </message>
     <message>
-        <location line="-33"/>
+        <location line="-34"/>
         <source>Unamed</source>
         <translation>Opción</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+35"/>
         <source>Option name:</source>
         <translation>Nombre:</translation>
     </message>

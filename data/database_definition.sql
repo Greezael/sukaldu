@@ -149,12 +149,22 @@ ON recipe_product.product = C_prod_price.id
 GROUP BY recipe.id
 
 -- COMPUTED
+-- Menu Role prices
+CREATE VIEW C_role_price AS
+SELECT menu_role.menu, menu_role.id,
+    AVG(price) 'avg_price', MAX(price) 'max_price', MIN(price) 'min_price'
+FROM menu_role
+LEFT JOIN menu_recipe
+    ON menu_role.id = menu_recipe.role
+LEFT JOIN C_recipe_price
+    ON menu_recipe.recipe = C_recipe_price.id
+GROUP BY menu_role.id
+
+-- COMPUTED
 -- Menu prices
 CREATE VIEW C_menu_price AS
-SELECT menu.id, SUM(price) 'price'
-FROM menu LEFT JOIN menu_recipe
-ON menu.id = menu_recipe.menu
-LEFT JOIN C_recipe_price
-ON menu_recipe.recipe = C_recipe_price.id
+SELECT menu.id, SUM(avg_price) 'avg_price', SUM(min_price) 'min_price', SUM(max_price) 'max_price'
+FROM menu LEFT JOIN C_role_price
+ON menu.id = C_role_price.menu
 GROUP BY menu.id
 
