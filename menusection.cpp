@@ -151,7 +151,7 @@ void MainWindow::fillMenuOptions()
     QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
     QHBoxLayout *buttonBox = new QHBoxLayout();
     QSpacerItem *spacer = new QSpacerItem(1, 1, QSizePolicy::Expanding);
-    QPushButton *addButton = new QPushButton("Add Option");
+    QPushButton *addButton = new QPushButton(tr("Add Option"));
     QObject::connect(addButton, &QPushButton::clicked, [=]() {this->addOption();});
 
     buttonBox->addSpacerItem(spacer);
@@ -175,14 +175,14 @@ void MainWindow::showMenuOption(QVariant roleid)
 {
     QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
 
-    QLabel *optionLabel = new QLabel("Option");
+    QLabel *optionLabel = new QLabel(tr("Option"));
     QTableView *tableView = new QTableView();
     QHBoxLayout *buttonBox = new QHBoxLayout();
     QSpacerItem *spacer = new QSpacerItem(1, 1, QSizePolicy::Expanding);
-    QPushButton *remButton = new QPushButton("Remove");
-    QPushButton *addButton = new QPushButton("Add");
-    QPushButton *remOptButton = new QPushButton("Remove Option");
-    QPushButton *renOptButton = new QPushButton("Rename Option");
+    QPushButton *remButton = new QPushButton(tr("Remove"));
+    QPushButton *addButton = new QPushButton(tr("Add"));
+    QPushButton *remOptButton = new QPushButton(tr("Remove Option"));
+    QPushButton *renOptButton = new QPushButton(tr("Rename Option"));
 
     layout->addRow(optionLabel, tableView);
 
@@ -342,7 +342,8 @@ void MainWindow::removeRecipes(int row)
 void MainWindow::addOption()
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO menu_role VALUES (NULL, :menuId, 'Unnamed') ");
+    query.prepare("INSERT INTO menu_role VALUES (NULL, :menuId, :newopttext) ");
+    query.bindValue(":newopttext", tr("Unamed"));
     query.bindValue(":menuId", this->currentMenu);
     query.exec();
     if (query.lastError().type() != QSqlError::NoError)
@@ -395,11 +396,12 @@ void MainWindow::insertNewMenu()
     QSqlQuery query;
     query.prepare("INSERT INTO menu VALUES ( "
                   "NULL, "  // Id
-                  "'New Menu', "  // Name
+                  ":newmenutext, "  // Name
                   "NULL, "  // Cat
                   "NULL, "  // Subcat
                   "NULL "  // notes
                   ")");
+    query.bindValue(":newmenutext", tr("New Menu"));
     query.exec();
 
     query.prepare("SELECT last_insert_rowid()");

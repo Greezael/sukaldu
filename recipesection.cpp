@@ -147,12 +147,13 @@ void MainWindow::insertNewRecipe()
     QSqlQuery query;
     query.prepare("INSERT INTO recipe VALUES ( "
                   "NULL, "  // Id
-                  "\"New Recipe\", "  // Name
+                  ":newrecipetext, "  // Name
                   "NULL, "  // Cat
                   "NULL, "  // Subcat
                   "NULL, "  // preparation
                   "NULL "   // servings
                   ")");
+    query.bindValue(":newrecipetext", tr("New Recipe"));
     query.exec();
 
     query.prepare("SELECT last_insert_rowid()");

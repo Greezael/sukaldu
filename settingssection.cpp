@@ -21,9 +21,9 @@ void MainWindow::initSettingsPanel()
     sections->blockSignals(true);
     sections->clear();
 
-    sections->addItem("Product", SK_S_PROD);
-    sections->addItem("Recipe", SK_S_REC);
-    sections->addItem("Menu", SK_S_MENU);
+    sections->addItem(tr("Ingredients"), SK_S_PROD);
+    sections->addItem(tr("Recipes"), SK_S_REC);
+    sections->addItem(tr("Menus"), SK_S_MENU);
 
     sections->setCurrentIndex(0);
     sections->blockSignals(false);
@@ -159,7 +159,8 @@ void MainWindow::set_addCat()
 {
     QSqlQuery query;
     query.prepare("INSERT INTO " + getPrefix(currentSection) + "_cat "
-                  "VALUES (NULL, 'New category')");
+                  "VALUES (NULL, :newcattext)");
+    query.bindValue(":newcattext", tr("New Category"));
     query.exec();
 
     resetCategoriesInfo();
@@ -170,7 +171,8 @@ void MainWindow::set_addSubCat()
     if (currentCategory == -1) return;
     QSqlQuery query;
     query.prepare("INSERT INTO " + getPrefix(currentSection) + "_subcat "
-                  "VALUES (NULL, :cat, 'New subcategory')");
+                  "VALUES (NULL, :cat, :newsubcattext)");
+    query.bindValue(":newsubcattext", tr("New Subcategory"));
     query.bindValue(":cat", currentCategory);
     query.exec();
 
@@ -311,7 +313,8 @@ void MainWindow::set_addMeas()
 {
     QSqlQuery query;
     query.prepare("INSERT INTO prod_meas "
-                  "VALUES (NULL, 'New')");
+                  "VALUES (NULL, :new)");
+    query.bindValue(":new", tr("New"));
     query.exec();
 
     resetMeasInfo();
@@ -341,8 +344,8 @@ void MainWindow::set_renameMeas()
     QString currentName = list->selectionModel()->selectedIndexes().first().data(Qt::DisplayRole).toString();
 
     bool ok;
-    QString newName = QInputDialog::getText(this, tr("Rename Measurement"),
-                                         tr("Measurement abbreviation:"), QLineEdit::Normal,
+    QString newName = QInputDialog::getText(this, tr("Rename Unit"),
+                                         tr("Unit abbreviation:"), QLineEdit::Normal,
                                          currentName, &ok);
     if (ok && !newName.isEmpty())
     {

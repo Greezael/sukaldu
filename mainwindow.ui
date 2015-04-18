@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sukaldu</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -22,7 +22,7 @@
       </property>
       <widget class="QWidget" name="products">
        <attribute name="title">
-        <string>Products</string>
+        <string>Ingredients</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="2" column="0">
@@ -61,7 +61,7 @@
               <item row="0" column="0">
                <widget class="QLabel" name="prod_title">
                 <property name="text">
-                 <string>Product</string>
+                 <string>Ingredient</string>
                 </property>
                </widget>
               </item>
@@ -121,7 +121,7 @@
               <item row="4" column="0">
                <widget class="QLabel" name="prod_meas_tag">
                 <property name="text">
-                 <string>Measurement</string>
+                 <string>Units</string>
                 </property>
                </widget>
               </item>
@@ -768,7 +768,7 @@
         <item>
          <widget class="QToolBox" name="toolBox">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="set_categories">
            <property name="geometry">
@@ -915,7 +915,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Measurements</string>
+               <string>Units</string>
               </property>
              </widget>
             </item>

@@ -49,7 +49,7 @@ void MenuDialog::fillCategoryList()
     QSqlQuery query;
     query.prepare("SELECT id, name FROM recipe_cat");
     query.exec();
-    cat->addItem("Any", QVariant::fromValue(-1));
+    cat->addItem(tr("Any"), QVariant::fromValue(-1));
     while (query.next())
     {
         cat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
@@ -76,7 +76,7 @@ void MenuDialog::catSelected(int index)
         query.prepare("SELECT id, name FROM recipe_subcat WHERE cat = :catId");
         query.bindValue(":catId", QVariant::fromValue(catId));
         query.exec();
-        subcat->addItem("Any", QVariant::fromValue(-1));
+        subcat->addItem(tr("Any"), QVariant::fromValue(-1));
         while (query.next())
         {
             subcat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
@@ -85,7 +85,7 @@ void MenuDialog::catSelected(int index)
     }
     else
     {
-        subcat->addItem("Any", QVariant::fromValue(-1));
+        subcat->addItem(tr("Any"), QVariant::fromValue(-1));
     }
     subcat->blockSignals(false);
     subcatSelected(0);

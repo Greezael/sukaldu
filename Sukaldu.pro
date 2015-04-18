@@ -36,6 +36,9 @@ FORMS    += mainwindow.ui \
     recipedialog.ui \
     menudialog.ui
 
+TRANSLATIONS = \
+    translations/sukaldu_es.ts
+
 OTHER_FILES += \
     data/database_definition.sql \
     data/database_sample.sql
@@ -45,4 +48,10 @@ data.files   += \
     data/database_definition.sql \
     data/database_sample.sql
 
-INSTALLS       += data
+translations.path    = $$OUT_PWD/translations
+translations.files   += \
+    translations/sukaldu_es.qm
+
+INSTALLS       += \
+            data \
+            translations

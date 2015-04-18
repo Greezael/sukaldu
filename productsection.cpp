@@ -126,7 +126,7 @@ void MainWindow::fillProductMeasurementList(int measId)
     query.prepare("SELECT id, name FROM prod_meas");
     query.exec();
     int selected = 0, index = 1;
-    this->ui->prod_meas->addItem("None", QVariant::fromValue(-1));
+    this->ui->prod_meas->addItem(tr("None"), QVariant::fromValue(-1));
     while (query.next())
     {
         this->ui->prod_meas->addItem(query.value("name").toString(),
@@ -256,13 +256,14 @@ void MainWindow::insertNewProduct()
     QSqlQuery query;
     query.prepare("INSERT INTO product VALUES ( "
                   "NULL, "  // Id
-                  "\"New Product\", "  // Name
+                  ":newproducttext, "  // Name
                   "NULL, "  // Cat
                   "NULL, "  // Subcat
                   "NULL, "  // Notes
                   "NULL, "  // Price
                   "NULL "  // Measurement
                   ")");
+    query.bindValue(":newproducttext", tr("New Ingredient"));
     query.exec();
 
     query.prepare("SELECT last_insert_rowid()");

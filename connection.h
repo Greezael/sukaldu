@@ -60,17 +60,14 @@ static bool loadScript(const char *name, bool line_by_line = false);
     connect to a database.
 */
 //! [0]
-static bool createConnection()
+static bool createConnection(QApplication * app)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 //    db.setDatabaseName(":memory:");
     db.setDatabaseName("sukaldudb.db");
     if (!db.open()) {
-        QMessageBox::critical(0, qApp->tr("Cannot open database"),
-            qApp->tr("Unable to establish a database connection.\n"
-                     "This example needs SQLite support. Please read "
-                     "the Qt SQL driver documentation for information how "
-                     "to build it.\n\n"
+        QMessageBox::critical(0, QMessageBox::tr("Cannot open database"),
+            QMessageBox::tr("Unable to establish a database connection.\n"
                      "Click Cancel to exit."), QMessageBox::Cancel);
         return false;
     }
@@ -87,8 +84,8 @@ static bool createConnection()
         }
         else
         {
-            QMessageBox::critical(0, qApp->tr("Cannot open database"),
-                qApp->tr("The database doesn't correspond to this version of the program.\n"
+            QMessageBox::critical(0, QMessageBox::tr("Cannot open database"),
+                QMessageBox::tr("The database doesn't correspond to this version of the program.\n"
                          "The db reports version [%1]\n"
                          "Click Cancel to exit.").arg(query.value("value").toString()), QMessageBox::Cancel);
             return false;

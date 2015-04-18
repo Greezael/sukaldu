@@ -196,7 +196,7 @@ void MainWindow::fillCategoryLists(int catId, int subCatId, SK_Section section)
     query.prepare("SELECT id, name FROM " + prefix + "_cat");
     query.exec();
     int selected = 0, index = 1;
-    cat->addItem("None", QVariant::fromValue(-1));
+    cat->addItem(tr("None"), QVariant::fromValue(-1));
     while (query.next())
     {
         cat->addItem(query.value("name").toString(), QVariant::fromValue(query.value("id").toInt()));
@@ -260,7 +260,7 @@ void MainWindow::catSelected(int index, SK_Section section)
     }
     else
     {
-        subcat->addItem("None", QVariant::fromValue(-1));
+        subcat->addItem(tr("None"), QVariant::fromValue(-1));
     }
 }
 
@@ -341,7 +341,7 @@ void MainWindow::tabChanged(int index)
         recipeSelected(currentRecipe);
         break;
     case 2:
-//        menuSelected(currentMenu);
+        menuSelected(currentMenu);
         break;
     }
 }
