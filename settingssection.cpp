@@ -31,6 +31,8 @@ void MainWindow::initSettingsPanel()
     currentSection = SK_S_NONE;
     currentCategory = -1;
     set_sectionSelected(0);
+
+    resetMeasInfo();
 }
 
 void MainWindow::rebuildTrees()
@@ -275,4 +277,81 @@ QString getPrefix(SK_Section section)
         break;
     }
     return prefix;
+}
+
+void MainWindow::resetMeasInfo()
+{
+    QListView *meas = this->ui->set_meas;
+
+    QStandardItemModel * model;
+    if (meas->model() != nullptr)
+    {
+        model = (QStandardItemModel *) meas->model();
+        model->clear();
+    }
+    else
+    {
+        model = new QStandardItemModel();
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM prod_meas");
+    query.exec();
+    while (query.next())
+    {
+        QStandardItem * item = new QStandardItem(query.value("name").toString());
+        item->setData(QVariant::fromValue(query.value("id").toInt()), SK_IdRole);
+        model->appendRow(item);
+    }
+
+    meas->setModel(model);
+}
+
+void MainWindow::set_addMeas()
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO prod_meas "
+                  "VALUES (NULL, 'New')");
+    query.exec();
+
+    resetMeasInfo();
+}
+
+void MainWindow::set_deleteMeas()
+{
+    QListView * list = this->ui->set_meas;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+
+    QString prefix = getPrefix(currentSection);
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM prod_meas "
+                  "WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    resetMeasInfo();
+}
+void MainWindow::set_renameMeas()
+{
+    QListView * list = this->ui->set_meas;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+    QString currentName = list->selectionModel()->selectedIndexes().first().data(Qt::DisplayRole).toString();
+
+    bool ok;
+    QString newName = QInputDialog::getText(this, tr("Rename Measurement"),
+                                         tr("Measurement abbreviation:"), QLineEdit::Normal,
+                                         currentName, &ok);
+    if (ok && !newName.isEmpty())
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE prod_meas SET name = :name WHERE id = :id");
+        query.bindValue(":id", id);
+        query.bindValue(":name", newName);
+        query.exec();
+
+        resetMeasInfo();
+    }
 }

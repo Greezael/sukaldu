@@ -188,10 +188,10 @@ void MainWindow::updateIngredientsList()
     query.prepare("SELECT RP.product, M.name 'meas', P.name, RP.quantity "
                   "FROM recipe_product RP "
                   "JOIN product P "
-                  "JOIN prod_meas M "
+                  "LEFT JOIN prod_meas M "
+                  "ON P.meas = M.id "
                   "WHERE RP.recipe = :recid "
-                  "AND P.id = RP.product "
-                  "AND P.meas = M.id");
+                  "AND P.id = RP.product");
     query.bindValue(":recid", QVariant::fromValue(this->currentRecipe));
     query.exec();
     rootModel->setColumnCount(3);

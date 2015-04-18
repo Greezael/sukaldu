@@ -175,6 +175,18 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(set_renameSubCat()));
+    QObject::connect(this->ui->set_meas_add,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_addMeas()));
+    QObject::connect(this->ui->set_meas_rem,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_deleteMeas()));
+    QObject::connect(this->ui->set_meas_ren,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_renameMeas()));
 }
 
 

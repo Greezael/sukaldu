@@ -135,17 +135,21 @@ private:
     void rebuildTrees();
     void resetCategoriesInfo();
     void resetSubCategoriesInfo();
+    void resetMeasInfo();
 
 public slots:
     void set_sectionSelected(int index);
     void set_catSelected(const QModelIndex & current, const QModelIndex & previous);
     void set_catSelectedById(int id);
-    void set_deleteCat();
-    void set_deleteSubCat();
     void set_addCat();
-    void set_addSubCat();
+    void set_deleteCat();
     void set_renameCat();
+    void set_addSubCat();
     void set_renameSubCat();
+    void set_deleteSubCat();
+    void set_addMeas();
+    void set_renameMeas();
+    void set_deleteMeas();
 
 // State
 private:

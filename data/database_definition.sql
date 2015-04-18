@@ -54,11 +54,12 @@ name VARCHAR(100),
 cat INTEGER,
 subcat INTEGER,
 notes TEXT,
-meas INTEGER REFERENCES prod_meas,
+meas INTEGER,
 current_price INTEGER,
 FOREIGN KEY (current_price) references prod_price ON DELETE SET NULL,
 FOREIGN KEY (cat) references prod_cat ON DELETE SET NULL,
-FOREIGN KEY (subcat) references prod_subcat ON DELETE SET NULL
+FOREIGN KEY (subcat) references prod_subcat ON DELETE SET NULL,
+FOREIGN KEY (meas) references prod_meas ON DELETE SET NULL
 )
 
 -- Product prices

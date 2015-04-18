@@ -768,7 +768,7 @@
         <item>
          <widget class="QToolBox" name="toolBox">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="set_categories">
            <property name="geometry">
@@ -834,7 +834,7 @@
             <item row="1" column="1">
              <widget class="QLabel" name="set_cat_tag">
               <property name="text">
-               <string>Category</string>
+               <string>&lt; Category</string>
               </property>
              </widget>
             </item>
@@ -854,7 +854,7 @@
             <item row="6" column="1">
              <widget class="QLabel" name="set_subcat_tag">
               <property name="text">
-               <string>Subcategory</string>
+               <string>Subcategory &gt;</string>
               </property>
              </widget>
             </item>
@@ -863,18 +863,83 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="page_2">
+          <widget class="QWidget" name="set_units">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>100</width>
-             <height>30</height>
+             <width>861</width>
+             <height>434</height>
             </rect>
            </property>
            <attribute name="label">
-            <string>Page 2</string>
+            <string>Units</string>
            </attribute>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="2" column="1">
+             <widget class="QPushButton" name="set_meas_ren">
+              <property name="text">
+               <string>Rename</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="set_meas_add">
+              <property name="text">
+               <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2" rowspan="5">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0" rowspan="4">
+             <widget class="QListView" name="set_meas"/>
+            </item>
+            <item row="0" column="0" colspan="2">
+             <widget class="QLabel" name="set_meas_tag">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Measurements</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="set_meas_rem">
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3" rowspan="3">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
