@@ -8,6 +8,7 @@
 #include "mainwindow.h"
 
 #include <QtSql>
+#include <QPushButton>
 
 PriceDialog::PriceDialog(QWidget *parent) :
     QDialog(parent),
@@ -23,6 +24,9 @@ PriceDialog::PriceDialog(int prodIdentifier, int priceIdentifier, QWidget *paren
     ui(new Ui::PriceDialog)
 {
     ui->setupUi(this);
+    this->ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Ok"));
+    this->ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
+
     this->prodId = prodIdentifier;
     this->priceId = priceIdentifier;
     if (priceId >= 0)

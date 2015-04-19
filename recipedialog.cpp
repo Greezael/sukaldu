@@ -8,6 +8,7 @@
 #include "mainwindow.h"
 
 #include <QtSql>
+#include <QPushButton>
 
 RecipeDialog::RecipeDialog(QWidget *parent) :
     QDialog(parent),
@@ -21,6 +22,9 @@ RecipeDialog::RecipeDialog(int recIdentifier, int prodIdentifier, QWidget *paren
     ui(new Ui::RecipeDialog)
 {
     ui->setupUi(this);
+    this->ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Ok"));
+    this->ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
+
     this->recId = recIdentifier;
     this->prodId = prodIdentifier;
     if (prodId >= 0)

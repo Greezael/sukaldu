@@ -61,6 +61,7 @@
     </message>
     <message>
         <location line="+16"/>
+        <location filename="../productsection.cpp" line="+107"/>
         <source>Notes</source>
         <translation>Notas</translation>
     </message>
@@ -84,12 +85,14 @@
     </message>
     <message>
         <location line="+92"/>
+        <location filename="../menusection.cpp" line="+56"/>
         <source>Recipe</source>
         <translation>Receta</translation>
     </message>
     <message>
         <location line="+30"/>
         <location line="+392"/>
+        <location filename="../productsection.cpp" line="+0"/>
         <source>Price</source>
         <translation>Precio</translation>
     </message>
@@ -110,6 +113,7 @@
     </message>
     <message>
         <location line="-427"/>
+        <location filename="../recipesection.cpp" line="+211"/>
         <source>Ingredient</source>
         <translation>Ingrediente</translation>
     </message>
@@ -118,7 +122,7 @@
         <location line="+340"/>
         <location line="+40"/>
         <location line="+75"/>
-        <location filename="../menusection.cpp" line="-1"/>
+        <location filename="../menusection.cpp" line="-57"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
@@ -195,7 +199,7 @@
     <message>
         <location filename="../genericcode.cpp" line="+199"/>
         <location line="+64"/>
-        <location filename="../productsection.cpp" line="+129"/>
+        <location filename="../productsection.cpp" line="+23"/>
         <source>None</source>
         <translation>Ninguna</translation>
     </message>
@@ -216,12 +220,17 @@
     </message>
     <message>
         <location line="+1"/>
-        <location line="+196"/>
+        <location line="+204"/>
         <source>Rename Option</source>
         <translation>Renombrar Opción</translation>
     </message>
     <message>
-        <location line="-34"/>
+        <location line="-150"/>
+        <source>Price / Person</source>
+        <translation>Precio / Persona</translation>
+    </message>
+    <message>
+        <location line="+116"/>
         <source>Unamed</source>
         <translation>Opción</translation>
     </message>
@@ -266,9 +275,14 @@
         <translation>Abbreviatura:</translation>
     </message>
     <message>
-        <location filename="../recipesection.cpp" line="+156"/>
+        <location filename="../recipesection.cpp" line="-55"/>
         <source>New Recipe</source>
         <translation>Nueva Receta</translation>
+    </message>
+    <message>
+        <location line="+55"/>
+        <source>Quantity</source>
+        <translation>Cantidad</translation>
     </message>
     <message>
         <location filename="../settingssection.cpp" line="-185"/>
@@ -281,9 +295,28 @@
         <translation>Nueva Subcategoría</translation>
     </message>
     <message>
-        <location filename="../productsection.cpp" line="+137"/>
+        <location filename="../productsection.cpp" line="-23"/>
+        <source>Current</source>
+        <translation>Actual</translation>
+    </message>
+    <message>
+        <location line="+160"/>
         <source>New Ingredient</source>
         <translation>Nuevo Ingrediente</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="+15"/>
+        <location line="+2"/>
+        <location line="+2"/>
+        <source>Save</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <location line="+2"/>
+        <location line="+2"/>
+        <source>Reset</source>
+        <translation>Restaurar</translation>
     </message>
 </context>
 <context>
@@ -310,7 +343,17 @@
         <translation>Receta</translation>
     </message>
     <message>
-        <location filename="../menudialog.cpp" line="+52"/>
+        <location filename="../menudialog.cpp" line="+28"/>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location line="+27"/>
         <location line="+27"/>
         <location line="+9"/>
         <source>Any</source>
@@ -343,6 +386,16 @@
         <location line="+23"/>
         <source>Notes</source>
         <translation>Notas</translation>
+    </message>
+    <message>
+        <location filename="../pricedialog.cpp" line="+27"/>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -396,7 +449,17 @@ Click Cancel to exit.</source>
         <translation>Cantidad</translation>
     </message>
     <message>
-        <location filename="../recipedialog.cpp" line="+100"/>
+        <location filename="../recipedialog.cpp" line="+25"/>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location line="+78"/>
         <location line="+27"/>
         <location line="+9"/>
         <source>Any</source>

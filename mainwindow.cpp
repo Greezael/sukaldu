@@ -12,6 +12,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->ui->prod_curprod_buttons->button(QDialogButtonBox::Save)->setText(tr("Save"));
+    this->ui->prod_curprod_buttons->button(QDialogButtonBox::Reset)->setText(tr("Reset"));
+    this->ui->rec_currec_buttons->button(QDialogButtonBox::Save)->setText(tr("Save"));
+    this->ui->rec_currec_buttons->button(QDialogButtonBox::Reset)->setText(tr("Reset"));
+    this->ui->menu_curmenu_buttons->button(QDialogButtonBox::Save)->setText(tr("Save"));
+    this->ui->menu_curmenu_buttons->button(QDialogButtonBox::Reset)->setText(tr("Reset"));
 
     currentProduct = -1;
     currentRecipe = -1;

@@ -218,27 +218,35 @@ void MainWindow::showMenuOption(QVariant roleid)
     QStandardItemModel * rootModel = new QStandardItemModel(this);
 
     QSqlQuery query;
-
-    query.prepare("SELECT MR.recipe, R.name "
+    query.prepare("SELECT R.id, R.name, P.price "
                   "FROM menu_recipe MR "
                   "JOIN recipe R "
+                  "ON R.id = MR.recipe "
+                  "JOIN C_recipe_price P "
+                  "ON R.id = P.id "
                   "WHERE MR.menu = :menuid "
-                  "AND R.id = MR.recipe "
                   "AND MR.role = :role");
     query.bindValue(":menuid", currentMenu);
     query.bindValue(":role", roleid);
     query.exec();
-    rootModel->setColumnCount(1);
+    std::cout << query.lastError().text().toStdString() << std::endl;
+    rootModel->setColumnCount(2);
+
     while (query.next())
     {
         QList<QStandardItem*> row;
         QStandardItem* recipeName = new QStandardItem(query.value("name").toString());
-        row << recipeName;
-        recipeName->setData(query.value("recipe"), SK_IdRole);
+        QStandardItem* recipePrice = new QStandardItem(query.value("price").toString());
+        row << recipeName << recipePrice;
+        recipeName->setData(query.value("id"), SK_IdRole);
         rootModel->appendRow(row);
     }
 
+    rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Recipe") << tr("Price / Person"));
     tableView->setModel(rootModel);
+
+    tableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    tableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Interactive);
 
     query.prepare("SELECT name "
                   "FROM menu_role "

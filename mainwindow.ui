@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="products">
        <attribute name="title">
@@ -48,8 +48,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>584</width>
-             <height>478</height>
+             <width>597</width>
+             <height>531</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -387,8 +387,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>584</width>
-             <height>478</height>
+             <width>597</width>
+             <height>531</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -656,8 +656,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>584</width>
-             <height>478</height>
+             <width>597</width>
+             <height>531</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout_2">
@@ -838,15 +838,15 @@
         <item>
          <widget class="QToolBox" name="toolBox">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="set_categories">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>283</width>
-             <height>329</height>
+             <width>861</width>
+             <height>500</height>
             </rect>
            </property>
            <attribute name="label">

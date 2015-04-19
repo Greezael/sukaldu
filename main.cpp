@@ -8,23 +8,26 @@
 
 int main(int argc, char *argv[])
 {
-//    QLocale locale("es_ES");
-//    QLocale::setDefault(locale);
+    QApplication app(argc, argv);
+
+    QLocale eslocale("es");
+    QLocale::setDefault(eslocale);
+
+    QString translationsPath(QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    QLocale locale = QLocale();
 
     QTranslator qtTranslator;
-    qtTranslator.load("qt_" + QLocale().name(),
-               QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    if (qtTranslator.load(locale, "qt", "_", translationsPath))
+        app.installTranslator(&qtTranslator);
+
+    QTranslator qtBaseTranslator;
+    if (qtBaseTranslator.load(locale, "qtbase", "_", translationsPath))
+        app.installTranslator(&qtBaseTranslator);
 
     QTranslator translator;
-
     if (QLocale().language() == QLocale::Spanish)
-    {
-        translator.load("sukaldu_es", "translations");
-    }
-
-    QApplication app(argc, argv);
-    app.installTranslator(&qtTranslator);
-    app.installTranslator(&translator);
+        if (translator.load("sukaldu_es", "translations"))
+            app.installTranslator(&translator);
 
     if (!createConnection(&app))
         return false;

@@ -104,6 +104,7 @@ void MainWindow::updatePriceList()
 
     }
 
+    rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Current") << tr("Price") << tr("Notes"));
     this->ui->prod_pricetable->setModel(rootModel);
     updateRecipePrice();
 }

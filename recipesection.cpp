@@ -195,19 +195,20 @@ void MainWindow::updateIngredientsList()
                   "AND P.id = RP.product");
     query.bindValue(":recid", QVariant::fromValue(this->currentRecipe));
     query.exec();
-    rootModel->setColumnCount(3);
+    rootModel->setColumnCount(2);
     while (query.next())
     {
         QList<QStandardItem*> row;
-        QStandardItem* quantity = new QStandardItem(query.value("quantity").toString());
-        QStandardItem* meas = new QStandardItem(query.value("meas").toString());
+        QStandardItem* quantity = new QStandardItem(query.value("quantity").toString() + " " +
+                                                    query.value("meas").toString());
         QStandardItem* product = new QStandardItem(query.value("name").toString());
-        row << quantity << meas << product;
+        row << quantity << product;
         quantity->setData(query.value("product"), SK_IdRole);
 
         rootModel->appendRow(row);
     }
 
+    rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Quantity") << tr("Ingredient"));
     this->ui->rec_ing->setModel(rootModel);
     updateRecipePrice();
 }

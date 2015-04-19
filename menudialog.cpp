@@ -8,6 +8,7 @@
 #include "mainwindow.h"
 
 #include <QtSql>
+#include <QPushButton>
 
 MenuDialog::MenuDialog(QWidget *parent) :
     QDialog(parent),
@@ -23,6 +24,9 @@ MenuDialog::MenuDialog(int menuIdentifier, int roleIdentifier, QWidget *parent) 
     this->menuId = menuIdentifier;
     this->roleId = roleIdentifier;
     ui->setupUi(this);
+
+    this->ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Ok"));
+    this->ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
 
     fillCategoryList();
     QObject::connect(this->ui->menurec_cat,
