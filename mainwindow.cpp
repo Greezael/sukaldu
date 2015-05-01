@@ -193,6 +193,10 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(set_renameMeas()));
+    QObject::connect(this->ui->set_language,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(set_changeAppLanguage()));
 }
 
 

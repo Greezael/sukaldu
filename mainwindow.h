@@ -150,6 +150,7 @@ public slots:
     void set_addMeas();
     void set_renameMeas();
     void set_deleteMeas();
+    void set_changeAppLanguage();
 
 // State
 private:

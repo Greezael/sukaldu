@@ -32,4 +32,4 @@ Makefile*
 *.qmlproject.user.*
 
 # Sukaldu specifics
-sukaldu-Windows/*
+windows/*

@@ -358,3 +358,36 @@ void MainWindow::set_renameMeas()
         resetMeasInfo();
     }
 }
+
+void MainWindow::set_changeAppLanguage()
+{
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+
+    QStringList items;
+    QStringList codes;
+    items << "Castellano" << "English";
+    codes << "es" << "en";
+
+    bool ok;
+    QString item = QInputDialog::getItem(nullptr, "QInputDialog::getItem()",
+                                         "Language", items, 0, false, &ok);
+
+    if (ok && !item.isEmpty())
+    {
+        for (int i = 0; i < items.length(); i++)
+        {
+            if (item.compare(items.at(i)) == 0)
+            {
+                QString localeString = codes.at(i);
+                if (settings.value("locale").toString().compare(localeString) != 0)
+                {
+                    settings.setValue("locale", localeString);
+                    settings.sync();
+                    QProcess::startDetached(QApplication::applicationFilePath());
+                    exit(12);
+                }
+                break;
+            }
+        }
+    }
+}

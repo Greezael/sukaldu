@@ -105,7 +105,17 @@
         <translation>--</translation>
     </message>
     <message>
-        <location line="-730"/>
+        <location line="+261"/>
+        <source>Interface</source>
+        <translation>Interfaz</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Change language</source>
+        <translation>Cambiar idioma</translation>
+    </message>
+    <message>
+        <location line="-1003"/>
         <location line="+466"/>
         <location filename="../settingssection.cpp" line="-1"/>
         <source>Ingredients</source>
