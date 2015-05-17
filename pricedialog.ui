@@ -73,14 +73,27 @@
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QLabel" name="price_notes_tag">
+      <widget class="QLabel" name="price_prov_tag">
        <property name="text">
-        <string>Notes</string>
+        <string>Provider</string>
        </property>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QTextEdit" name="price_notes"/>
+      <widget class="QComboBox" name="price_prov">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

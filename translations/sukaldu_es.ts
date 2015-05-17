@@ -55,13 +55,13 @@
     </message>
     <message>
         <location line="-343"/>
-        <location filename="../settingssection.cpp" line="+317"/>
+        <location filename="../settingssection.cpp" line="+318"/>
+        <location line="+76"/>
         <source>New</source>
         <translation>Nuevo</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../productsection.cpp" line="+107"/>
         <source>Notes</source>
         <translation>Notas</translation>
     </message>
@@ -72,14 +72,15 @@
         <location line="+99"/>
         <location line="+234"/>
         <location line="+7"/>
-        <location line="+86"/>
+        <location line="+87"/>
+        <location line="+69"/>
         <location filename="../menusection.cpp" line="+189"/>
         <source>Add</source>
         <translation>Añadir</translation>
     </message>
     <message>
-        <location line="-650"/>
-        <location filename="../settingssection.cpp" line="-292"/>
+        <location line="-720"/>
+        <location filename="../settingssection.cpp" line="-369"/>
         <source>Recipes</source>
         <translation>Recetas</translation>
     </message>
@@ -92,7 +93,7 @@
     <message>
         <location line="+30"/>
         <location line="+392"/>
-        <location filename="../productsection.cpp" line="+0"/>
+        <location filename="../productsection.cpp" line="+110"/>
         <source>Price</source>
         <translation>Precio</translation>
     </message>
@@ -105,7 +106,13 @@
         <translation>--</translation>
     </message>
     <message>
-        <location line="+261"/>
+        <location line="+183"/>
+        <location line="+35"/>
+        <source>Providers</source>
+        <translation>Proveedores</translation>
+    </message>
+    <message>
+        <location line="+121"/>
         <source>Interface</source>
         <translation>Interfaz</translation>
     </message>
@@ -115,7 +122,7 @@
         <translation>Cambiar idioma</translation>
     </message>
     <message>
-        <location line="-1003"/>
+        <location line="-1081"/>
         <location line="+466"/>
         <location filename="../settingssection.cpp" line="-1"/>
         <source>Ingredients</source>
@@ -131,13 +138,14 @@
         <location line="+476"/>
         <location line="+340"/>
         <location line="+40"/>
-        <location line="+75"/>
+        <location line="+80"/>
+        <location line="+65"/>
         <location filename="../menusection.cpp" line="-57"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location line="-446"/>
+        <location line="-516"/>
         <source>Servings</source>
         <translation>Raciones</translation>
     </message>
@@ -185,12 +193,13 @@
     <message>
         <location line="+6"/>
         <location line="+28"/>
-        <location line="+65"/>
+        <location line="+106"/>
+        <location line="+29"/>
         <source>Rename</source>
         <translation>Renombrar</translation>
     </message>
     <message>
-        <location line="-45"/>
+        <location line="-115"/>
         <source>&lt; Category</source>
         <translation>&lt; Categoría</translation>
     </message>
@@ -201,7 +210,7 @@
     </message>
     <message>
         <location line="-803"/>
-        <location line="+822"/>
+        <location line="+892"/>
         <location line="+42"/>
         <source>Units</source>
         <translation>Unidades</translation>
@@ -255,7 +264,7 @@
         <translation>Nuevo Menú</translation>
     </message>
     <message>
-        <location filename="../settingssection.cpp" line="+198"/>
+        <location filename="../settingssection.cpp" line="+199"/>
         <source>Rename Category</source>
         <translation>Renombrar Categoría</translation>
     </message>
@@ -275,7 +284,7 @@
         <translation>Nombre de la subcategoría:</translation>
     </message>
     <message>
-        <location line="+97"/>
+        <location line="+95"/>
         <source>Rename Unit</source>
         <translation>Renombrar Unidad</translation>
     </message>
@@ -283,6 +292,16 @@
         <location line="+1"/>
         <source>Unit abbreviation:</source>
         <translation>Abbreviatura:</translation>
+    </message>
+    <message>
+        <location line="+75"/>
+        <source>Rename Provider</source>
+        <translation>Renombrar Proveedor</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Name:</source>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <location filename="../recipesection.cpp" line="-55"/>
@@ -295,7 +314,7 @@
         <translation>Cantidad</translation>
     </message>
     <message>
-        <location filename="../settingssection.cpp" line="-185"/>
+        <location filename="../settingssection.cpp" line="-259"/>
         <source>New Category</source>
         <translation>Nueva Categoría</translation>
     </message>
@@ -308,6 +327,11 @@
         <location filename="../productsection.cpp" line="-23"/>
         <source>Current</source>
         <translation>Actual</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Provider</source>
+        <translation>Proveedor</translation>
     </message>
     <message>
         <location line="+160"/>
@@ -394,8 +418,8 @@
     </message>
     <message>
         <location line="+23"/>
-        <source>Notes</source>
-        <translation>Notas</translation>
+        <source>Provider</source>
+        <translation>Proveedor</translation>
     </message>
     <message>
         <location filename="../pricedialog.cpp" line="+27"/>
@@ -406,6 +430,11 @@
         <location line="+1"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>None</source>
+        <translation>Ninguno</translation>
     </message>
 </context>
 <context>

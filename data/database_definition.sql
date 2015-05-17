@@ -69,14 +69,22 @@ FOREIGN KEY (subcat) references prod_subcat ON DELETE SET NULL,
 FOREIGN KEY (meas) references prod_meas ON DELETE SET NULL
 )
 
+-- Price provider
+CREATE TABLE price_provider (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR(100)
+)
+
 -- Product prices
 CREATE TABLE prod_price (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 product INTEGER,
 price REAL,
 quantity REAL,
+provider INTEGER,
 notes TEXT,
-FOREIGN KEY (product) references product ON DELETE CASCADE
+FOREIGN KEY (product) references product ON DELETE CASCADE,
+FOREIGN KEY (provider) references price_provider ON DELETE CASCADE
 )
 
 -- Recipes

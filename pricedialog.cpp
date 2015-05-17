@@ -29,23 +29,40 @@ PriceDialog::PriceDialog(int prodIdentifier, int priceIdentifier, QWidget *paren
 
     this->prodId = prodIdentifier;
     this->priceId = priceIdentifier;
+    int providerId = -1;
+
     if (priceId >= 0)
     {
         QSqlQuery query;
-        query.prepare("SELECT price, quantity, notes FROM prod_price WHERE id = :id");
+        query.prepare("SELECT price, quantity, provider FROM prod_price WHERE id = :id");
         query.bindValue(":id", priceId);
         query.exec();
         if (query.next())
         {
             this->ui->price_price->setValue(query.value("price").toDouble());
             this->ui->price_quantity->setValue(query.value("quantity").toDouble());
-            this->ui->price_notes->setText(query.value("notes").toString());
+            providerId = query.value("provider").toInt();
         }
         else
         {
             this->priceId = -1;
         }
     }
+
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM price_provider");
+    query.exec();
+    int selected = 0, index = 1;
+    this->ui->price_prov->addItem(tr("None"), QVariant::fromValue(-1));
+    while (query.next())
+    {
+        this->ui->price_prov->addItem(query.value("name").toString(),
+                                     QVariant::fromValue(query.value("id").toInt()));
+        if (query.value("id").toInt() == providerId)
+            selected = index;
+        index++;
+    }
+    this->ui->price_prov->setCurrentIndex(selected);
 
     QObject::connect(this, SIGNAL(accepted()), this, SLOT(addPrice()));
 }
@@ -65,16 +82,17 @@ void PriceDialog::addPrice()
 
     double price = this->ui->price_price->value();
     double quantity = this->ui->price_quantity->value();
-    QString notes = this->ui->price_notes->toPlainText();
+    int provId = this->ui->price_prov->currentData().toInt();
+    QVariant provV = (provId != -1) ? QVariant::fromValue(provId) : QVariant();
 
     if (this->priceId < 0)
     {
         QSqlQuery query;
-        query.prepare("INSERT INTO prod_price VALUES (NULL, :product, :price, :quantity, :notes )" );
+        query.prepare("INSERT INTO prod_price VALUES (NULL, :product, :price, :quantity, :prov, NULL )" );
         query.bindValue(":product", prodId);
         query.bindValue(":price", price);
         query.bindValue(":quantity", quantity);
-        query.bindValue(":notes", notes);
+        query.bindValue(":prov", provV);
         query.exec();
     }
     else
@@ -83,12 +101,12 @@ void PriceDialog::addPrice()
         query.prepare("UPDATE prod_price SET "
                       "price = :price, "
                       "quantity = :quantity, "
-                      "notes = :notes "
+                      "provider = :prov "
                       "WHERE id = :id");
         query.bindValue(":id", priceId);
         query.bindValue(":price", price);
         query.bindValue(":quantity", quantity);
-        query.bindValue(":notes", notes);
+        query.bindValue(":prov", provV);
         query.exec();
     }
     MainWindow * mainwindow = (MainWindow *) this->parent();

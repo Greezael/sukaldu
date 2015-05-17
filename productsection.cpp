@@ -81,7 +81,10 @@ void MainWindow::updatePriceList()
         currentPrice = query.value("current_price").toInt();
     }
 
-    query.prepare("SELECT id, price / quantity 'cprice', notes FROM prod_price WHERE product = :prodid");
+    query.prepare("SELECT P.id, P.price / P.quantity 'cprice', D.name "
+                  "FROM prod_price P LEFT JOIN price_provider D "
+                  "ON P.provider = D.id "
+                  "WHERE P.product = :prodid");
     query.bindValue(":prodid", QVariant::fromValue(this->currentProduct));
     query.exec();
     rootModel->setColumnCount(3);
@@ -89,7 +92,7 @@ void MainWindow::updatePriceList()
     {
         QList<QStandardItem*> row;
         QStandardItem* price = new QStandardItem(query.value("cprice").toString());
-        QStandardItem* notes = new QStandardItem(query.value("notes").toString());
+        QStandardItem* notes = new QStandardItem(query.value("name").toString());
         QStandardItem* current = new QStandardItem("");
 
         if (query.value("id").toInt() == currentPrice)
@@ -104,7 +107,7 @@ void MainWindow::updatePriceList()
 
     }
 
-    rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Current") << tr("Price") << tr("Notes"));
+    rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Current") << tr("Price") << tr("Provider"));
     this->ui->prod_pricetable->setModel(rootModel);
     updateRecipePrice();
 }

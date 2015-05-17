@@ -33,6 +33,7 @@ void MainWindow::initSettingsPanel()
     set_sectionSelected(0);
 
     resetMeasInfo();
+    resetProvInfo();
 }
 
 void MainWindow::rebuildTrees()
@@ -326,8 +327,6 @@ void MainWindow::set_deleteMeas()
     if (list->selectionModel()->selectedIndexes().empty()) return;
     QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
 
-    QString prefix = getPrefix(currentSection);
-
     QSqlQuery query;
     query.prepare("DELETE FROM prod_meas "
                   "WHERE id = :id");
@@ -356,6 +355,82 @@ void MainWindow::set_renameMeas()
         query.exec();
 
         resetMeasInfo();
+    }
+}
+
+void MainWindow::resetProvInfo()
+{
+    QListView *list= this->ui->set_prov;
+
+    QStandardItemModel * model;
+    if (list->model() != nullptr)
+    {
+        model = (QStandardItemModel *) list->model();
+        model->clear();
+    }
+    else
+    {
+        model = new QStandardItemModel();
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM price_provider");
+    query.exec();
+    while (query.next())
+    {
+        QStandardItem * item = new QStandardItem(query.value("name").toString());
+        item->setData(QVariant::fromValue(query.value("id").toInt()), SK_IdRole);
+        model->appendRow(item);
+    }
+
+    list->setModel(model);
+}
+
+void MainWindow::set_addProv()
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO price_provider "
+                  "VALUES (NULL, :new)");
+    query.bindValue(":new", tr("New"));
+    query.exec();
+
+    resetProvInfo();
+}
+
+void MainWindow::set_deleteProv()
+{
+    QListView * list = this->ui->set_prov;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM price_provider "
+                  "WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    resetProvInfo();
+}
+void MainWindow::set_renameProv()
+{
+    QListView * list = this->ui->set_prov;
+    if (list->selectionModel()->selectedIndexes().empty()) return;
+    QVariant id = list->selectionModel()->selectedIndexes().first().data(SK_IdRole);
+    QString currentName = list->selectionModel()->selectedIndexes().first().data(Qt::DisplayRole).toString();
+
+    bool ok;
+    QString newName = QInputDialog::getText(this, tr("Rename Provider"),
+                                         tr("Name:"), QLineEdit::Normal,
+                                         currentName, &ok);
+    if (ok && !newName.isEmpty())
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE price_provider SET name = :name WHERE id = :id");
+        query.bindValue(":id", id);
+        query.bindValue(":name", newName);
+        query.exec();
+
+        resetProvInfo();
     }
 }
 

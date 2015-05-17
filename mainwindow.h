@@ -136,6 +136,7 @@ private:
     void resetCategoriesInfo();
     void resetSubCategoriesInfo();
     void resetMeasInfo();
+    void resetProvInfo();
 
 public slots:
     void set_sectionSelected(int index);
@@ -150,6 +151,9 @@ public slots:
     void set_addMeas();
     void set_renameMeas();
     void set_deleteMeas();
+    void set_addProv();
+    void set_renameProv();
+    void set_deleteProv();
     void set_changeAppLanguage();
 
 // State
