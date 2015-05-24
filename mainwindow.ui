@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="products">
        <attribute name="title">
@@ -387,8 +387,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>597</width>
-             <height>531</height>
+             <width>382</width>
+             <height>425</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -656,8 +656,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>597</width>
-             <height>531</height>
+             <width>412</width>
+             <height>183</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout_2">
@@ -838,7 +838,7 @@
         <item>
          <widget class="QToolBox" name="toolBox">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="set_categories">
            <property name="geometry">
@@ -934,6 +934,14 @@
            </layout>
           </widget>
           <widget class="QWidget" name="set_providers">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>861</width>
+             <height>430</height>
+            </rect>
+           </property>
            <attribute name="label">
             <string>Providers</string>
            </attribute>
@@ -1008,8 +1016,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>430</height>
+             <width>196</width>
+             <height>156</height>
             </rect>
            </property>
            <attribute name="label">
@@ -1086,8 +1094,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>430</height>
+             <width>158</width>
+             <height>55</height>
             </rect>
            </property>
            <attribute name="label">
