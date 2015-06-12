@@ -43,15 +43,14 @@ OTHER_FILES += \
     data/database_definition.sql \
     data/database_sample.sql
 
-data.path    = $$OUT_PWD/data
-data.files   += \
-    data/database_definition.sql \
-    data/database_sample.sql
+copydata.commands = $(COPY_DIR) $$PWD/data $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
 
-translations.path    = $$OUT_PWD/translations
-translations.files   += \
-    translations/sukaldu_es.qm
-
-INSTALLS       += \
-            data \
-            translations
+copytranslations.commands = $(COPY_DIR) $$PWD/translations $$OUT_PWD
+first.depends = $(first) copytranslations
+export(first.depends)
+export(copytranslations.commands)
+QMAKE_EXTRA_TARGETS += first copytranslations
