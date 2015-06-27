@@ -49,7 +49,7 @@
              <x>0</x>
              <y>0</y>
              <width>597</width>
-             <height>531</height>
+             <height>549</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -387,8 +387,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>382</width>
-             <height>425</height>
+             <width>597</width>
+             <height>549</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -656,8 +656,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>412</width>
-             <height>183</height>
+             <width>597</width>
+             <height>549</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout_2">
@@ -717,12 +717,22 @@
                </widget>
               </item>
               <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;  —  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="menu_price_max_tag">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 0, 0)</string>
                 </property>
                 <property name="text">
                  <string>Most expensive:</string>
@@ -731,8 +741,18 @@
               </item>
               <item>
                <widget class="QLabel" name="menu_price_max">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 0, 0)</string>
+                </property>
                 <property name="text">
                  <string>--</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;  —  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -744,6 +764,9 @@
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 200, 0)</string>
+                </property>
                 <property name="text">
                  <string>Cheapest:</string>
                 </property>
@@ -751,6 +774,9 @@
               </item>
               <item>
                <widget class="QLabel" name="menu_price_min">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 200, 0)</string>
+                </property>
                 <property name="text">
                  <string>--</string>
                 </property>
@@ -846,7 +872,7 @@
              <x>0</x>
              <y>0</y>
              <width>861</width>
-             <height>430</height>
+             <height>467</height>
             </rect>
            </property>
            <attribute name="label">
@@ -938,8 +964,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>430</height>
+             <width>186</width>
+             <height>128</height>
             </rect>
            </property>
            <attribute name="label">
@@ -1016,8 +1042,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>196</width>
-             <height>156</height>
+             <width>186</width>
+             <height>122</height>
             </rect>
            </property>
            <attribute name="label">
@@ -1094,8 +1120,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>158</width>
-             <height>55</height>
+             <width>143</width>
+             <height>46</height>
             </rect>
            </property>
            <attribute name="label">
