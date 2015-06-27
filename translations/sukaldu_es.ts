@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES">
+<TS version="2.1" language="es_ES">
 <context>
     <name>MainWindow</name>
     <message>
@@ -178,7 +178,7 @@
     <message>
         <location line="+20"/>
         <source>Cheapest:</source>
-        <translation>M&apos;as barato:</translation>
+        <translation>Más barato:</translation>
     </message>
     <message>
         <location line="+87"/>
