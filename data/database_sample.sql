@@ -1,9 +1,9 @@
 INSERT INTO sukaldu_db VALUES ('dbversion', 'v1.0')
 
 -- Product measurement
-INSERT INTO prod_meas VALUES (1, 'g')
+INSERT INTO prod_meas VALUES (1, 'gr')
 INSERT INTO prod_meas VALUES (2, 'uds')
-INSERT INTO prod_meas VALUES (3, 'l')
+INSERT INTO prod_meas VALUES (3, 'L')
 
 -- Product categories
 INSERT INTO prod_cat VALUES (1, 'prod_cat1')
