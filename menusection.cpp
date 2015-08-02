@@ -58,6 +58,8 @@ void MainWindow::updateMenuPrice()
     {
         return;
     }
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+
     QSqlQuery query;
     query.prepare("SELECT avg_price, max_price, min_price "
                   "FROM C_menu_price "
@@ -68,9 +70,9 @@ void MainWindow::updateMenuPrice()
     {
         if (!query.value("avg_price").isNull())
         {
-            this->ui->menu_price_avg->setText(query.value("avg_price").toString());
-            this->ui->menu_price_max->setText(query.value("max_price").toString());
-            this->ui->menu_price_min->setText(query.value("min_price").toString());
+            this->ui->menu_price_avg->setText(currencyFormatter(query.value("avg_price")));
+            this->ui->menu_price_max->setText(currencyFormatter(query.value("max_price")));
+            this->ui->menu_price_min->setText(currencyFormatter(query.value("min_price")));
             return;
         }
     }
@@ -236,7 +238,7 @@ void MainWindow::showMenuOption(QVariant roleid)
     {
         QList<QStandardItem*> row;
         QStandardItem* recipeName = new QStandardItem(query.value("name").toString());
-        QStandardItem* recipePrice = new QStandardItem(query.value("price").toString());
+        QStandardItem* recipePrice = new QStandardItem(currencyFormatter(query.value("price")));
         row << recipeName << recipePrice;
         recipeName->setData(query.value("id"), SK_IdRole);
         rootModel->appendRow(row);

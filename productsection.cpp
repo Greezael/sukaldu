@@ -91,7 +91,7 @@ void MainWindow::updatePriceList()
     while (query.next())
     {
         QList<QStandardItem*> row;
-        QStandardItem* price = new QStandardItem(query.value("cprice").toString());
+        QStandardItem* price = new QStandardItem(currencyFormatter(query.value("cprice")));
         QStandardItem* notes = new QStandardItem(query.value("name").toString());
         QStandardItem* current = new QStandardItem("");
 

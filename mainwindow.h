@@ -119,6 +119,7 @@ private:
     void buildTree(SK_Section section);
     void fillCategoryLists(int catId, int subCatId, SK_Section section);
     void deleteItems(SK_Section section);
+    QString currencyFormatter(QVariant value);
 
 public slots:
     void treeItemSelected(const QModelIndex &current, const QModelIndex &previous);
@@ -137,6 +138,7 @@ private:
     void resetSubCategoriesInfo();
     void resetMeasInfo();
     void resetProvInfo();
+    void resetCurrency();
 
 public slots:
     void set_sectionSelected(int index);
@@ -155,6 +157,7 @@ public slots:
     void set_renameProv();
     void set_deleteProv();
     void set_changeAppLanguage();
+    void set_currencyChanged(int id);
 
 // State
 private:

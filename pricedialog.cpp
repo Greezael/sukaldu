@@ -49,7 +49,20 @@ PriceDialog::PriceDialog(int prodIdentifier, int priceIdentifier, QWidget *paren
         }
     }
 
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+    this->ui->price_price_cur->setText(settings.value("currency").toString());
+
     QSqlQuery query;
+    query.prepare("SELECT prod_meas.name FROM product JOIN prod_meas " \
+                  "WHERE product.id = :id " \
+                  "AND product.meas = prod_meas.id");
+    query.bindValue(":id", prodId);
+    query.exec();
+    if (query.next())
+    {
+        this->ui->price_quantity_meas->setText(query.value("name").toString());
+    }
+
     query.prepare("SELECT id, name FROM price_provider");
     query.exec();
     int selected = 0, index = 1;

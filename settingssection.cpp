@@ -34,6 +34,7 @@ void MainWindow::initSettingsPanel()
 
     resetMeasInfo();
     resetProvInfo();
+    resetCurrency();
 }
 
 void MainWindow::rebuildTrees()
@@ -465,4 +466,31 @@ void MainWindow::set_changeAppLanguage()
             }
         }
     }
+}
+
+void MainWindow::resetCurrency()
+{
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+
+    int id = settings.value("currencyId").toInt();
+
+    this->ui->currencyButtonGroup->blockSignals(true);
+    if (this->ui->currencyButtonGroup->button(id) != nullptr) {
+        this->ui->currencyButtonGroup->button(id)->setChecked(true);
+    }
+    this->ui->currencyButtonGroup->blockSignals(false);
+}
+
+void MainWindow::set_currencyChanged(int id)
+{
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+
+    QString currencyString = "";
+    if (id == 1) currencyString = "€";
+    else if (id == 2) currencyString = "$";
+    else if (id == 3) currencyString = this->ui->set_custom_currency->text();
+
+    settings.setValue("currency", currencyString);
+    settings.setValue("currencyId", id);
+    settings.sync();
 }

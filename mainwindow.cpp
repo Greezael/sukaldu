@@ -27,6 +27,10 @@ MainWindow::MainWindow(QWidget *parent) :
     buildRecipeTree();
     buildMenuTree();
 
+    this->ui->currencyButtonGroup->setId(this->ui->set_cur_eur, 1);
+    this->ui->currencyButtonGroup->setId(this->ui->set_cur_usd, 2);
+    this->ui->currencyButtonGroup->setId(this->ui->set_cur_custom, 3);
+
     initSettingsPanel();
 
     makeConnections();
@@ -209,6 +213,20 @@ void MainWindow::makeConnections()
                      SIGNAL(clicked()),
                      this,
                      SLOT(set_changeAppLanguage()));
+    QObject::connect(this->ui->currencyButtonGroup,
+                     SIGNAL(buttonClicked(int)),
+                     this,
+                     SLOT(set_currencyChanged(int)));
+    QObject::connect(this->ui->set_custom_currency, &QLineEdit::editingFinished,
+                    [=]() {
+                        this->ui->currencyButtonGroup->button(3)->setChecked(true);
+                        set_currencyChanged(3);
+                    } );
+    QObject::connect(this->ui->set_custom_currency, &QLineEdit::textChanged,
+                    [=]() {
+                        this->ui->currencyButtonGroup->button(3)->setChecked(true);
+                        set_currencyChanged(3);
+                    } );
 }
 
 

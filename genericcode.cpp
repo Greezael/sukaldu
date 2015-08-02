@@ -345,3 +345,11 @@ void MainWindow::tabChanged(int index)
         break;
     }
 }
+
+QString MainWindow::currencyFormatter(QVariant value)
+{
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+    float val = value.toFloat();
+    return QString::number(val, 'f', 2)\
+            + settings.value("currency").toString();
+}

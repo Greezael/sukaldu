@@ -1120,15 +1120,31 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>143</width>
-             <height>46</height>
+             <width>861</width>
+             <height>467</height>
             </rect>
            </property>
            <attribute name="label">
             <string>Interface</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_7">
-            <item row="0" column="0">
+            <item row="11" column="0">
+             <widget class="QLineEdit" name="set_custom_currency">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
              <widget class="QPushButton" name="set_language">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
@@ -1141,7 +1157,14 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Currency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
              <spacer name="horizontalSpacer_9">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1155,6 +1178,50 @@
              </spacer>
             </item>
             <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Language</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QRadioButton" name="set_cur_eur">
+              <property name="text">
+               <string>€</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">currencyButtonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="10" column="0">
+             <widget class="QRadioButton" name="set_cur_custom">
+              <property name="text">
+               <string>Custom:</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">currencyButtonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QRadioButton" name="set_cur_usd">
+              <property name="text">
+               <string>$</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">currencyButtonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item row="12" column="0">
              <spacer name="verticalSpacer_2">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -1181,4 +1248,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="currencyButtonGroup"/>
+ </buttongroups>
 </ui>

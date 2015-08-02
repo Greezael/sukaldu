@@ -74,7 +74,7 @@ void MainWindow::updateRecipePrice()
     {
         if (!query.value("price").isNull())
         {
-            this->ui->rec_price->setText(query.value("price").toString());
+            this->ui->rec_price->setText(currencyFormatter(query.value("price")));
             return;
         }
     }

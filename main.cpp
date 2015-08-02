@@ -63,6 +63,13 @@ int main(int argc, char *argv[])
         if (translator.load("sukaldu_es", "translations"))
             app.installTranslator(&translator);
 
+    if (settings.value("currency").isNull() ||
+            settings.value("currencyId").isNull())
+    {
+        settings.setValue("currency", "€");
+        settings.setValue("currencyId", 1);
+    }
+
     if (!createConnection(&app))
         return false;
 
