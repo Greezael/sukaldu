@@ -65,6 +65,7 @@ void MainWindow::buildTree(SK_Section section)
         QVariant catId = queryCat.value("id");
         category->setData(QVariant::fromValue((int) SK_Category), SK_TypeRole);
         category->setData(catId, SK_IdRole);
+        category->setForeground(Qt::blue);
         rootModel->appendRow(category);
 
         querySubcat.prepare("SELECT id, name FROM " + prefix + "_subcat "
@@ -78,6 +79,7 @@ void MainWindow::buildTree(SK_Section section)
             QVariant subCatId = querySubcat.value("id");
             subcategory->setData(QVariant::fromValue((int) SK_Subcategory), SK_TypeRole);
             subcategory->setData(subCatId, SK_IdRole);
+            subcategory->setForeground(Qt::blue);
             category->appendRow(subcategory);
 
             queryItem.prepare("SELECT id, name FROM " + itemTable + " "
