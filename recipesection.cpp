@@ -144,16 +144,66 @@ void MainWindow::saveRecipeData()
 
 void MainWindow::insertNewRecipe()
 {
+    QTreeView* tree = this->ui->rec_tree;
+
+    QModelIndexList indexes = tree->selectionModel()->selectedIndexes();
+    QVariant cat;
+    QVariant subcat;
+
+    if (!indexes.isEmpty())
+    {
+        QModelIndex tableIndex = indexes.at(0);
+        QVariant typeSel = tree->model()->itemData(tableIndex)[SK_TypeRole];
+        if (typeSel.toInt() == SK_Category)
+        {
+            cat = tree->model()->itemData(tableIndex)[SK_IdRole];
+        }
+        else if (typeSel.toInt() == SK_Subcategory)
+        {
+            subcat = tree->model()->itemData(tableIndex)[SK_IdRole];
+            QSqlQuery query;
+            query.prepare("SELECT cat FROM recipe_subcat WHERE id = :subcat");
+            query.bindValue(":subcat", subcat);
+            query.exec();
+            if (query.next() && !query.value(0).isNull())
+            {
+                cat = query.value(0);
+            }
+            else
+            {
+                subcat = QVariant();
+            }
+        }
+        else if (typeSel.toInt() == SK_Recipe)
+        {
+            QVariant id = tree->model()->itemData(tableIndex)[SK_IdRole];
+            QSqlQuery query;
+            query.prepare("SELECT cat, subcat FROM recipe WHERE id = :id");
+            query.bindValue(":id", id);
+            query.exec();
+            if (query.next() && !query.value("cat").isNull())
+            {
+                cat = query.value("cat");
+                if (!query.value("subcat").isNull())
+                {
+                    subcat = query.value("subcat");
+                }
+            }
+        }
+    }
+
     QSqlQuery query;
     query.prepare("INSERT INTO recipe VALUES ( "
                   "NULL, "  // Id
                   ":newrecipetext, "  // Name
-                  "NULL, "  // Cat
-                  "NULL, "  // Subcat
+                  ":cat, "  // Cat
+                  ":subcat, "  // Subcat
                   "NULL, "  // preparation
                   "NULL "   // servings
                   ")");
     query.bindValue(":newrecipetext", tr("New Recipe"));
+    query.bindValue(":cat", cat);
+    query.bindValue(":subcat", subcat);
     query.exec();
 
     query.prepare("SELECT last_insert_rowid()");
