@@ -20,25 +20,31 @@
         <location line="-571"/>
         <location line="+337"/>
         <location line="+269"/>
+        <location filename="../statisticssection.cpp" line="+56"/>
+        <location line="+44"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
         <location line="-583"/>
         <location line="+351"/>
-        <location line="+332"/>
+        <location line="+358"/>
+        <location filename="../statisticssection.cpp" line="-44"/>
+        <location line="+44"/>
         <source>Category</source>
         <translation>Categoría</translation>
     </message>
     <message>
-        <location line="-660"/>
+        <location line="-686"/>
         <location line="+351"/>
-        <location line="+332"/>
+        <location line="+358"/>
+        <location filename="../statisticssection.cpp" line="-44"/>
+        <location line="+44"/>
         <source>Subcategory</source>
         <translation>Subcategoría</translation>
     </message>
     <message>
-        <location line="-653"/>
+        <location line="-679"/>
         <source>Prices</source>
         <translation>Precios</translation>
     </message>
@@ -55,7 +61,7 @@
     </message>
     <message>
         <location line="-343"/>
-        <location filename="../settingssection.cpp" line="+318"/>
+        <location filename="../settingssection.cpp" line="+319"/>
         <location line="+76"/>
         <source>New</source>
         <translation>Nuevo</translation>
@@ -70,43 +76,56 @@
         <location line="+81"/>
         <location line="+173"/>
         <location line="+99"/>
-        <location line="+234"/>
+        <location line="+320"/>
         <location line="+7"/>
-        <location line="+87"/>
+        <location line="+95"/>
         <location line="+69"/>
-        <location filename="../menusection.cpp" line="+189"/>
+        <location filename="../menusection.cpp" line="+191"/>
         <source>Add</source>
         <translation>Añadir</translation>
     </message>
     <message>
-        <location line="-720"/>
-        <location filename="../settingssection.cpp" line="-369"/>
+        <location line="-814"/>
+        <location line="+594"/>
+        <location filename="../settingssection.cpp" line="-370"/>
         <source>Recipes</source>
         <translation>Recetas</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="-502"/>
         <location filename="../menusection.cpp" line="+56"/>
         <source>Recipe</source>
         <translation>Receta</translation>
     </message>
     <message>
         <location line="+30"/>
-        <location line="+392"/>
+        <location line="+418"/>
         <location filename="../productsection.cpp" line="+110"/>
+        <location filename="../statisticssection.cpp" line="-44"/>
         <source>Price</source>
         <translation>Precio</translation>
     </message>
     <message>
-        <location line="-385"/>
+        <location line="-411"/>
         <location line="+277"/>
-        <location line="+20"/>
-        <location line="+20"/>
+        <location line="+33"/>
+        <location line="+33"/>
         <source>--</source>
         <translation>--</translation>
     </message>
     <message>
-        <location line="+183"/>
+        <location line="-59"/>
+        <location line="+33"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;  —  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+106"/>
+        <source>Comparative</source>
+        <translation>Comparativa</translation>
+    </message>
+    <message>
+        <location line="+171"/>
         <location line="+35"/>
         <source>Providers</source>
         <translation>Proveedores</translation>
@@ -117,12 +136,27 @@
         <translation>Interfaz</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+28"/>
         <source>Change language</source>
         <translation>Cambiar idioma</translation>
     </message>
     <message>
-        <location line="-1081"/>
+        <location line="+7"/>
+        <source>Currency</source>
+        <translation>Moneda</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Language</source>
+        <translation>Lenguaje</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Custom:</source>
+        <translation>Personalizado:</translation>
+    </message>
+    <message>
+        <location line="-1242"/>
         <location line="+466"/>
         <location filename="../settingssection.cpp" line="-1"/>
         <source>Ingredients</source>
@@ -130,22 +164,22 @@
     </message>
     <message>
         <location line="-427"/>
-        <location filename="../recipesection.cpp" line="+211"/>
+        <location filename="../recipesection.cpp" line="+261"/>
         <source>Ingredient</source>
         <translation>Ingrediente</translation>
     </message>
     <message>
         <location line="+476"/>
-        <location line="+340"/>
+        <location line="+426"/>
         <location line="+40"/>
-        <location line="+80"/>
+        <location line="+88"/>
         <location line="+65"/>
         <location filename="../menusection.cpp" line="-57"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location line="-516"/>
+        <location line="-610"/>
         <source>Servings</source>
         <translation>Raciones</translation>
     </message>
@@ -156,12 +190,13 @@
     </message>
     <message>
         <location line="+15"/>
+        <location line="+298"/>
         <location filename="../settingssection.cpp" line="+2"/>
         <source>Menus</source>
         <translation>Menús</translation>
     </message>
     <message>
-        <location line="+89"/>
+        <location line="-209"/>
         <source>Menu</source>
         <translation>Menú</translation>
     </message>
@@ -171,17 +206,17 @@
         <translation>Medio:</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+30"/>
         <source>Most expensive:</source>
         <translation>Más caro:</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+33"/>
         <source>Cheapest:</source>
         <translation>Más barato:</translation>
     </message>
     <message>
-        <location line="+87"/>
+        <location line="+150"/>
         <source>Settings</source>
         <translation>Opciones</translation>
     </message>
@@ -193,13 +228,13 @@
     <message>
         <location line="+6"/>
         <location line="+28"/>
-        <location line="+106"/>
+        <location line="+114"/>
         <location line="+29"/>
         <source>Rename</source>
         <translation>Renombrar</translation>
     </message>
     <message>
-        <location line="-115"/>
+        <location line="-123"/>
         <source>&lt; Category</source>
         <translation>&lt; Categoría</translation>
     </message>
@@ -209,14 +244,14 @@
         <translation>Subcategoría &gt;</translation>
     </message>
     <message>
-        <location line="-803"/>
-        <location line="+892"/>
+        <location line="-889"/>
+        <location line="+986"/>
         <location line="+42"/>
         <source>Units</source>
         <translation>Unidades</translation>
     </message>
     <message>
-        <location filename="../genericcode.cpp" line="+199"/>
+        <location filename="../genericcode.cpp" line="+201"/>
         <location line="+64"/>
         <location filename="../productsection.cpp" line="+23"/>
         <source>None</source>
@@ -259,12 +294,12 @@
         <translation>Nombre:</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+72"/>
         <source>New Menu</source>
         <translation>Nuevo Menú</translation>
     </message>
     <message>
-        <location filename="../settingssection.cpp" line="+199"/>
+        <location filename="../settingssection.cpp" line="+200"/>
         <source>Rename Category</source>
         <translation>Renombrar Categoría</translation>
     </message>
@@ -304,12 +339,12 @@
         <translation>Nombre:</translation>
     </message>
     <message>
-        <location filename="../recipesection.cpp" line="-55"/>
+        <location filename="../recipesection.cpp" line="-57"/>
         <source>New Recipe</source>
         <translation>Nueva Receta</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+57"/>
         <source>Quantity</source>
         <translation>Cantidad</translation>
     </message>
@@ -334,7 +369,7 @@
         <translation>Proveedor</translation>
     </message>
     <message>
-        <location line="+160"/>
+        <location line="+208"/>
         <source>New Ingredient</source>
         <translation>Nuevo Ingrediente</translation>
     </message>
@@ -351,6 +386,21 @@
         <location line="+2"/>
         <source>Reset</source>
         <translation>Restaurar</translation>
+    </message>
+    <message>
+        <location filename="../statisticssection.cpp" line="+44"/>
+        <source>Average</source>
+        <translation>Medio</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Most expensive</source>
+        <translation>Más caro</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Cheapest</source>
+        <translation>Más barato</translation>
     </message>
 </context>
 <context>
@@ -407,17 +457,17 @@
         <translation>Nuevo Precio</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+34"/>
         <source>Price paid</source>
         <translation>Precio</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="-27"/>
         <source>Quantity</source>
         <translation>Cantidad</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+20"/>
         <source>Provider</source>
         <translation>Proveedor</translation>
     </message>
@@ -432,7 +482,7 @@
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+41"/>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>

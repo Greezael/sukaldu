@@ -126,6 +126,13 @@ public slots:
     void catSelected(int index, SK_Section section);
     void tabChanged(int index);
 
+// Statistics related
+private:
+    void sta_loadTableRecipe();
+    void sta_loadTableMenu();
+public slots:
+    void sta_loadTables();
+
 
 // Settings related
 private:

@@ -856,6 +856,66 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="statistics">
+       <attribute name="title">
+        <string>Comparative</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="0">
+         <widget class="QToolBox" name="toolBox_2">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="page">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>861</width>
+             <height>523</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>Menus</string>
+           </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QTableView" name="sta_menu">
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+           <zorder>sta_menu</zorder>
+           <zorder>sta_recipe</zorder>
+          </widget>
+          <widget class="QWidget" name="page_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>861</width>
+             <height>523</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>Recipes</string>
+           </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QTableView" name="sta_recipe">
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="config">
        <attribute name="title">
         <string>Settings</string>
@@ -1194,7 +1254,7 @@
             <item row="5" column="0">
              <widget class="QRadioButton" name="set_cur_eur">
               <property name="text">
-               <string>€</string>
+               <string notr="true">€</string>
               </property>
               <attribute name="buttonGroup">
                <string notr="true">currencyButtonGroup</string>
@@ -1214,7 +1274,7 @@
             <item row="7" column="0">
              <widget class="QRadioButton" name="set_cur_usd">
               <property name="text">
-               <string>$</string>
+               <string notr="true">$</string>
               </property>
               <attribute name="buttonGroup">
                <string notr="true">currencyButtonGroup</string>
