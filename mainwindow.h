@@ -146,6 +146,7 @@ private:
     void resetMeasInfo();
     void resetProvInfo();
     void resetCurrency();
+    void resetAdvancedOpts();
 
 public slots:
     void set_sectionSelected(int index);
@@ -165,6 +166,7 @@ public slots:
     void set_deleteProv();
     void set_changeAppLanguage();
     void set_currencyChanged(int id);
+    void set_advancedOptsChanged(bool state);
 
 // State
 private:

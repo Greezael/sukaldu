@@ -35,6 +35,7 @@ void MainWindow::initSettingsPanel()
     resetMeasInfo();
     resetProvInfo();
     resetCurrency();
+    resetAdvancedOpts();
 }
 
 void MainWindow::rebuildTrees()
@@ -492,5 +493,24 @@ void MainWindow::set_currencyChanged(int id)
 
     settings.setValue("currency", currencyString);
     settings.setValue("currencyId", id);
+    settings.sync();
+}
+
+void MainWindow::resetAdvancedOpts()
+{
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+
+    bool enabled = settings.value("enableAdvMenuOpts").toBool();
+
+    this->ui->set_adv_menu->blockSignals(true);
+    this->ui->set_adv_menu->setChecked(enabled);
+    this->ui->set_adv_menu->blockSignals(false);
+}
+
+void MainWindow::set_advancedOptsChanged(bool state)
+{
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+
+    settings.setValue("enableAdvMenuOpts", state);
     settings.sync();
 }

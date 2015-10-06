@@ -227,6 +227,10 @@ void MainWindow::makeConnections()
                         this->ui->currencyButtonGroup->button(3)->setChecked(true);
                         set_currencyChanged(3);
                     } );
+    QObject::connect(this->ui->set_adv_menu,
+                     SIGNAL(toggled(bool)),
+                     this,
+                     SLOT(set_advancedOptsChanged(bool)));
 }
 
 
