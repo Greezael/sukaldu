@@ -44,14 +44,13 @@ OTHER_FILES += \
     data/database_definition.sql \
     data/database_sample.sql
 
-copydata.commands = $(COPY_DIR) $$PWD/data $$OUT_PWD
-first.depends = $(first) copydata
-export(first.depends)
-export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
+!win32 {
+    copydata.commands = $(COPY_DIR) $$PWD/data $$OUT_PWD
+    copytranslations.commands = $(COPY_DIR) $$PWD/translations $$OUT_PWD
 
-copytranslations.commands = $(COPY_DIR) $$PWD/translations $$OUT_PWD
-first.depends = $(first) copytranslations
-export(first.depends)
-export(copytranslations.commands)
-QMAKE_EXTRA_TARGETS += first copytranslations
+    first.depends = $(first) copydata copytranslations
+    export(first.depends)
+    export(copydata.commands)
+    export(copytranslations.commands)
+    QMAKE_EXTRA_TARGETS += first copydata copytranslations
+}
