@@ -719,7 +719,7 @@
               <item>
                <widget class="QLabel" name="label">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;  —  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string notr="true">—</string>
                 </property>
                </widget>
               </item>
@@ -752,7 +752,7 @@
               <item>
                <widget class="QLabel" name="label_2">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;  —  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string notr="true">—</string>
                 </property>
                </widget>
               </item>
@@ -902,8 +902,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>523</height>
+             <width>88</width>
+             <height>88</height>
             </rect>
            </property>
            <attribute name="label">
@@ -1196,8 +1196,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>861</width>
-             <height>439</height>
+             <width>224</width>
+             <height>201</height>
             </rect>
            </property>
            <attribute name="label">
@@ -1313,6 +1313,14 @@
            </layout>
           </widget>
           <widget class="QWidget" name="set_advanced">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>277</width>
+             <height>44</height>
+            </rect>
+           </property>
            <attribute name="label">
             <string>Advanced</string>
            </attribute>

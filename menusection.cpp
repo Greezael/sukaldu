@@ -137,6 +137,9 @@ void MainWindow::resetMenuData()
 
 void MainWindow::fillMenuOptions()
 {
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+    bool advanced = settings.value("enableAdvMenuOpts").toBool();
+
     cleanMenuOptions();
 
     menuOptions.clear();
@@ -163,7 +166,10 @@ void MainWindow::fillMenuOptions()
     QObject::connect(addButton, &QPushButton::clicked, [=]() {this->addOption();});
 
     buttonBox->addSpacerItem(spacer);
-    buttonBox->addWidget(addButton);
+    if (advanced)
+    {
+        buttonBox->addWidget(addButton);
+    }
 
     layout->addRow(buttonBox);
 
@@ -181,6 +187,9 @@ void MainWindow::reloadMenuOptions()
 
 void MainWindow::showMenuOption(QVariant roleid)
 {
+    QSettings settings("Sukaldu-dev", "Sukaldu");
+    bool advanced = settings.value("enableAdvMenuOpts").toBool();
+
     QFormLayout *layout = (QFormLayout *) this->ui->menu_scroll_contents->layout();
 
     QLabel *optionLabel = new QLabel(tr("Option"));
@@ -194,8 +203,11 @@ void MainWindow::showMenuOption(QVariant roleid)
 
     layout->addRow(optionLabel, tableView);
 
-    buttonBox->addWidget(remOptButton);
-    buttonBox->addWidget(renOptButton);
+    if (advanced)
+    {
+        buttonBox->addWidget(remOptButton);
+        buttonBox->addWidget(renOptButton);
+    }
     buttonBox->addSpacerItem(spacer);
     buttonBox->addWidget(remButton);
     buttonBox->addWidget(addButton);
@@ -231,7 +243,6 @@ void MainWindow::showMenuOption(QVariant roleid)
     query.bindValue(":menuid", currentMenu);
     query.bindValue(":role", roleid);
     query.exec();
-    std::cout << query.lastError().text().toStdString() << std::endl;
     rootModel->setColumnCount(2);
 
     while (query.next())
@@ -474,10 +485,38 @@ void MainWindow::insertNewMenu()
 
     query.prepare("SELECT last_insert_rowid()");
     query.exec();
+    int newMenuId = -1;
     if (query.next())
     {
-        menuSelected(query.value(0).toInt());
+        newMenuId = query.value(0).toInt();
     }
+
+    if (newMenuId >= 0)
+    {
+        QSqlQuery query;
+        query.prepare("INSERT INTO menu_role VALUES (NULL, :menuId, :newopttext) ");
+        query.bindValue(":newopttext", tr("Entree"));
+        query.bindValue(":menuId", newMenuId);
+        query.exec();
+
+        query.prepare("INSERT INTO menu_role VALUES (NULL, :menuId, :newopttext) ");
+        query.bindValue(":newopttext", tr("First"));
+        query.bindValue(":menuId", newMenuId);
+        query.exec();
+
+        query.prepare("INSERT INTO menu_role VALUES (NULL, :menuId, :newopttext) ");
+        query.bindValue(":newopttext", tr("Second"));
+        query.bindValue(":menuId", newMenuId);
+        query.exec();
+
+        query.prepare("INSERT INTO menu_role VALUES (NULL, :menuId, :newopttext) ");
+        query.bindValue(":newopttext", tr("Dessert"));
+        query.bindValue(":menuId", newMenuId);
+        query.exec();
+
+        menuSelected(newMenuId);
+    }
+
     buildMenuTree();
 }
 

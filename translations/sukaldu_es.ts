@@ -61,7 +61,7 @@
     </message>
     <message>
         <location line="-343"/>
-        <location filename="../settingssection.cpp" line="+319"/>
+        <location filename="../settingssection.cpp" line="+320"/>
         <location line="+76"/>
         <source>New</source>
         <translation>Nuevo</translation>
@@ -76,24 +76,24 @@
         <location line="+81"/>
         <location line="+173"/>
         <location line="+99"/>
-        <location line="+320"/>
+        <location line="+336"/>
         <location line="+7"/>
         <location line="+95"/>
         <location line="+69"/>
-        <location filename="../menusection.cpp" line="+191"/>
+        <location filename="../menusection.cpp" line="+200"/>
         <source>Add</source>
         <translation>Añadir</translation>
     </message>
     <message>
-        <location line="-814"/>
-        <location line="+594"/>
-        <location filename="../settingssection.cpp" line="-370"/>
+        <location line="-830"/>
+        <location line="+601"/>
+        <location filename="../settingssection.cpp" line="-371"/>
         <source>Recipes</source>
         <translation>Recetas</translation>
     </message>
     <message>
-        <location line="-502"/>
-        <location filename="../menusection.cpp" line="+56"/>
+        <location line="-509"/>
+        <location filename="../menusection.cpp" line="+58"/>
         <source>Recipe</source>
         <translation>Receta</translation>
     </message>
@@ -114,18 +114,12 @@
         <translation>--</translation>
     </message>
     <message>
-        <location line="-59"/>
-        <location line="+33"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;  —  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+106"/>
+        <location line="+80"/>
         <source>Comparative</source>
         <translation>Comparativa</translation>
     </message>
     <message>
-        <location line="+171"/>
+        <location line="+187"/>
         <location line="+35"/>
         <source>Providers</source>
         <translation>Proveedores</translation>
@@ -156,7 +150,17 @@
         <translation>Personalizado:</translation>
     </message>
     <message>
-        <location line="-1242"/>
+        <location line="+42"/>
+        <source>Advanced</source>
+        <translation>Avanzado</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Enable advanced menu configuration</source>
+        <translation>Habilitar opciones avanzadas para menús</translation>
+    </message>
+    <message>
+        <location line="-1306"/>
         <location line="+466"/>
         <location filename="../settingssection.cpp" line="-1"/>
         <source>Ingredients</source>
@@ -170,16 +174,16 @@
     </message>
     <message>
         <location line="+476"/>
-        <location line="+426"/>
+        <location line="+442"/>
         <location line="+40"/>
         <location line="+88"/>
         <location line="+65"/>
-        <location filename="../menusection.cpp" line="-57"/>
+        <location filename="../menusection.cpp" line="-59"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location line="-610"/>
+        <location line="-626"/>
         <source>Servings</source>
         <translation>Raciones</translation>
     </message>
@@ -216,7 +220,7 @@
         <translation>Más barato:</translation>
     </message>
     <message>
-        <location line="+150"/>
+        <location line="+166"/>
         <source>Settings</source>
         <translation>Opciones</translation>
     </message>
@@ -244,8 +248,8 @@
         <translation>Subcategoría &gt;</translation>
     </message>
     <message>
-        <location line="-889"/>
-        <location line="+986"/>
+        <location line="-905"/>
+        <location line="+1002"/>
         <location line="+42"/>
         <source>Units</source>
         <translation>Unidades</translation>
@@ -258,12 +262,12 @@
         <translation>Ninguna</translation>
     </message>
     <message>
-        <location filename="../menusection.cpp" line="-28"/>
+        <location filename="../menusection.cpp" line="-34"/>
         <source>Add Option</source>
         <translation>Añadir Opción</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+30"/>
         <source>Option</source>
         <translation>Opción</translation>
     </message>
@@ -274,7 +278,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <location line="+204"/>
+        <location line="+206"/>
         <source>Rename Option</source>
         <translation>Renombrar Opción</translation>
     </message>
@@ -299,7 +303,27 @@
         <translation>Nuevo Menú</translation>
     </message>
     <message>
-        <location filename="../settingssection.cpp" line="+200"/>
+        <location line="+17"/>
+        <source>Entree</source>
+        <translation>Entrante</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>First</source>
+        <translation>Primero</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Second</source>
+        <translation>Segundo</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Dessert</source>
+        <translation>Postre</translation>
+    </message>
+    <message>
+        <location filename="../settingssection.cpp" line="+201"/>
         <source>Rename Category</source>
         <translation>Renombrar Categoría</translation>
     </message>
