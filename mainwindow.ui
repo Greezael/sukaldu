@@ -21,6 +21,9 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="products">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(181, 255, 146);</string>
+       </property>
        <attribute name="title">
         <string>Ingredients</string>
        </attribute>
@@ -305,6 +308,9 @@
        </layout>
       </widget>
       <widget class="QWidget" name="recipes">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 205, 105);</string>
+       </property>
        <attribute name="title">
         <string>Recipes</string>
        </attribute>
@@ -577,6 +583,9 @@
        </layout>
       </widget>
       <widget class="QWidget" name="menus">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(170, 255, 255);</string>
+       </property>
        <attribute name="title">
         <string>Menus</string>
        </attribute>
