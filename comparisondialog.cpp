@@ -9,12 +9,19 @@ ComparisonDialog::ComparisonDialog(QWidget *parent) :
 {
     this->setAttribute(Qt::WA_DeleteOnClose, true);
     ui->setupUi(this);
+
+    MainWindow * mainwindow = (MainWindow *) this->parent();
+    if (!mainwindow->compDialogGeometry.isEmpty())
+    {
+        this->setGeometry(mainwindow->compDialogGeometry);
+    }
 }
 
 ComparisonDialog::~ComparisonDialog()
 {
     MainWindow * mainwindow = (MainWindow *) this->parent();
     mainwindow->compDialog = nullptr;
+    mainwindow->compDialogGeometry = this->geometry();
 
     delete ui;
 }

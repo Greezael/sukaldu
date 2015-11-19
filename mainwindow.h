@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QAbstractButton>
+#include <QRect>
 
 #include "comparisondialog.h"
 
@@ -131,6 +132,7 @@ public slots:
 // Statistics related
 public:
     ComparisonDialog * compDialog;
+    QRect compDialogGeometry;
 private:
     void sta_loadTableRecipe();
     void sta_loadTableMenu();
