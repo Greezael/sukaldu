@@ -24,18 +24,21 @@ SOURCES += main.cpp\
     recipedialog.cpp \
     menudialog.cpp \
     settingssection.cpp \
-    statisticssection.cpp
+    statisticssection.cpp \
+    comparisondialog.cpp
 
 HEADERS  += mainwindow.h \
     connection.h \
     pricedialog.h \
     recipedialog.h \
-    menudialog.h
+    menudialog.h \
+    comparisondialog.h
 
 FORMS    += mainwindow.ui \
     pricedialog.ui \
     recipedialog.ui \
-    menudialog.ui
+    menudialog.ui \
+    comparisondialog.ui
 
 TRANSLATIONS = \
     translations/sukaldu_es.ts

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QAbstractButton>
 
+#include "comparisondialog.h"
+
 enum SK_CustomRole {
     SK_IdRole = Qt::UserRole + 1,
     SK_TypeRole
@@ -127,11 +129,14 @@ public slots:
     void tabChanged(int index);
 
 // Statistics related
+public:
+    ComparisonDialog * compDialog;
 private:
     void sta_loadTableRecipe();
     void sta_loadTableMenu();
 public slots:
     void sta_loadTables();
+    void toggleComparisonDialog();
 
 
 // Settings related

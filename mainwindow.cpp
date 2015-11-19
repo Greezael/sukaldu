@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     initSettingsPanel();
 
+    compDialog = nullptr;
+
     makeConnections();
 }
 
@@ -231,8 +233,27 @@ void MainWindow::makeConnections()
                      SIGNAL(toggled(bool)),
                      this,
                      SLOT(set_advancedOptsChanged(bool)));
+
+    QObject::connect(this->ui->togglecomparison,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(toggleComparisonDialog()));
 }
 
+void MainWindow::toggleComparisonDialog()
+{
+    if (compDialog == nullptr)
+    {
+        compDialog = new ComparisonDialog(this);
+        compDialog->setModal(false);
+        compDialog->show();
 
+        sta_loadTables();
+    }
+    else
+    {
+        compDialog->close();
+    }
+}
 
 

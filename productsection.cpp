@@ -212,6 +212,7 @@ void MainWindow::saveProductData()
 
     productSelected(currentProduct);
     buildProductTree();
+    sta_loadTables();
 }
 
 void MainWindow::setCurrentPrice()
@@ -228,6 +229,7 @@ void MainWindow::setCurrentPrice()
         query.exec();
 
         updatePriceList();
+        sta_loadTables();
     }
 }
 
@@ -252,6 +254,7 @@ void MainWindow::deletePrice()
     if (deleted)
     {
         updatePriceList();
+        sta_loadTables();
     }
 }
 

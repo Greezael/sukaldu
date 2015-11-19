@@ -113,6 +113,7 @@ void MainWindow::saveMenuData()
 
     menuSelected(currentMenu);
     buildMenuTree();
+    sta_loadTables();
 }
 
 void MainWindow::generalMenuButtonClicked(QAbstractButton *button)
@@ -393,6 +394,7 @@ void MainWindow::removeOption(int row)
 
     this->reloadMenuOptions();
     this->updateMenuPrice();
+    sta_loadTables();
 }
 
 
@@ -518,10 +520,12 @@ void MainWindow::insertNewMenu()
     }
 
     buildMenuTree();
+    sta_loadTables();
 }
 
 
 void MainWindow::deleteMenu()
 {
     deleteItems(SK_S_MENU);
+    sta_loadTables();
 }

@@ -140,6 +140,7 @@ void MainWindow::saveRecipeData()
 
     recipeSelected(currentRecipe);
     buildRecipeTree();
+    sta_loadTables();
 }
 
 void MainWindow::insertNewRecipe()
@@ -213,12 +214,14 @@ void MainWindow::insertNewRecipe()
         recipeSelected(query.value(0).toInt());
     }
     buildRecipeTree();
+    sta_loadTables();
 }
 
 
 void MainWindow::deleteRecipe()
 {
     deleteItems(SK_S_REC);
+    sta_loadTables();
 }
 
 void MainWindow::updateIngredientsList()
@@ -306,5 +309,6 @@ void MainWindow::removeProduct()
     if (deleted)
     {
         updateIngredientsList();
+        sta_loadTables();
     }
 }

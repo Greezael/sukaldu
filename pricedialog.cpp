@@ -124,4 +124,5 @@ void PriceDialog::addPrice()
     }
     MainWindow * mainwindow = (MainWindow *) this->parent();
     mainwindow->updatePriceList();
+    mainwindow->sta_loadTables();
 }

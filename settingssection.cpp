@@ -494,6 +494,8 @@ void MainWindow::set_currencyChanged(int id)
     settings.setValue("currency", currencyString);
     settings.setValue("currencyId", id);
     settings.sync();
+
+    sta_loadTables();
 }
 
 void MainWindow::resetAdvancedOpts()

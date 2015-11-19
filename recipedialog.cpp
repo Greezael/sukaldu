@@ -216,4 +216,5 @@ void RecipeDialog::addRecipe()
 
     MainWindow * mainwindow = (MainWindow *) this->parent();
     mainwindow->updateIngredientsList();
+    mainwindow->sta_loadTables();
 }

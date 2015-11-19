@@ -16,10 +16,11 @@ void MainWindow::sta_loadTables()
 
 void MainWindow::sta_loadTableRecipe()
 {
+    if (compDialog == nullptr) return;
     QStandardItemModel * rootModel;
-    if (this->ui->sta_recipe->model() != NULL)
+    if (compDialog->ui->sta_recipe->model() != NULL)
     {
-        rootModel = (QStandardItemModel *) this->ui->sta_recipe->model();
+        rootModel = (QStandardItemModel *) compDialog->ui->sta_recipe->model();
         rootModel->clear();
     }
     else
@@ -54,15 +55,17 @@ void MainWindow::sta_loadTableRecipe()
     }
 
     rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Name") << tr("Price") << tr("Category") << tr("Subcategory"));
-    this->ui->sta_recipe->setModel(rootModel);
+    compDialog->ui->sta_recipe->setModel(rootModel);
 }
 
 void MainWindow::sta_loadTableMenu()
 {
+    if (compDialog == nullptr) return;
+
     QStandardItemModel * rootModel;
-    if (this->ui->sta_menu->model() != NULL)
+    if (compDialog->ui->sta_menu->model() != NULL)
     {
-        rootModel = (QStandardItemModel *) this->ui->sta_menu->model();
+        rootModel = (QStandardItemModel *) compDialog->ui->sta_menu->model();
         rootModel->clear();
     }
     else
@@ -98,5 +101,5 @@ void MainWindow::sta_loadTableMenu()
     }
 
     rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Name") << tr("Average") << tr("Most expensive") << tr("Cheapest") << tr("Category") << tr("Subcategory"));
-    this->ui->sta_menu->setModel(rootModel);
+    compDialog->ui->sta_menu->setModel(rootModel);
 }

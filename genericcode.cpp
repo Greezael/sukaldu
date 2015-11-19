@@ -345,9 +345,6 @@ void MainWindow::tabChanged(int index)
     case 2:
         menuSelected(currentMenu);
         break;
-    case 3:
-        sta_loadTables();
-        break;
     }
 }
 
