@@ -12,6 +12,8 @@ void MainWindow::sta_loadTables()
 {
     sta_loadTableMenu();
     sta_loadTableRecipe();
+    sta_loadMenuFilter();
+    sta_loadRecipeFilter();
 }
 
 void MainWindow::sta_loadTableRecipe()
@@ -30,6 +32,15 @@ void MainWindow::sta_loadTableRecipe()
 
     QSqlQuery query;
 
+    QString filterString;
+    if (!recipeFilterId.isNull()
+        && recipeFilterId.toInt() >= 0)
+    {
+        filterString = "LEFT JOIN recipe_product RPD "
+                "ON P.id = RPD.recipe "
+                "WHERE RPD.product = :filterId";
+    }
+
     query.prepare("SELECT P.id, P.name, RP.price, C.name 'cat', SC.name 'subcat' "
                   "FROM recipe P "
                   "JOIN C_recipe_price RP "
@@ -37,10 +48,24 @@ void MainWindow::sta_loadTableRecipe()
                   "LEFT JOIN recipe_cat C "
                   "ON C.id = P.cat "
                   "LEFT JOIN recipe_subcat SC "
-                  "ON SC.id = P.subcat "
+                  "ON SC.id = P.subcat " +
+                  filterString
                   );
+
+    if (!filterString.isEmpty())
+    {
+        query.bindValue(":filterId", recipeFilterId.toInt());
+    }
     query.exec();
-//    rootModel->setColumnCount(2);
+
+    if (query.lastError().type() != QSqlError::NoError)
+    {
+        std::cerr << "ERROR: " << query.lastError().text().toUtf8().constData() << std::endl;
+        std::cerr << "IN QUERY: " << std::endl;
+        std::cerr << QString(query.lastQuery()).toStdString() << std::endl;
+        std::cerr << "--------" << std::endl;
+    }
+
     while (query.next())
     {
         QList<QStandardItem*> row;
@@ -75,6 +100,15 @@ void MainWindow::sta_loadTableMenu()
 
     QSqlQuery query;
 
+    QString filterString;
+    if (!menuFilterId.isNull()
+        && menuFilterId.toInt() >= 0)
+    {
+        filterString = "LEFT JOIN menu_recipe MR "
+                "ON M.id = MR.menu "
+                "WHERE MR.recipe = :filterId";
+    }
+
     query.prepare("SELECT M.id, M.name, MP.min_price, MP.avg_price, MP.max_price, C.name 'cat', SC.name 'subcat' "
                   "FROM menu M "
                   "JOIN C_menu_price MP "
@@ -82,9 +116,15 @@ void MainWindow::sta_loadTableMenu()
                   "LEFT JOIN menu_cat C "
                   "ON C.id = M.cat "
                   "LEFT JOIN menu_subcat SC "
-                  "ON SC.id = M.subcat "
+                  "ON SC.id = M.subcat " +
+                  filterString
                   );
+    if (!filterString.isEmpty())
+    {
+        query.bindValue(":filterId", menuFilterId.toInt());
+    }
     query.exec();
+
     while (query.next())
     {
         QList<QStandardItem*> row;
@@ -102,4 +142,70 @@ void MainWindow::sta_loadTableMenu()
 
     rootModel->setHorizontalHeaderLabels(QList<QString>() << tr("Name") << tr("Average") << tr("Most expensive") << tr("Cheapest") << tr("Category") << tr("Subcategory"));
     compDialog->ui->sta_menu->setModel(rootModel);
+}
+
+void MainWindow::sta_loadMenuFilter()
+{
+    QComboBox *rec;
+    rec = compDialog->ui->sta_menu_filter;
+
+    rec->blockSignals(true);
+    rec->clear();
+
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM recipe ");
+    query.exec();
+    rec->addItem(tr("Any"), QVariant::fromValue(-1));
+    int selected = 0, counter = 0;
+    while (query.next())
+    {
+        QVariant id = QVariant::fromValue(query.value("id").toInt());
+        rec->addItem(query.value("name").toString(), id);
+        counter++;
+        if (menuFilterId == id)
+        {
+            selected = counter;
+        }
+    }
+    rec->blockSignals(false);
+    rec->setCurrentIndex(selected);
+}
+
+void MainWindow::sta_loadRecipeFilter()
+{
+    QComboBox *rec;
+    rec = compDialog->ui->sta_recipe_filter;
+
+    rec->blockSignals(true);
+    rec->clear();
+
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM product ");
+    query.exec();
+    rec->addItem(tr("Any"), QVariant::fromValue(-1));
+    int selected = 0, counter = 0;
+    while (query.next())
+    {
+        QVariant id = QVariant::fromValue(query.value("id").toInt());
+        rec->addItem(query.value("name").toString(), id);
+        counter++;
+        if (recipeFilterId == id)
+        {
+            selected = counter;
+        }
+    }
+    rec->blockSignals(false);
+    rec->setCurrentIndex(selected);
+}
+
+void MainWindow::sta_menuFilterSelected(int index)
+{
+    menuFilterId = compDialog->ui->sta_menu_filter->currentData();
+    sta_loadTableMenu();
+}
+
+void MainWindow::sta_recipeFilterSelected(int index)
+{
+    recipeFilterId = compDialog->ui->sta_recipe_filter->currentData();
+    sta_loadTableRecipe();
 }

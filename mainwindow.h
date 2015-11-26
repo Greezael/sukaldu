@@ -134,11 +134,17 @@ public:
     ComparisonDialog * compDialog;
     QRect compDialogGeometry;
 private:
+    QVariant menuFilterId;
+    QVariant recipeFilterId;
     void sta_loadTableRecipe();
     void sta_loadTableMenu();
+    void sta_loadMenuFilter();
+    void sta_loadRecipeFilter();
 public slots:
     void sta_loadTables();
     void toggleComparisonDialog();
+    void sta_menuFilterSelected(int index);
+    void sta_recipeFilterSelected(int index);
 
 
 // Settings related

@@ -14,9 +14,19 @@
         <translation>Menús</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+28"/>
+        <source>Filter by recipe</source>
+        <translation>Filtrar por receta</translation>
+    </message>
+    <message>
+        <location line="+19"/>
         <source>Recipes</source>
         <translation>Recetas</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Filter by ingredient</source>
+        <translation>Filtrar por ingrediente</translation>
     </message>
 </context>
 <context>
@@ -38,8 +48,8 @@
         <location line="-577"/>
         <location line="+340"/>
         <location line="+272"/>
-        <location filename="../statisticssection.cpp" line="+57"/>
-        <location line="+46"/>
+        <location filename="../statisticssection.cpp" line="+82"/>
+        <location line="+61"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
@@ -47,8 +57,8 @@
         <location line="-589"/>
         <location line="+354"/>
         <location line="+361"/>
-        <location filename="../statisticssection.cpp" line="-46"/>
-        <location line="+46"/>
+        <location filename="../statisticssection.cpp" line="-61"/>
+        <location line="+61"/>
         <source>Category</source>
         <translation>Categoría</translation>
     </message>
@@ -56,8 +66,8 @@
         <location line="-692"/>
         <location line="+354"/>
         <location line="+361"/>
-        <location filename="../statisticssection.cpp" line="-46"/>
-        <location line="+46"/>
+        <location filename="../statisticssection.cpp" line="-61"/>
+        <location line="+61"/>
         <source>Subcategory</source>
         <translation>Subcategoría</translation>
     </message>
@@ -118,7 +128,7 @@
         <location line="+30"/>
         <location line="+421"/>
         <location filename="../productsection.cpp" line="+110"/>
-        <location filename="../statisticssection.cpp" line="-46"/>
+        <location filename="../statisticssection.cpp" line="-61"/>
         <source>Price</source>
         <translation>Precio</translation>
     </message>
@@ -428,7 +438,7 @@
         <translation>Restaurar</translation>
     </message>
     <message>
-        <location filename="../statisticssection.cpp" line="+46"/>
+        <location filename="../statisticssection.cpp" line="+61"/>
         <source>Average</source>
         <translation>Medio</translation>
     </message>
@@ -441,6 +451,12 @@
         <location line="+0"/>
         <source>Cheapest</source>
         <translation>Más barato</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location line="+27"/>
+        <source>Any</source>
+        <translation>Cualquiera</translation>
     </message>
 </context>
 <context>
