@@ -6,6 +6,8 @@
 
 #include <QtSql>
 #include <QStandardItemModel>
+#include <QBitmap>
+#include <QPixmap>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->rec_currec_buttons->button(QDialogButtonBox::Reset)->setText(tr("Reset"));
     this->ui->menu_curmenu_buttons->button(QDialogButtonBox::Save)->setText(tr("Save"));
     this->ui->menu_curmenu_buttons->button(QDialogButtonBox::Reset)->setText(tr("Reset"));
+
+    setTabIcons();
 
     currentProduct = -1;
     currentRecipe = -1;
@@ -256,4 +260,47 @@ void MainWindow::toggleComparisonDialog()
     }
 }
 
+void MainWindow::setTabIcons()
+{
+    {
+        QPixmap icon("data/assets/9.png");
+        QPixmap iconColored(icon.size());
+        QColor color(181, 255, 146);
+        int h, s, v;
+        color.getHsv(&h, &s, &v);
+        color.setHsv(h, 255, v * 0.8);
+        iconColored.fill(color);
+        iconColored.setMask(icon.createMaskFromColor(Qt::transparent));
+        this->ui->tabWidget->setTabIcon(0, QIcon(iconColored));
+    }
+    {
+        QPixmap icon("data/assets/12.png");
+        QPixmap iconColored(icon.size());
+        QColor color(255, 205, 105);
+        int h, s, v;
+        color.getHsv(&h, &s, &v);
+        color.setHsv(h, 255, v * 0.8);
+        iconColored.fill(color);
+        iconColored.setMask(icon.createMaskFromColor(Qt::transparent));
+        this->ui->tabWidget->setTabIcon(1, QIcon(iconColored));
+    }
+    {
+        QPixmap icon("data/assets/14.png");
+        QPixmap iconColored(icon.size());
+        QColor color(170, 255, 255);
+        int h, s, v;
+        color.getHsv(&h, &s, &v);
+        color.setHsv(h, 255, v * 0.8);
+        iconColored.fill(color);
+        iconColored.setMask(icon.createMaskFromColor(Qt::transparent));
+        this->ui->tabWidget->setTabIcon(2, QIcon(iconColored));
+    }
+    {
+        QPixmap icon("data/assets/13.png");
+        QPixmap iconColored(icon.size());
+        iconColored.fill(QColor::fromRgb(0, 0, 0));
+        iconColored.setMask(icon.createMaskFromColor(Qt::transparent));
+        this->ui->tabWidget->setTabIcon(3, QIcon(iconColored));
+    }
+}
 

@@ -43,6 +43,7 @@ public:
 private:
     Ui::MainWindow *ui;
     void makeConnections();
+    void setTabIcons();
     int currentCatId, currentSubCatId;
 
 // Product related
